@@ -791,7 +791,11 @@ function updateAuthUI() {
 
 // Verificar se Firebase está disponível
 function isFirebaseAvailable() {
-  return typeof firebase !== "undefined" && firebase.auth && firebase.database;
+  return typeof firebase !== "undefined" && 
+         firebase.apps && 
+         firebase.apps.length > 0 &&
+         firebase.auth && 
+         firebase.database;
 }
 
 // Login com Google

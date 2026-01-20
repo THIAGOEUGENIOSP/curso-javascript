@@ -16,11 +16,19 @@ const firebaseConfig = {
   appId: "1:123456789:web:abcdef123456"
 };
 
-// ✅ Inicializar Firebase (não mexer nessas linhas)
-firebase.initializeApp(firebaseConfig);
+// ✅ Inicializar Firebase APENAS se as credenciais forem reais
+const isFirebaseConfigured = firebaseConfig.apiKey && 
+                             !firebaseConfig.apiKey.includes("AQUI_SUA");
 
-// Referências para usar no app.js
-const auth = firebase.auth();
-const db = firebase.database();
+if (isFirebaseConfigured && typeof firebase !== "undefined") {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    console.log("✅ Firebase inicializado com sucesso!");
+  } catch (error) {
+    console.warn("⚠️ Firebase já foi inicializado ou houve erro:", error.message);
+  }
+} else {
+  console.log("ℹ️ Firebase não foi configurado. Usando localStorage para progresso.");
+  console.log("📖 Para ativar, siga: https://github.com/THIAGOEUGENIOSP/curso-javascript/blob/main/FIREBASE_SETUP.md");
+}
 
-console.log("✅ Firebase inicializado com sucesso!");
