@@ -126,12 +126,23 @@ function renderNav(filterText = "") {
     nav.appendChild(moduleEl);
   }
 
-  const searchInfo = document.getElementById("searchInfo");
-  if (q)
-    searchInfo.textContent = `${resultsCount} resultado(s) para "${filterText}"`;
-  else
-    searchInfo.textContent =
-      "Dica: use termos como “arrays”, “DOM”, “async”, “git”.";
+  if (q) {
+    searchInfo.innerHTML = `
+      <strong>${resultsCount} resultado(s)</strong> para <code>"${escapeHtml(filterText)}"</code>
+      <br/>
+      <small>Busca por título, nível, tags e duração</small>
+    `;
+  } else {
+    searchInfo.innerHTML = `
+      💡 <strong>Dica:</strong> busque por:
+      <br/>
+      • Tópicos: <code>arrays</code>, <code>funções</code>, <code>async</code>
+      <br/>
+      • Nível: <code>Iniciante</code>, <code>Intermediário</code>
+      <br/>
+      • Tags: <code>DOM</code>, <code>loops</code>, <code>classes</code>
+    `;
+  }
 }
 
 function renderProgress() {
