@@ -80,6 +80,181 @@ pre code{ background: transparent; padding:0; }
   .sidebar{ order:2; }
 }
 
+@media (max-width: 800px) {
+  /* Topbar mobile */
+  .topbar {
+    padding: 12px 14px;
+  }
+  
+  .brand {
+    gap: 10px;
+  }
+  
+  .brand-title {
+    font-size: 18px;
+  }
+  
+  .brand-subtitle {
+    font-size: 11px;
+  }
+  
+  .logo svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Layout mobile */
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  /* Typography mobile */
+  h1 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  
+  h2 {
+    font-size: 15px;
+  }
+  
+  h3 {
+    font-size: 14px;
+  }
+  
+  body {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  
+  /* Card spacing */
+  .card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  
+  /* Sidebar mobile */
+  .sidebar {
+    gap: 16px;
+  }
+  
+  /* Button mobile */
+  .btn {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  
+  .hamburger {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Lesson container */
+  .lesson-container {
+    padding: 0;
+  }
+  
+  .lesson-header {
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .lesson-header h1 {
+    font-size: 20px;
+  }
+  
+  /* Pedagogical sections */
+  .lesson-outcomes-section,
+  .lesson-context-section,
+  .lesson-difficulty-section {
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 12px;
+  }
+  
+  .lesson-outcomes-section h2,
+  .lesson-context-section h2,
+  .lesson-difficulty-section h2 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  
+  .learning-outcome {
+    padding: 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  /* Difficulty gauge mobile */
+  .difficulty-gauge {
+    gap: 6px;
+  }
+  
+  .difficulty-bar {
+    height: 12px;
+    border-radius: 4px;
+  }
+  
+  .difficulty-label {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  
+  /* Common mistakes mobile */
+  .common-mistake {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  
+  .mistake-label {
+    font-size: 13px;
+  }
+  
+  .mistake-code {
+    padding: 10px;
+  }
+  
+  .mistake-code pre {
+    font-size: 12px;
+  }
+  
+  .mistake-explanation {
+    font-size: 13px;
+    padding: 12px;
+    margin-top: 12px;
+  }
+  
+  /* Prerequisites mobile */
+  .prerequisite-item,
+  .next-step-item {
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .prerequisites-list {
+    gap: 10px;
+    margin: 12px 0;
+  }
+  
+  /* Real world context mobile */
+  .context-example {
+    padding: 10px;
+    margin: 8px 0;
+  }
+  
+  .context-example strong {
+    display: block;
+    margin-bottom: 6px;
+  }
+}
+
 .card{
   background: rgba(15,23,42,.65);
   border: 1px solid var(--border);
@@ -630,12 +805,6 @@ body.sidebar-collapsed .layout{
   border: 1px solid rgba(148,163,184,.12);
   background: rgba(2,6,23,.20);
   border-radius: 12px;
-}
-
-@media (max-width: 800px) {
-  .common-mistake {
-    grid-template-columns: 1fr;
-  }
 }
 
 .mistake-wrong {
