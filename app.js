@@ -756,4 +756,161 @@ if (window.innerWidth <= 1100 && localStorage.getItem(SIDEBAR_KEY) === null) {
   if (btn) btn.setAttribute("aria-expanded", "false");
 }
 
-init();
+// ==========================================
+// FIREBASE INTEGRATION
+// ==========================================
+
+let currentUser = null;
+const btnLogin = document.getElementById("btnLogin");
+const btnLogout = document.getElementById("btnLogout");
+const userDisplay = document.getElementById("userDisplay");
+
+// Função para atualizar UI de auth
+function updateAuthUI() {
+  if (currentUser) {
+    btnLogin.style.display = "none";
+    btnLogout.style.display = "block";
+    userDisplay.textContent = currentUser.displayName || currentUser.email || "Usuário";
+  } else {
+    btnLogin.style.display = "block";
+    btnLogout.style.display = "none";
+    userDisplay.textContent = "";
+  }
+}
+
+// Verificar se Firebase está disponível
+function isFirebaseAvailable() {
+  return typeof firebase !== "undefined" && firebase.auth && firebase.database;
+}
+
+// Login com Google
+function loginWithGoogle() {
+  if (!isFirebaseAvailable()) {
+    alert("⚠️ Firebase não foi configurado. Veja firebase-config.js");
+    return;
+  }
+  
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      currentUser = result.user;
+      updateAuthUI();
+      // Carregar progresso do Firebase
+      loadProgressFromFirebase();
+      alert(`✅ Bem-vindo, ${currentUser.displayName || currentUser.email}!`);
+    })
+    .catch((error) => {
+      console.error("Erro no login:", error);
+      alert("❌ Erro ao fazer login. Verifique a console.");
+    });
+}
+
+// Login com GitHub
+function loginWithGitHub() {
+  if (!isFirebaseAvailable()) {
+    alert("⚠️ Firebase não foi configurado. Veja firebase-config.js");
+    return;
+  }
+  
+  const provider = new firebase.auth.GithubAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      currentUser = result.user;
+      updateAuthUI();
+      loadProgressFromFirebase();
+      alert(`✅ Bem-vindo, ${currentUser.displayName || currentUser.email}!`);
+    })
+    .catch((error) => {
+      console.error("Erro no login:", error);
+      alert("❌ Erro ao fazer login. Verifique a console.");
+    });
+}
+
+// Logout
+function logout() {
+  if (!isFirebaseAvailable()) return;
+  
+  firebase.auth().signOut()
+    .then(() => {
+      currentUser = null;
+      updateAuthUI();
+      alert("✅ Desconectado com sucesso!");
+    })
+    .catch((error) => {
+      console.error("Erro ao desconectar:", error);
+    });
+}
+
+// Carregar progresso do Firebase
+function loadProgressFromFirebase() {
+  if (!currentUser || !isFirebaseAvailable()) return;
+  
+  const db = firebase.database();
+  const ref = db.ref(`users/${currentUser.uid}/progress`);
+  
+  ref.once("value", (snapshot) => {
+    if (snapshot.exists()) {
+      state.progress = snapshot.val();
+      render();
+      console.log("✅ Progresso carregado do Firebase");
+    }
+  });
+}
+
+// Salvar progresso no Firebase
+function saveProgressToFirebase() {
+  if (!currentUser || !isFirebaseAvailable()) return;
+  
+  const db = firebase.database();
+  const ref = db.ref(`users/${currentUser.uid}/progress`);
+  
+  ref.set(state.progress)
+    .then(() => {
+      console.log("✅ Progresso salvo no Firebase");
+    })
+    .catch((error) => {
+      console.error("Erro ao salvar no Firebase:", error);
+    });
+}
+
+// Sincronizar progresso: se logado, salva no Firebase; senão, usa localStorage
+function syncProgress() {
+  if (currentUser) {
+    saveProgressToFirebase();
+  } else {
+    saveProgress(); // localStorage
+  }
+}
+
+// Detectar usuário logado ao carregar página
+if (isFirebaseAvailable()) {
+  firebase.auth().onAuthStateChanged((user) => {
+    currentUser = user;
+    updateAuthUI();
+    if (user) {
+      loadProgressFromFirebase();
+    } else {
+      loadProgress(); // localStorage
+    }
+  });
+} else {
+  loadProgress(); // localStorage apenas
+}
+
+// Botões de auth
+if (btnLogin) {
+  btnLogin.addEventListener("click", () => {
+    const choice = prompt("Login com:\n1 = Google\n2 = GitHub");
+    if (choice === "1") loginWithGoogle();
+    else if (choice === "2") loginWithGitHub();
+  });
+}
+
+if (btnLogout) {
+  btnLogout.addEventListener("click", logout);
+}
+
+// Substituir saveProgress() por syncProgress()
+const originalSaveProgress = saveProgress;
+saveProgress = syncProgress;
+

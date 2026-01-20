@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Curso Completo de JavaScript — Do Zero ao Profissional</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Markdown renderer (leve e prático) -->
+  <!-- Markdown renderer -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Firebase SDKs (v9+ modular) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -25,12 +29,27 @@
     </div>
 
     <div class="top-actions">
-        <!-- Adicionar dentro de .top-actions -->
+        <!-- Botão hamburger -->
 <button id="btnToggleNav" class="btn ghost hamburger" aria-label="Abrir menu" aria-expanded="true" title="Menu">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
   </svg>
 </button>
+
+      <!-- Botões de auth (aparece/desaparece conforme login) -->
+      <div id="authContainer" style="display: flex; gap: 10px; align-items: center;">
+        <button class="btn ghost" id="btnLogin" title="Login com Google">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10z"/>
+          </svg>
+          Entrar
+        </button>
+        <span id="userDisplay" style="color: var(--muted); font-size: 12px;"></span>
+        <button class="btn ghost" id="btnLogout" title="Fazer logout" style="display: none;">
+          Sair
+        </button>
+      </div>
+
       <button class="btn ghost" id="btnReset">Resetar progresso</button>
       <button class="btn" id="btnExport">Exportar progresso</button>
     </div>
