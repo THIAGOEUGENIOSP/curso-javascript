@@ -695,6 +695,704 @@ console.log("Classificação:", classificarIMC(imc));`,
             "Consigo organizar o código em etapas.",
           ],
         },
+
+        {
+          id: "m1a4",
+          title: "Aula 4 — Funções (funções, parâmetros, return)",
+          duration: "60–90 min",
+          level: "Intermediário",
+          tags: ["funções", "return", "parâmetros", "escopo"],
+          tip: "Funções são 'caixas de código reutilizável'. Bem feitas, elas tornam seu código limpo e profissional.",
+          
+          learningOutcomes: [
+            "✓ Entender funções como blocos reutilizáveis",
+            "✓ Usar parâmetros e return corretamente",
+            "✓ Evitar efeitos colaterais (side effects)",
+            "✓ Debugar funções com problemas",
+            "✓ Usar funções anônimas e arrow functions"
+          ],
+          
+          realWorldContext: {
+            description: "Funções são o coração de qualquer código profissional. Apps grandes são muitas funções pequenas, cada uma com responsabilidade clara. Você precisa ser expert nisso.",
+            examples: [
+              "Validar email: função que retorna true/false",
+              "Enviar dados para servidor: função que dispara requisição",
+              "Formatar número como moeda: função reutilizável em 10 lugares"
+            ]
+          },
+          
+          commonMistakes: [
+            {
+              title: "Não fazer return quando deveria",
+              wrong: `function dobro(n) {
+  console.log(n * 2); // Só imprime, não retorna!
+}
+
+let resultado = dobro(5); // undefined!`,
+              right: `function dobro(n) {
+  return n * 2; // Agora retorna
+}
+
+let resultado = dobro(5); // 10`,
+              explanation: "console.log mostra na tela, mas return de verdade envia o valor. Use return quando precisa usar o resultado depois."
+            },
+            {
+              title: "Modificar variáveis globais dentro da função (side effect)",
+              wrong: `let contador = 0;
+
+function incrementar() {
+  contador++; // Modifica global. Confunde, cria bugs.
+}`,
+              right: `function incrementar(valor) {
+  return valor + 1; // Puro: só toma entrada, devolve resultado
+}
+
+let contador = 0;
+contador = incrementar(contador);`,
+              explanation: "Funções 'puras' são previsíveis: mesma entrada = mesma saída. Evita bugs surpresa."
+            },
+            {
+              title: "Confundir função com chamada de função",
+              wrong: `let fn = alert("oi"); // Chama AGORA, não depois!
+setTimeout(fn, 1000); // undefined! Erro!`,
+              right: `let fn = () => alert("oi"); // Função anônima (arrow)
+setTimeout(fn, 1000); // Chama depois`,
+              explanation: "fn = alert('oi') executa agora. fn = () => alert('oi') armazena para depois."
+            }
+          ],
+          
+          prerequisites: ["m1a3"],
+          nextRecommended: ["m1a5"],
+          
+          content: `
+### 🎯 Objetivo
+Dominar funções: criar, reutilizar, evitar erros comuns.
+
+### Declaração básica
+\`\`\`js
+function saudacao(nome) {
+  return "Olá, " + nome;
+}
+
+console.log(saudacao("Maria"));
+\`\`\`
+
+### Parâmetros e argumentos
+- **Parâmetros**: variáveis na declaração
+- **Argumentos**: valores quando chama
+
+\`\`\`js
+function soma(a, b) { // a, b = parâmetros
+  return a + b;
+}
+
+soma(3, 5); // 3, 5 = argumentos
+\`\`\`
+
+### Arrow functions (ES6)
+\`\`\`js
+const dobro = (n) => n * 2;
+console.log(dobro(5)); // 10
+\`\`\`
+
+### Funções anônimas (usadas com setTimeout, map, etc)
+\`\`\`js
+setTimeout(() => {
+  console.log("depois de 1s");
+}, 1000);
+\`\`\`
+
+### Boas práticas
+- Uma função = uma responsabilidade
+- Nomes descritivos: \`validarEmail\`, não \`ve\`
+- Avoid side effects (não modifique globais)
+- Sempre teste com casos extremos
+          `,
+          exercises: [
+            {
+              title: "Exercício 1 — Função com múltiplos parâmetros",
+              level: "Fácil",
+              prompt: "Crie uma função que calcula a área de um retângulo (base × altura).",
+              solution: `function areaRetangulo(base, altura) {
+  return base * altura;
+}
+
+console.log(areaRetangulo(5, 3)); // 15`,
+            },
+            {
+              title: "Exercício 2 — Validação",
+              level: "Médio",
+              prompt: "Crie uma função que valida se um número está entre 0 e 100.",
+              solution: `function ehValido(num) {
+  return num >= 0 && num <= 100;
+}
+
+console.log(ehValido(50));  // true
+console.log(ehValido(150)); // false`,
+            },
+          ],
+          checklist: [
+            "Consigo criar funções com return.",
+            "Entendo diferença entre parâmetro e argumento.",
+            "Sei usar arrow functions.",
+            "Evito side effects em funções.",
+          ],
+          quiz: [
+            {
+              q: "Qual a diferença entre console.log e return?",
+              options: [
+                "Nenhuma, fazem a mesma coisa",
+                "log mostra na tela, return envia o valor",
+                "return é mais rápido",
+                "log é melhor para funções",
+              ],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m1a5",
+          title: "Aula 5 — Arrays (índices, métodos, map, filter, reduce)",
+          duration: "70–110 min",
+          level: "Intermediário",
+          tags: ["arrays", "map", "filter", "reduce", "forEach"],
+          tip: "Arrays são dados em lista. Map/filter/reduce transformam listas inteligentemente. Isso é o que 99% do código faz.",
+          
+          learningOutcomes: [
+            "✓ Criar e acessar arrays por índice",
+            "✓ Usar forEach, map, filter, reduce",
+            "✓ Diferenciar quando usar cada método",
+            "✓ Transformar dados de forma funcional",
+            "✓ Debugar problemas com arrays"
+          ],
+          
+          realWorldContext: {
+            description: "Todo app que mostra listas (redes sociais, e-commerce, dados) usa arrays. Você precisa saber: filtrar produtos, mapear usuários, somar totais, remover itens. Isso é o essencial.",
+            examples: [
+              "E-commerce: filtrar produtos por preço ou categoria",
+              "App de tarefas: mapear tarefas para elementos HTML",
+              "Dashboard: somar receita total com reduce"
+            ]
+          },
+          
+          commonMistakes: [
+            {
+              title: "Esquecer que arrays começam em 0",
+              wrong: `let frutas = ["maçã", "banana", "laranja"];
+console.log(frutas[1]); // Esperava maçã, got banana`,
+              right: `let frutas = ["maçã", "banana", "laranja"];
+console.log(frutas[0]); // maçã (índice 0)`,
+              explanation: "Primeira posição é índice 0, segunda é 1. Sempre."
+            },
+            {
+              title: "Confundir map com forEach",
+              wrong: `let nums = [1,2,3];
+let dobrados = nums.forEach(n => n * 2);
+console.log(dobrados); // undefined!`,
+              right: `let nums = [1,2,3];
+let dobrados = nums.map(n => n * 2);
+console.log(dobrados); // [2,4,6]`,
+              explanation: "forEach = faz algo em cada item. map = transforma e retorna novo array."
+            },
+          ],
+          
+          prerequisites: ["m1a4"],
+          nextRecommended: ["m1a6"],
+          
+          content: `
+### Arrays: coleções de dados
+\`\`\`js
+let numeros = [1, 2, 3, 4, 5];
+let nomes = ["Ana", "Bruno", "Carlos"];
+
+console.log(numeros[0]); // 1 (primeiro)
+console.log(nomes[2]);   // Carlos (terceiro)
+\`\`\`
+
+### forEach (faz algo em cada item, sem retorno)
+\`\`\`js
+numeros.forEach(n => console.log(n * 2));
+// Imprime: 2, 4, 6, 8, 10
+\`\`\`
+
+### map (transforma, retorna novo array)
+\`\`\`js
+let dobrados = numeros.map(n => n * 2);
+console.log(dobrados); // [2,4,6,8,10]
+\`\`\`
+
+### filter (mantém apenas o que passa no teste)
+\`\`\`js
+let pares = numeros.filter(n => n % 2 === 0);
+console.log(pares); // [2,4]
+\`\`\`
+
+### reduce (combina em 1 resultado)
+\`\`\`js
+let soma = numeros.reduce((acc, n) => acc + n, 0);
+console.log(soma); // 15
+\`\`\`
+
+### Métodos úteis
+- \`push\`: adiciona ao final
+- \`pop\`: remove do final  
+- \`shift\`: remove do início
+- \`unshift\`: adiciona no início
+- \`includes\`: verifica se contém
+- \`indexOf\`: encontra posição
+          `,
+          exercises: [
+            {
+              title: "Exercício — Filter números pares",
+              level: "Médio",
+              prompt: "Dado um array [1,2,3,4,5,6,7,8,9,10], filtre apenas os pares.",
+              solution: `let nums = [1,2,3,4,5,6,7,8,9,10];
+let pares = nums.filter(n => n % 2 === 0);
+console.log(pares); // [2,4,6,8,10]`,
+            },
+            {
+              title: "Exercício — Map com transformação",
+              level: "Médio",
+              prompt: "Dado ['João', 'Maria', 'Pedro'], mapeie para maiúsculas.",
+              solution: `let nomes = ['João', 'Maria', 'Pedro'];
+let maiúsculas = nomes.map(n => n.toUpperCase());
+console.log(maiúsculas); // ['JOÃO', 'MARIA', 'PEDRO']`,
+            },
+          ],
+          checklist: [
+            "Sei usar forEach, map, filter.",
+            "Entendo reduce (até que point).",
+            "Consigo filtrar arrays por condição.",
+            "Sei transformar arrays com map.",
+          ],
+        },
+
+        {
+          id: "m1a6",
+          title: "Aula 6 — Objetos (propriedades, métodos, this)",
+          duration: "60–90 min",
+          level: "Intermediário",
+          tags: ["objetos", "propriedades", "métodos", "this", "JSON"],
+          tip: "Objetos agrupam dados e comportamentos relacionados. Você vai ver eles em todo código JS profissional.",
+          
+          learningOutcomes: [
+            "✓ Criar objetos com {} e acessar propriedades",
+            "✓ Adicionar e modificar propriedades dinamicamente",
+            "✓ Criar métodos (funções dentro de objetos)",
+            "✓ Entender 'this' dentro de métodos",
+            "✓ Trabalhar com JSON (parse e stringify)"
+          ],
+          
+          realWorldContext: {
+            description: "Tudo no navegador é um objeto: documento, usuário logado, carrinho de compras, configurações. JSON (notação de objetos) é o formato universal para dados na web.",
+            examples: [
+              "Usuário com propriedades: nome, email, ativo, saldo",
+              "Produto com métodos: calcularDesconto(), validar()",
+              "APIs retornam JSON que você converte para objetos"
+            ]
+          },
+          
+          commonMistakes: [
+            {
+              title: "Esquecer de usar 'this' dentro de métodos",
+              wrong: `let pessoa = {
+  nome: "Ana",
+  saudar: function() {
+    return "Olá " + nome; // undefined! Não achou 'nome'
+  }
+};`,
+              right: `let pessoa = {
+  nome: "Ana",
+  saudar: function() {
+    return "Olá " + this.nome; // Acessa propriedade do objeto
+  }
+};`,
+              explanation: "'this' refere ao objeto que contém o método. Sem 'this', JS procura em escopo global."
+            },
+          ],
+          
+          prerequisites: ["m1a5"],
+          nextRecommended: ["m1a7"],
+          
+          content: `
+### Criando objetos
+\`\`\`js
+let usuario = {
+  nome: "Maria",
+  email: "maria@example.com",
+  ativo: true,
+  saldo: 1500
+};
+
+console.log(usuario.nome); // Maria
+\`\`\`
+
+### Adicionando propriedades
+\`\`\`js
+usuario.idade = 28;
+usuario["telefone"] = "1234567890";
+\`\`\`
+
+### Métodos (funções dentro de objetos)
+\`\`\`js
+let calculadora = {
+  somar: function(a, b) {
+    return a + b;
+  },
+  dividir: (a, b) => a / b
+};
+
+console.log(calculadora.somar(10, 5)); // 15
+\`\`\`
+
+### 'this' dentro de métodos
+\`\`\`js
+let conta = {
+  saldo: 1000,
+  sacar: function(valor) {
+    this.saldo -= valor; // 'this' = conta
+    return "Saldo: " + this.saldo;
+  }
+};
+\`\`\`
+
+### JSON (JavaScript Object Notation)
+\`\`\`js
+// Converter objeto para JSON (texto)
+let json = JSON.stringify(usuario);
+// {"nome":"Maria","email":"maria@example.com"...}
+
+// Converter JSON para objeto
+let obj = JSON.parse(json);
+\`\`\`
+          `,
+          exercises: [
+            {
+              title: "Exercício — Objeto produto",
+              level: "Fácil",
+              prompt: "Crie um objeto 'produto' com nome, preço, estoque. Adicione método que calcula valor total (preço × estoque).",
+              solution: `let produto = {
+  nome: "Notebook",
+  preco: 2000,
+  estoque: 5,
+  valorTotal: function() {
+    return this.preco * this.estoque;
+  }
+};
+
+console.log(produto.valorTotal()); // 10000`,
+            },
+          ],
+          checklist: [
+            "Sei criar objetos com {}.",
+            "Entendo propriedades e métodos.",
+            "Uso 'this' corretamente.",
+            "Consigo usar JSON.stringify e JSON.parse.",
+          ],
+        },
+
+        {
+          id: "m1a7",
+          title: "Aula 7 — Classes (ES6) e programação orientada a objetos",
+          duration: "70–110 min",
+          level: "Intermediário",
+          tags: ["classes", "constructor", "herança", "extends"],
+          tip: "Classes tornam código grande mais organizado. Depois de funções e objetos, é o próximo passo natural.",
+          
+          learningOutcomes: [
+            "✓ Criar classes com constructor e propriedades",
+            "✓ Criar instâncias com 'new'",
+            "✓ Usar herança com extends",
+            "✓ Criar métodos estáticos",
+            "✓ Entender quando usar classes vs objetos"
+          ],
+          
+          prerequisites: ["m1a6"],
+          nextRecommended: ["m1a8"],
+          
+          content: `
+### Sintaxe básica
+\`\`\`js
+class Pessoa {
+  constructor(nome, idade) {
+    this.nome = nome;
+    this.idade = idade;
+  }
+
+  apresentar() {
+    return \`Olá, sou \${this.nome}\`;
+  }
+}
+
+let pessoa = new Pessoa("Ana", 28);
+console.log(pessoa.apresentar()); // Olá, sou Ana
+\`\`\`
+
+### Herança
+\`\`\`js
+class Animal {
+  fazer_som() {
+    return "...";
+  }
+}
+
+class Cachorro extends Animal {
+  fazer_som() {
+    return "Au au!";
+  }
+}
+
+let dog = new Cachorro();
+console.log(dog.fazer_som()); // Au au!
+\`\`\`
+
+### Métodos estáticos
+\`\`\`js
+class Matemática {
+  static PI = 3.14159;
+  
+  static dobro(n) {
+    return n * 2;
+  }
+}
+
+console.log(Matemática.dobro(5)); // 10
+\`\`\`
+          `,
+          checklist: [
+            "Consigo criar uma classe simples.",
+            "Entendo constructor.",
+            "Sei usar herança.",
+            "Sou capaz de instanciar com new.",
+          ],
+        },
+
+        {
+          id: "m1a8",
+          title: "Aula 8 — Tratamento de erros (try/catch/finally e debugging)",
+          duration: "50–80 min",
+          level: "Intermediário",
+          tags: ["try", "catch", "finally", "debugging", "console"],
+          tip: "Código profissional trata erros gracefully. Não deixa o app quebrar silenciosamente.",
+          
+          learningOutcomes: [
+            "✓ Usar try/catch para pegar erros",
+            "✓ Criar e lançar erros próprios",
+            "✓ Debugar com console e DevTools",
+            "✓ Diferenciar tipos de erro (TypeError, ReferenceError, etc)",
+            "✓ Usar finally para limpeza"
+          ],
+          
+          prerequisites: ["m1a7"],
+          nextRecommended: ["m1a9"],
+          
+          content: `
+### Try/catch básico
+\`\`\`js
+try {
+  // Código que pode gerar erro
+  let resultado = 10 / 0; // Não dá erro aqui...
+  JSON.parse("JSON inválido"); // ...mas aqui dá
+} catch (erro) {
+  console.log("Capturei erro:", erro.message);
+}
+\`\`\`
+
+### Lançar erro customizado
+\`\`\`js
+try {
+  let idade = -5;
+  if (idade < 0) {
+    throw new Error("Idade não pode ser negativa");
+  }
+} catch (e) {
+  console.log(e.message);
+}
+\`\`\`
+
+### Finally (sempre executa)
+\`\`\`js
+try {
+  fazAlgo();
+} catch (e) {
+  console.log("erro");
+} finally {
+  console.log("Isso sempre roda");
+}
+\`\`\`
+
+### Debugging com console
+\`\`\`js
+console.log(variavel);      // valor
+console.warn("aviso");      // amarelo
+console.error("erro");      // vermelho
+console.table(array);       // tabela
+console.assert(condicao);   // se falso, mostra erro
+\`\`\`
+          `,
+          checklist: [
+            "Consigo usar try/catch.",
+            "Sei lançar erros com throw.",
+            "Uso console para debugar.",
+            "Entendo tipos comuns de erro.",
+          ],
+        },
+
+        {
+          id: "m1a9",
+          title: "Aula 9 — Destructuring, spread operator e ES6+",
+          duration: "60–90 min",
+          level: "Intermediário",
+          tags: ["destructuring", "spread", "rest", "template literals"],
+          tip: "Essas features modernizam seu código. Apps profissionais usam todas.",
+          
+          learningOutcomes: [
+            "✓ Usar destructuring em arrays e objetos",
+            "✓ Usar spread operator (...) para copiar/expandir",
+            "✓ Usar rest parameters em funções",
+            "✓ Template literals com `backticks`",
+            "✓ Conhecer sintaxe moderna importante"
+          ],
+          
+          prerequisites: ["m1a8"],
+          nextRecommended: ["m1a10"],
+          
+          content: `
+### Destructuring de arrays
+\`\`\`js
+let [a, b, c] = [1, 2, 3];
+console.log(a); // 1
+
+// Ignorar elementos
+let [primeiro, , terceiro] = [10, 20, 30];
+console.log(primeiro, terceiro); // 10, 30
+\`\`\`
+
+### Destructuring de objetos
+\`\`\`js
+let pessoa = { nome: "Ana", idade: 28 };
+let { nome, idade } = pessoa;
+console.log(nome); // Ana
+\`\`\`
+
+### Spread operator (...)
+\`\`\`js
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1, 4, 5];
+console.log(arr2); // [1, 2, 3, 4, 5]
+
+let obj1 = { a: 1, b: 2 };
+let obj2 = { ...obj1, c: 3 };
+console.log(obj2); // {a: 1, b: 2, c: 3}
+\`\`\`
+
+### Rest parameters
+\`\`\`js
+function somar(...numeros) {
+  return numeros.reduce((a, b) => a + b, 0);
+}
+
+console.log(somar(1, 2, 3, 4)); // 10
+\`\`\`
+
+### Template literals
+\`\`\`js
+let nome = "Maria";
+let msg = \`Olá, \${nome}! Bem-vinda.\`;
+console.log(msg); // Olá, Maria! Bem-vinda.
+\`\`\`
+          `,
+          checklist: [
+            "Consigo usar destructuring.",
+            "Entendo spread operator.",
+            "Uso template literals.",
+            "Conheço rest parameters.",
+          ],
+        },
+
+        {
+          id: "m1a10",
+          title: "Aula 10 — Closures e escopos avançados (último do módulo 1)",
+          duration: "70–100 min",
+          level: "Intermediário avançado",
+          tags: ["closures", "escopo", "var", "let", "const", "hoisting"],
+          tip: "Closures são 'mágica' que parece, mas é lógica simples. Entender isso te torna um dev muito melhor.",
+          
+          learningOutcomes: [
+            "✓ Entender escopo global, local e de bloco",
+            "✓ Entender closures profundamente",
+            "✓ Diferenças entre var, let, const",
+            "✓ Hoisting e seu impacto",
+            "✓ Factory functions e padrões avançados"
+          ],
+          
+          prerequisites: ["m1a9"],
+          nextRecommended: [],
+          
+          content: `
+### Escopos
+**Global**: visível em qualquer lugar
+**Local**: dentro de uma função
+**Bloco**: dentro de { } (let e const)
+
+\`\`\`js
+var x = 1;      // global (evite)
+let y = 2;      // bloco
+const z = 3;    // bloco + imutável
+
+function teste() {
+  let local = 4; // vive só aqui dentro
+  console.log(y); // vê 'y' do escopo pai
+}
+\`\`\`
+
+### Closures
+Uma função que "lembra" do escopo onde foi criada.
+
+\`\`\`js
+function contador() {
+  let count = 0; // privada
+  return function() {
+    count++;
+    return count;
+  };
+}
+
+let c = contador();
+console.log(c()); // 1
+console.log(c()); // 2
+\`\`\`
+
+### var vs let vs const
+- **var**: global ou função, pode redeclarar
+- **let**: bloco, não pode redeclarar (preferred)
+- **const**: bloco, imutável, prefira isso
+
+\`\`\`js
+const usuario = { nome: "Ana" };
+usuario.nome = "Bruno"; // OK (modifica propriedade)
+usuario = {}; // ERRO (reatribui)
+\`\`\`
+
+### Hoisting
+Variáveis (var) e funções são "puxadas" para cima.
+
+\`\`\`js
+console.log(x); // undefined (hoisted, mas sem valor)
+var x = 5;
+
+console.log(fn()); // funciona! (função hoisted completa)
+function fn() { return "oi"; }
+\`\`\`
+          `,
+          checklist: [
+            "Entendo escopos e closures.",
+            "Sei as diferenças var/let/const.",
+            "Consigo usar closures para dados privados.",
+            "Entendo hoisting.",
+          ],
+        },
       ],
     },
 
