@@ -1,0 +1,224 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Curso Completo de JavaScript — Do Zero ao Profissional</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Markdown renderer (leve e prático) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <!-- Logo SVG -->
+        <svg viewBox="0 0 64 64" role="img">
+          <rect x="8" y="8" width="48" height="48" rx="12"></rect>
+          <path d="M22 42c2 2 5 4 10 4 6 0 10-3 10-8 0-4-3-6-8-7l-3-1c-2-1-3-2-3-3 0-2 2-3 4-3 2 0 4 1 5 2l3-4c-2-2-5-3-8-3-6 0-10 3-10 8 0 4 3 6 7 7l3 1c3 1 4 2 4 4 0 2-2 3-5 3-3 0-5-1-7-3l-2 3z"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">JavaScript</div>
+        <div class="brand-subtitle">Do Zero ao Profissional • Aula por aula • Projetos reais</div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+        <!-- Adicionar dentro de .top-actions -->
+<button id="btnToggleNav" class="btn ghost hamburger" aria-label="Abrir menu" aria-expanded="true" title="Menu">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="18" height="18">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+  </svg>
+</button>
+      <button class="btn ghost" id="btnReset">Resetar progresso</button>
+      <button class="btn" id="btnExport">Exportar progresso</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="card">
+        <h2>Progresso</h2>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-meta">
+          <span id="progressText">0%</span>
+          <span id="progressCount">0/0 aulas</span>
+        </div>
+
+        <div class="badges" id="badges"></div>
+
+        <div class="hint">
+          💡 Dica: marque aulas como concluídas e ganhe badges.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Buscar</h2>
+        <input class="input" id="searchInput" placeholder="Buscar por tema (ex: arrays, DOM, async)" />
+        <div class="small" id="searchInfo"></div>
+      </section>
+
+      <section class="card nav">
+        <h2>Conteúdo</h2>
+        <div id="courseNav"></div>
+      </section>
+    </aside>
+
+    <section class="content">
+      <section class="hero card" id="hero">
+        <div class="hero-text">
+          <h1>Aprenda JavaScript do jeito certo</h1>
+          <p>
+            Aqui você aprende <strong>lógica</strong>, <strong>fundamentos</strong>, <strong>DOM</strong>, <strong>assíncrono</strong>,
+            <strong>boas práticas</strong>, <strong>Git/GitHub</strong> e entra no caminho para <strong>React + Node.js</strong>.
+          </p>
+          <div class="hero-actions">
+            <button class="btn" id="btnContinue">Continuar de onde parei</button>
+            <button class="btn ghost" id="btnStart">Começar do zero</button>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-kpi">
+              <div class="kpi-title">Formato</div>
+              <div class="kpi-value">Didático • Profissional</div>
+              <div class="kpi-sub">Teoria + prática + projetos</div>
+            </div>
+            <div class="hero-kpi">
+              <div class="kpi-title">Recursos</div>
+              <div class="kpi-value">Quiz • Checklist</div>
+              <div class="kpi-sub">Correção automática</div>
+            </div>
+            <div class="hero-kpi">
+              <div class="kpi-title">Gamificação</div>
+              <div class="kpi-value">Badges • Progresso</div>
+              <div class="kpi-sub">Salvo no navegador</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <!-- Ilustração SVG -->
+          <svg viewBox="0 0 520 360">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6ee7ff" stop-opacity="0.8"/>
+                <stop offset="1" stop-color="#a78bfa" stop-opacity="0.8"/>
+              </linearGradient>
+            </defs>
+            <rect x="24" y="24" width="472" height="312" rx="24" fill="url(#g1)" opacity="0.25"/>
+            <rect x="52" y="64" width="416" height="240" rx="18" fill="#0b1220" opacity="0.9"/>
+            <rect x="52" y="64" width="416" height="36" rx="18" fill="#0f172a" opacity="1"/>
+            <circle cx="78" cy="82" r="6" fill="#fb7185"/>
+            <circle cx="98" cy="82" r="6" fill="#fbbf24"/>
+            <circle cx="118" cy="82" r="6" fill="#34d399"/>
+            <g fill="#e5e7eb" opacity="0.9">
+              <rect x="80" y="130" width="220" height="14" rx="7"/>
+              <rect x="80" y="156" width="320" height="14" rx="7" opacity="0.75"/>
+              <rect x="80" y="182" width="260" height="14" rx="7" opacity="0.85"/>
+              <rect x="80" y="208" width="300" height="14" rx="7" opacity="0.65"/>
+              <rect x="80" y="234" width="180" height="14" rx="7" opacity="0.8"/>
+            </g>
+            <rect x="310" y="126" width="134" height="138" rx="14" fill="#111827" opacity="1"/>
+            <rect x="328" y="146" width="98" height="10" rx="5" fill="#93c5fd" opacity="0.9"/>
+            <rect x="328" y="168" width="86" height="10" rx="5" fill="#fca5a5" opacity="0.9"/>
+            <rect x="328" y="190" width="106" height="10" rx="5" fill="#86efac" opacity="0.9"/>
+            <rect x="328" y="212" width="76" height="10" rx="5" fill="#fcd34d" opacity="0.9"/>
+            <rect x="328" y="234" width="96" height="10" rx="5" fill="#c4b5fd" opacity="0.9"/>
+          </svg>
+        </div>
+      </section>
+
+      <section class="card lesson" id="lessonView" hidden>
+        <div class="lesson-header">
+          <div>
+            <div class="crumbs" id="crumbs"></div>
+            <h1 id="lessonTitle"></h1>
+            <div class="lesson-meta" id="lessonMeta"></div>
+          </div>
+          <div class="lesson-actions">
+            <button class="btn ghost" id="btnPrev">← Anterior</button>
+            <button class="btn ghost" id="btnNext">Próxima →</button>
+            <button class="btn" id="btnDone">Marcar como concluída</button>
+          </div>
+        </div>
+
+        <div class="lesson-outcomes-section" id="lessonOutcomes"></div>
+
+        <div class="lesson-context-section" id="lessonContext"></div>
+
+        <div class="lesson-difficulty-section" id="lessonDifficulty"></div>
+
+        <div class="lesson-body">
+          <div class="lesson-left">
+            <div id="lessonMistakesWrap" class="section" hidden>
+              <h2>⚠️ Armadilhas Comuns & Correções</h2>
+              <div id="lessonMistakes"></div>
+            </div>
+
+            <div class="section">
+              <h2>Conteúdo</h2>
+              <div id="lessonContent" class="md"></div>
+            </div>
+
+            <div class="section" id="lessonImagesWrap" hidden>
+              <h2>Imagens e diagramas</h2>
+              <div id="lessonImages" class="images"></div>
+            </div>
+
+            <div class="section" id="lessonExamplesWrap" hidden>
+              <h2>Exemplos</h2>
+              <div id="lessonExamples"></div>
+            </div>
+
+            <div class="section" id="lessonExercisesWrap" hidden>
+              <h2>Exercícios</h2>
+              <div id="lessonExercises"></div>
+            </div>
+
+            <div class="section" id="lessonProjectWrap" hidden>
+              <h2>Projeto / prática guiada</h2>
+              <div id="lessonProject"></div>
+            </div>
+
+            <div class="section" id="lessonPrerequisitesWrap" hidden>
+              <h2>📌 Pré-requisitos & Próximos Passos</h2>
+              <div id="lessonPrerequisites"></div>
+            </div>
+          </div>
+
+          <div class="lesson-right">
+            <section class="side card">
+              <h3>Checklist</h3>
+              <div id="lessonChecklist"></div>
+            </section>
+
+            <section class="side card" id="lessonQuizWrap" hidden>
+              <h3>Quiz</h3>
+              <div id="lessonQuiz"></div>
+              <button class="btn" id="btnGradeQuiz">Corrigir quiz</button>
+              <div class="quiz-result" id="quizResult"></div>
+            </section>
+
+            <section class="side card">
+              <h3>Dica do professor</h3>
+              <div class="tip" id="lessonTip"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="small">
+          Feito para estudo. Você pode editar <code>courseData.js</code> para adicionar mais aulas e conteúdos.
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script src="courseData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

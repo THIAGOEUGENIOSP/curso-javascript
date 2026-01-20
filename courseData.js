@@ -1,0 +1,3738 @@
+// courseData.js
+// Você pode adicionar aulas seguindo o mesmo formato.
+// O app renderiza Markdown em "content".
+
+window.COURSE = {
+  title: "Curso Completo de JavaScript — Do Zero ao Profissional",
+  version: "v1.0",
+  modules: [
+    {
+      id: "m1",
+      title: "Módulo 1 — Fundamentos (Iniciante absoluto)",
+      description:
+        "Lógica, variáveis, operadores, controle de fluxo e funções.",
+      lessons: [
+        {
+          id: "m1a1",
+          title: "Aula 1 — O que é programação (com explicação profunda)",
+          duration: "45–70 min",
+          level: "Iniciante",
+          tags: ["lógica", "introdução", "algoritmo", "variáveis", "tipos"],
+          tip: "Não tente decorar. Entenda o raciocínio. Código é consequência da lógica.",
+          
+          // ===== PEDAGOGIA NOVA =====
+          learningOutcomes: [
+            "✓ Entender que programação é transformar intenções em instruções claras",
+            "✓ Diferenciar algoritmo de código",
+            "✓ Criar sua primeira variável e entender tipos básicos",
+            "✓ Usar console.log para debug desde agora",
+            "✓ Dominar o mindset: lógica primeiro, sintaxe depois"
+          ],
+          
+          realWorldContext: {
+            description: "Programação é a linguagem das máquinas. Toda app que você usa — desde Instagram até seu carro — foi construída com essas ideias básicas. Dominar isso é aprender a comunicar com computadores.",
+            examples: [
+              "Apps mobile: reconhecer que cada funcionalidade é uma sequência lógica de passos",
+              "E-commerce: calculadoras de carrinho usam variáveis e lógica de negócio",
+              "Redes sociais: algoritmo de feed é uma série de decisões (if/else) processadas em bilhões de dados"
+            ]
+          },
+          
+          commonMistakes: [
+            {
+              title: "Pensar que o computador 'entende' contexto humano",
+              wrong: `// ERRADO: pensar assim
+// 'Compute o valor de algo importante'
+// O computador vai ficar confuso!`,
+              right: `// CORRETO: ser explícito
+let valorProduto = 100;
+let desconto = 0.1;
+let precoFinal = valorProduto * (1 - desconto);
+console.log(precoFinal);`,
+              explanation: "O computador não interpreta intenções. Ele apenas executa instruções. Você precisa ser 100% explícito."
+            },
+            {
+              title: "Criar variável sem saber qual tipo ela tem",
+              wrong: `let x = 5;
+let y = "5";
+console.log(x + y); // "55" ou 10? Confuso!`,
+              right: `let numero = 5;      // number
+let texto = "5";     // string
+let resultado = numero + numero; // 10
+console.log(resultado);`,
+              explanation: "JavaScript tenta 'adivinhar' o tipo, causando bugs. Sempre pense qual tipo você quer e seja claro."
+            },
+            {
+              title: "Decorar sintaxe em vez de entender lógica",
+              wrong: `// Tentar memorizar 'let' vs 'const' vs 'var' sem entender por quê
+// Depois fica perdido com escopos e erros estranhos`,
+              right: `// Entender PRIMEIRO a lógica:
+// 'let' = criar espaço de memória com nome
+// Depois: aprender onde esse espaço "vive" (escopo)
+// Depois: aprender as variações (const, var)`,
+              explanation: "Estrutura de aprendizado importa. Lógica → sintaxe → padrões avançados. Nessa ordem."
+            }
+          ],
+          
+          prerequisites: [],
+          nextRecommended: ["m1a2"],
+          
+          // ===== FIM PEDAGOGIA =====
+          images: [
+            {
+              caption:
+                "Algoritmo = passos claros para resolver um problema (diagrama)",
+              svg: `
+              <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="660" height="280" rx="18" fill="rgba(2,6,23,.55)" stroke="rgba(148,163,184,.25)"/>
+                <text x="40" y="60" fill="rgba(229,231,235,.95)" font-size="18" font-family="Arial" font-weight="700">Algoritmo (exemplo: fazer café)</text>
+                <g font-family="Arial" font-size="14" fill="rgba(229,231,235,.92)">
+                  <rect x="40" y="90" width="180" height="46" rx="12" fill="rgba(96,165,250,.18)" stroke="rgba(96,165,250,.45)"/>
+                  <text x="60" y="118">1) Pegar xícara</text>
+
+                  <rect x="250" y="90" width="180" height="46" rx="12" fill="rgba(167,139,250,.18)" stroke="rgba(167,139,250,.45)"/>
+                  <text x="270" y="118">2) Colocar pó</text>
+
+                  <rect x="460" y="90" width="180" height="46" rx="12" fill="rgba(52,211,153,.16)" stroke="rgba(52,211,153,.40)"/>
+                  <text x="480" y="118">3) Aquecer água</text>
+
+                  <rect x="145" y="170" width="180" height="46" rx="12" fill="rgba(251,191,36,.16)" stroke="rgba(251,191,36,.40)"/>
+                  <text x="165" y="198">4) Misturar</text>
+
+                  <rect x="355" y="170" width="180" height="46" rx="12" fill="rgba(251,113,133,.16)" stroke="rgba(251,113,133,.40)"/>
+                  <text x="375" y="198">5) Servir</text>
+                </g>
+                <g stroke="rgba(148,163,184,.55)" stroke-width="3">
+                  <line x1="220" y1="113" x2="250" y2="113"/>
+                  <line x1="430" y1="113" x2="460" y2="113"/>
+                  <line x1="340" y1="136" x2="235" y2="170"/>
+                  <line x1="340" y1="136" x2="355" y2="170"/>
+                </g>
+                <text x="40" y="260" fill="rgba(148,163,184,.95)" font-size="13" font-family="Arial">
+                  Ideia central: o computador precisa de passos explícitos. Programar = transformar intenção em instruções.
+                </text>
+              </svg>`,
+            },
+          ],
+          content: `
+### 🎯 Objetivo da aula
+Ao final desta aula você vai:
+- Entender o que é programação de verdade (sem “decorar comandos”)
+- Saber como um computador “pensa” (ele **não** interpreta intenções)
+- Compreender o papel do JavaScript no navegador e fora dele
+- Entender por que **lógica** vem antes da linguagem
+
+---
+
+### 1) O que é programar?
+Programar é **ensinar o computador a resolver problemas** com instruções claras.
+
+> Um humano entende contexto. Um computador entende **ordem**.
+
+Se você disser: “Faça um café”, uma pessoa entende.  
+O computador precisa de algo assim: **passo 1, passo 2, passo 3…**
+
+**Programação = intenção → algoritmo → código → software.**
+
+---
+
+### 2) O que é algoritmo?
+Algoritmo é uma sequência de passos lógicos para resolver um problema.
+
+Exemplo simples (vida real):
+1. Acordar  
+2. Escovar os dentes  
+3. Tomar café  
+4. Sair de casa  
+
+No código, você descreve passos que o computador executa.
+
+---
+
+### 3) O que é JavaScript?
+JavaScript nasceu para deixar a web interativa. Hoje ele faz:
+- Front-end (DOM, eventos, UI)
+- Back-end (Node.js: APIs, servidores)
+- Apps (React Native / Electron)
+- Automação, testes, ferramentas
+
+---
+
+### 4) Como o JavaScript funciona?
+No navegador:
+- Você escreve JS
+- O navegador interpreta
+- Executa ações (mudar texto, validar formulário, buscar dados, etc.)
+
+Exemplo:
+\`\`\`js
+alert("Olá, mundo!");
+\`\`\`
+
+---
+
+### 5) Primeiro contato com código
+Crie um arquivo \`script.js\` e escreva:
+
+\`\`\`js
+console.log("Meu primeiro código em JavaScript!");
+\`\`\`
+
+Abra o navegador → **F12** → Console.
+
+---
+
+### 6) O que é uma variável?
+Variável é um **espaço na memória** com um nome.
+
+\`\`\`js
+let idade = 30; // cria variável
+idade = 31;     // atualiza o valor
+\`\`\`
+
+- \`let\`: cria variável que pode mudar
+- nome: \`idade\`
+- valor: \`30\`
+
+---
+
+### 7) Tipos de dados (na prática)
+- **String**: texto  
+  \`let nome = "Carlos"\`
+- **Number**: número inteiro ou decimal  
+  \`let altura = 1.75\`
+- **Boolean**: verdadeiro/falso  
+  \`let maiorDeIdade = true\`
+
+---
+
+### 8) Exercício guiado
+Crie variáveis: nome, idade, cidade, profissão e mostre no console:
+
+\`\`\`js
+let nome = "Ana";
+let idade = 28;
+let cidade = "São Paulo";
+let profissao = "Desenvolvedora";
+
+console.log(nome, idade, cidade, profissao);
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- O que é programação
+- O que é algoritmo
+- O papel do JavaScript
+- Variáveis e tipos
+- Primeiros passos com console
+          `,
+          examples: [
+            {
+              title: "Exemplo: algoritmo virando código",
+              description:
+                "Transforme um passo a passo em instruções executáveis (mesmo que simples).",
+              code: `// Algoritmo: cumprimentar alguém
+// 1) Receber nome
+// 2) Mostrar mensagem
+
+let nome = "Maria";
+console.log("Olá, " + nome + "! Bem-vinda.");`,
+            },
+            {
+              title: "Exemplo: depurando com console.log",
+              description:
+                "console.log é seu melhor amigo no começo (e no avançado também).",
+              code: `let a = 10;
+let b = 5;
+let soma = a + b;
+
+console.log("a =", a);
+console.log("b =", b);
+console.log("soma =", soma);`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício 1 — Algoritmo em português",
+              level: "Fácil",
+              prompt:
+                "Escreva um algoritmo (passo a passo) para 'trocar um pneu' ou 'fazer um sanduíche'. Depois, transforme em um console.log por passo.",
+              solution: `// Exemplo: fazer sanduíche
+console.log("Pegar pão");
+console.log("Passar maionese");
+console.log("Adicionar queijo e presunto");
+console.log("Fechar o pão");
+console.log("Servir");`,
+            },
+            {
+              title: "Exercício 2 — Variáveis e tipos",
+              level: "Fácil",
+              prompt:
+                "Crie 5 variáveis: nome (string), idade (number), altura (number), temCarteira (boolean), cidade (string). Imprima tudo.",
+              solution: `let nome = "João";
+let idade = 22;
+let altura = 1.8;
+let temCarteira = false;
+let cidade = "Campinas";
+
+console.log({ nome, idade, altura, temCarteira, cidade });`,
+            },
+            {
+              title: "Desafio — Mini cadastro",
+              level: "Médio",
+              prompt:
+                "Crie variáveis para um 'produto' (nome, preço, emEstoque). Mostre uma frase: 'O produto X custa Y e está em estoque: Z'.",
+              solution: `let nomeProduto = "Mouse";
+let preco = 79.9;
+let emEstoque = true;
+
+console.log("O produto " + nomeProduto + " custa " + preco + " e está em estoque: " + emEstoque);`,
+            },
+          ],
+          checklist: [
+            "Entendi a diferença entre intenção e instrução.",
+            "Sei o que é algoritmo e consigo escrever um.",
+            "Criei variáveis com let e alterei valores.",
+            "Sei a diferença entre string, number e boolean.",
+            "Usei o console do navegador (F12).",
+          ],
+          quiz: [
+            {
+              q: "O que é um algoritmo?",
+              options: [
+                "Um tipo de variável no JavaScript",
+                "Uma sequência lógica de passos para resolver um problema",
+                "Um erro do navegador",
+                "Uma biblioteca",
+              ],
+              answerIndex: 1,
+            },
+            {
+              q: "Qual comando exibe mensagem no console?",
+              options: ["alert()", "print()", "console.log()", "show()"],
+              answerIndex: 2,
+            },
+            {
+              q: "Qual tipo representa verdadeiro/falso?",
+              options: ["String", "Number", "Boolean", "Null"],
+              answerIndex: 2,
+            },
+          ],
+        },
+
+        {
+          id: "m1a2",
+          title: "Aula 2 — Operadores e Lógica (profundo, com exemplos)",
+          duration: "60–90 min",
+          level: "Iniciante",
+          tags: ["operadores", "if", "else", "switch", "lógica"],
+          tip: "O segredo aqui é pensar em 'condições' como perguntas que retornam true/false.",
+          
+          // ===== PEDAGOGIA NOVA =====
+          learningOutcomes: [
+            "✓ Dominar operadores aritméticos e de comparação sem confusão",
+            "✓ Entender o poder dos operadores lógicos (&&, ||, !)",
+            "✓ Escrever condições que fazem sentido lógico",
+            "✓ Saber quando usar if/else e quando usar switch",
+            "✓ Criar lógica de negócio clara (preços, validações, classificações)"
+          ],
+          
+          realWorldContext: {
+            description: "Operadores e lógica são o coração de praticamente todo software. Desde um simples validador de email até sistemas bancários complexos, tudo usa essas ideias para tomar decisões e proteger dados.",
+            examples: [
+              "Validação: if (email.includes('@') && email.includes('.')) permite envio",
+              "Controle de acesso: if (idade >= 18 && temPagado) mostra conteúdo",
+              "E-commerce: switch(statusPedido) renderiza botão 'Enviar' ou 'Entregar'"
+            ]
+          },
+          
+          commonMistakes: [
+            {
+              title: "Confundir == com ===",
+              wrong: `if (5 == "5") { // true (mas perigoso!)
+  console.log("São iguais");
+}`,
+              right: `if (5 === "5") { // false (correto, tipos diferentes)
+  console.log("São iguais");
+} else {
+  console.log("Tipos diferentes");
+}`,
+              explanation: "== faz 'coerção de tipo' (tenta converter), === compara tipo E valor. Use === sempre em produção."
+            },
+            {
+              title: "Esquecer que 0, '', null, undefined são 'falsy'",
+              wrong: `let preco = 0;
+if (preco) { // false, porque 0 é 'falsy'
+  console.log("Preço válido");
+}`,
+              right: `let preco = 0;
+if (preco >= 0) { // true, comparação explícita
+  console.log("Preço válido");
+}`,
+              explanation: "Em JavaScript, alguns valores são 'falsy': 0, '', null, undefined, false, NaN. Não confie em truthy/falsy em código crítico."
+            },
+            {
+              title: "Lógica complicada em uma linha só",
+              wrong: `if (idade >= 18 && temDinheiro && temCarteira || maiorQueOutraPessoa) {
+  // Que lógica é essa? if (a && b && c || d)?
+}`,
+              right: `const podeComprar = idade >= 18 && temDinheiro;
+const temMetodos = temCarteira || temPix;
+if (podeComprar && temMetodos) {
+  console.log("Pode comprar");
+}`,
+              explanation: "Separe a lógica em variáveis nomeadas. Fica claro, legível e fácil de debugar depois."
+            }
+          ],
+          
+          prerequisites: ["m1a1"],
+          nextRecommended: ["m1a3"],
+          
+          // ===== FIM PEDAGOGIA =====
+          
+          content: `
+### 🎯 Objetivo
+Você vai dominar:
+- Operadores aritméticos, comparação, lógicos
+- Pensamento booleano (true/false)
+- Tomada de decisão com \`if/else\` e \`switch\`
+
+---
+
+### 1) Operadores aritméticos
+\`+ - * / %\`  
+\`%\` é o **resto** (muito útil pra par/ímpar).
+
+\`\`\`js
+10 % 2 // 0 (par)
+10 % 3 // 1 (resto 1)
+\`\`\`
+
+---
+
+### 2) Comparação
+Prefira \`===\` em vez de \`==\`.
+
+\`\`\`js
+5 == "5"   // true (coerção)
+5 === "5"  // false (tipo diferente)
+\`\`\`
+
+---
+
+### 3) Operadores lógicos
+- \`&&\` (E) → tudo precisa ser true  
+- \`||\` (OU) → basta um ser true  
+- \`!\` (NÃO) → inverte
+
+---
+
+### 4) If/Else (decisão)
+\`\`\`js
+let idade = 20;
+if (idade >= 18) {
+  console.log("Maior de idade");
+} else {
+  console.log("Menor de idade");
+}
+\`\`\`
+
+---
+
+### 5) Else if (múltiplas faixas)
+\`\`\`js
+let nota = 6;
+if (nota >= 7) console.log("Aprovado");
+else if (nota >= 5) console.log("Recuperação");
+else console.log("Reprovado");
+\`\`\`
+
+---
+
+### 6) Switch (muitas opções fixas)
+\`\`\`js
+let dia = 2;
+switch (dia) {
+  case 1: console.log("Segunda"); break;
+  case 2: console.log("Terça"); break;
+  default: console.log("Inválido");
+}
+\`\`\`
+          `,
+          examples: [
+            {
+              title: "Exemplo: validação com &&",
+              description:
+                "Duas condições precisam ser verdadeiras para permitir acesso.",
+              code: `let idade = 19;
+let temIngresso = true;
+
+if (idade >= 18 && temIngresso) {
+  console.log("Pode entrar");
+} else {
+  console.log("Não pode entrar");
+}`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício — Par ou ímpar",
+              level: "Fácil",
+              prompt:
+                "Crie uma variável numero e diga se é par ou ímpar usando %.",
+              solution: `let numero = 17;
+if (numero % 2 === 0) console.log("Par");
+else console.log("Ímpar");`,
+            },
+            {
+              title: "Desafio — Classificação de idade",
+              level: "Médio",
+              prompt:
+                "Criança (<12), Adolescente (12–17), Adulto (18–59), Idoso (60+).",
+              solution: `let idade = 60;
+
+if (idade < 12) console.log("Criança");
+else if (idade < 18) console.log("Adolescente");
+else if (idade < 60) console.log("Adulto");
+else console.log("Idoso");`,
+            },
+          ],
+          checklist: [
+            "Sei usar + - * / %.",
+            "Entendi a diferença entre == e ===.",
+            "Sei usar &&, || e !.",
+            "Consigo criar decisões com if/else.",
+            "Consigo usar switch para opções fixas.",
+          ],
+          quiz: [
+            {
+              q: "Qual operador verifica igualdade com tipo?",
+              options: ["==", "===", "=", "!="],
+              answerIndex: 1,
+            },
+            {
+              q: "O operador % retorna:",
+              options: ["O quociente", "O resto", "A soma", "A potência"],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m1a3",
+          title: "Aula 3 — Laços (for/while) e repetição inteligente",
+          duration: "60–90 min",
+          level: "Iniciante",
+          tags: ["for", "while", "loop", "repetição"],
+          tip: "Loop bom tem condição de parada clara. Loop ruim vira loop infinito.",
+          
+          // ===== PEDAGOGIA NOVA =====
+          learningOutcomes: [
+            "✓ Entender quando usar for vs while",
+            "✓ Escrever loops sem criar infinitos (armadilha clássica)",
+            "✓ Usar break e continue com propósito",
+            "✓ Fazer operações repetidas em listas de dados",
+            "✓ Debugar loops que não funcionam"
+          ],
+          
+          realWorldContext: {
+            description: "Loops são fundamentais porque dados vêm em listas. Você precisa processar cada item: validar, transformar, contar, filtrar. Toda aplicação que trabalha com dados usa loops.",
+            examples: [
+              "Processar lista de usuários: enviar email para cada um",
+              "Calcular média: somar todos os valores e dividir pela quantidade",
+              "Validar formulário: verificar cada campo até encontrar erro"
+            ]
+          },
+          
+          commonMistakes: [
+            {
+              title: "Criar loop infinito sem perceber",
+              wrong: `let i = 0;
+while (i < 10) {
+  console.log(i);
+  // Esqueceu de i++! Loop infinito!
+}`,
+              right: `let i = 0;
+while (i < 10) {
+  console.log(i);
+  i++; // Agora muda, loop termina
+}`,
+              explanation: "while precisa que algo mude para a condição ficar falsa. Sempre verifique: o que muda a cada volta?"
+            },
+            {
+              title: "Usar for quando deveria usar while",
+              wrong: `// Você não sabe quantas vezes vai repetir
+let tentativas = 0;
+for (let i = 0; i < ???; i++) { // Quantas?
+  // Try API
+  tentativas++;
+}`,
+              right: `let tentativas = 0;
+let sucesso = false;
+while (!sucesso && tentativas < 3) {
+  // Try API
+  tentativas++;
+  if (resposta.ok) sucesso = true;
+}`,
+              explanation: "for é para quando você SABE a quantidade. while é para quando depende de uma condição desconhecida."
+            },
+            {
+              title: "Modificar array dentro do loop sem cuidado",
+              wrong: `let items = [1,2,3,4,5];
+for (let i = 0; i < items.length; i++) {
+  if (items[i] === 3) {
+    items.splice(i, 1); // Pula item!
+  }
+}`,
+              right: `let items = [1,2,3,4,5];
+items = items.filter(x => x !== 3); // Melhor
+
+// OU:
+for (let i = items.length - 1; i >= 0; i--) {
+  if (items[i] === 3) items.splice(i, 1); // Reverso funciona
+}`,
+              explanation: "Modificar array durante iteração causa pulos. Use filter ou itere de trás para frente."
+            }
+          ],
+          
+          prerequisites: ["m1a2"],
+          nextRecommended: [],
+          
+          // ===== FIM PEDAGOGIA =====
+          
+          content: `
+### Por que loops existem?
+Porque repetição manual é erro e desperdício.
+
+### \`for\` (quando você sabe a quantidade)
+\`\`\`js
+for (let i = 1; i <= 10; i++) console.log(i);
+\`\`\`
+
+### \`while\` (quando depende de condição)
+\`\`\`js
+let tentativas = 0;
+while (tentativas < 3) {
+  console.log("Tentativa:", tentativas + 1);
+  tentativas++;
+}
+\`\`\`
+
+### Cuidado com loops infinitos
+Sempre garanta que algo muda para a condição ficar falsa.
+          `,
+          exercises: [
+            {
+              title: "Exercício — Tabuada",
+              level: "Médio",
+              prompt: "Mostre a tabuada do 5 (5x1 até 5x10).",
+              solution: `let n = 5;
+for (let i = 1; i <= 10; i++) {
+  console.log(\`\${n} x \${i} = \${n * i}\`);
+}`,
+            },
+          ],
+          checklist: [
+            "Consigo usar for com contador.",
+            "Consigo usar while com condição.",
+            "Sei evitar loop infinito.",
+            "Consigo fazer tabuada com loop.",
+          ],
+        },
+
+        {
+          id: "m1proj1",
+          title: "Projeto 1 — Calculadora de IMC (passo a passo)",
+          duration: "90–140 min",
+          level: "Iniciante",
+          tags: ["projeto", "funções", "if", "lógica"],
+          tip: "Projetos são onde você aprende de verdade. Faça e refaça.",
+          content: `
+Vamos construir uma calculadora de IMC (ainda em console, sem HTML por enquanto).
+
+**Regras:**
+\`imc = peso / (altura * altura)\`
+
+Classificação:
+- < 18.5: abaixo do peso
+- < 25: normal
+- < 30: sobrepeso
+- >= 30: obesidade
+          `,
+          project: {
+            goal: "Calcular IMC e exibir classificação usando funções e condicionais.",
+            steps: [
+              "Criar variáveis peso e altura.",
+              "Calcular o IMC.",
+              "Criar uma função classificarIMC(imc).",
+              "Exibir imc com 2 casas decimais e classificação.",
+            ],
+            starterCode: `let peso = 80;
+let altura = 1.75;
+
+// TODO: calcular IMC
+// TODO: classificar e imprimir`,
+            solution: `let peso = 80;
+let altura = 1.75;
+
+let imc = peso / (altura * altura);
+
+function classificarIMC(imc) {
+  if (imc < 18.5) return "Abaixo do peso";
+  if (imc < 25) return "Normal";
+  if (imc < 30) return "Sobrepeso";
+  return "Obesidade";
+}
+
+console.log("IMC:", imc.toFixed(2));
+console.log("Classificação:", classificarIMC(imc));`,
+          },
+          checklist: [
+            "Sei usar funções com return.",
+            "Consigo usar if/else if para faixas.",
+            "Consigo calcular e formatar números (toFixed).",
+            "Consigo organizar o código em etapas.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "m2",
+      title: "Módulo 2 — DOM, Eventos e Interfaces (Intermediário)",
+      description:
+        "Aqui o JS ganha vida na tela: DOM, eventos, classes, localStorage e projetos.",
+      lessons: [
+        {
+          id: "m2a1",
+          title: "Aula 9 — DOM na prática (seleção, texto, classes, atributos)",
+          duration: "70–110 min",
+          level: "Intermediário",
+          tags: ["DOM", "querySelector", "eventos", "classList"],
+          tip: "DOM é uma árvore. Pense em selecionar nós e mudar propriedades.",
+          content: `
+### O que é DOM?
+O navegador transforma seu HTML em uma árvore de objetos. O JS consegue:
+- Ler elementos
+- Alterar texto/HTML
+- Alterar classes/estilos
+- Criar/remover elementos
+
+### Seletores (os mais usados)
+- \`document.querySelector("#id")\`
+- \`document.querySelector(".classe")\`
+- \`document.querySelectorAll("li")\`
+
+### Texto vs HTML
+- \`textContent\`: texto seguro
+- \`innerHTML\`: insere HTML (cuidado com segurança em apps reais)
+
+### Classes
+\`\`\`js
+el.classList.add("ativo")
+el.classList.remove("ativo")
+el.classList.toggle("ativo")
+\`\`\`
+          `,
+          exercises: [
+            {
+              title: "Exercício — Botão contador",
+              level: "Médio",
+              prompt: "Crie um botão que ao clicar aumenta um número na tela.",
+              solution: `// HTML: <button id="btn">Clique</button><p id="n">0</p>
+const btn = document.querySelector("#btn");
+const p = document.querySelector("#n");
+let v = 0;
+
+btn.addEventListener("click", () => {
+  v++;
+  p.textContent = v;
+});`,
+            },
+          ],
+          checklist: [
+            "Consigo selecionar elementos com querySelector.",
+            "Sei alterar textContent.",
+            "Sei usar classList.",
+            "Sei ouvir eventos com addEventListener.",
+          ],
+        },
+
+        {
+          id: "m2proj1",
+          title: "Projeto 2 — To-do List com LocalStorage (profissional)",
+          duration: "2–4 horas",
+          level: "Intermediário",
+          tags: ["projeto", "DOM", "localStorage", "CRUD"],
+          tip: "Esse projeto é ótimo para portfólio. Capriche no README no GitHub.",
+          content: `
+Vamos criar uma To-do List completa:
+- Adicionar tarefa
+- Remover tarefa
+- Persistir no navegador com localStorage
+- (Extra) Marcar como concluída e filtrar
+          `,
+          project: {
+            goal: "Construir uma To-do List funcional usando DOM + localStorage.",
+            steps: [
+              "Montar HTML: input + botão + lista.",
+              "Criar função renderTarefa(texto).",
+              "Salvar lista no localStorage (JSON).",
+              "Carregar lista ao iniciar.",
+              "Excluir tarefa e salvar novamente.",
+              "Extras: concluir + filtros.",
+            ],
+            starterCode: `// Estrutura sugerida:
+// tarefas = [{ id, texto, done }]
+// salvar(), carregar(), render()
+`,
+            solution: `// Exemplo de modelagem de tarefas:
+const KEY = "tarefas_v1";
+let tarefas = JSON.parse(localStorage.getItem(KEY)) || [];
+
+function salvar() {
+  localStorage.setItem(KEY, JSON.stringify(tarefas));
+}
+
+function adicionar(texto) {
+  tarefas.push({ id: crypto.randomUUID(), texto, done: false });
+  salvar();
+  render();
+}
+
+function remover(id) {
+  tarefas = tarefas.filter(t => t.id !== id);
+  salvar();
+  render();
+}
+
+function alternar(id) {
+  tarefas = tarefas.map(t => t.id === id ? { ...t, done: !t.done } : t);
+  salvar();
+  render();
+}
+
+const ul = document.querySelector("#lista");
+
+function render() {
+  ul.innerHTML = "";
+  for (const t of tarefas) {
+    const li = document.createElement("li");
+    li.className = "todo-item";
+
+    const span = document.createElement("span");
+    span.textContent = t.texto;
+    if (t.done) span.style.textDecoration = "line-through";
+
+    const btnDone = document.createElement("button");
+    btnDone.textContent = t.done ? "Reabrir" : "Concluir";
+    btnDone.onclick = () => alternar(t.id);
+
+    const btnDel = document.createElement("button");
+    btnDel.textContent = "Excluir";
+    btnDel.onclick = () => remover(t.id);
+
+    li.append(span, btnDone, btnDel);
+    ul.appendChild(li);
+  }
+}
+
+render();`,
+          },
+          checklist: [
+            "Tenho CRUD básico funcionando (adicionar/remover).",
+            "Persisto tarefas em localStorage.",
+            "Tenho renderização consistente (render()).",
+            "Consigo concluir tarefa (extra).",
+          ],
+        },
+      ],
+    },
+
+    // ======== SUBSTITUA A PARTIR DO MÓDULO 3 (m3) ATÉ O FINAL DO MÓDULO 5 (m5) ========
+
+    {
+      id: "m3",
+      title:
+        "Módulo 3 — JavaScript Assíncrono, Fetch e APIs (Intermediário forte)",
+      description:
+        "Você vai dominar Promises, async/await, fetch, JSON, erros, loading, e construir apps que consomem APIs como um dev profissional.",
+      lessons: [
+        {
+          id: "m3a1",
+          title:
+            "Aula 1 — Assíncrono do zero: por que existe, Event Loop e setTimeout",
+          duration: "90–140 min",
+          level: "Intermediário",
+          tags: [
+            "assíncrono",
+            "event loop",
+            "setTimeout",
+            "call stack",
+            "web APIs",
+          ],
+          tip: "Assíncrono não é ‘mágica’. É um jeito de lidar com tarefas lentas sem travar a execução. Entenda o fluxo e você domina todo o resto.",
+          images: [
+            {
+              caption:
+                "Modelo mental: Call Stack + Web APIs + Callback Queue (event loop)",
+              svg: `
+          <svg viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="820" height="320" rx="18" fill="rgba(2,6,23,.55)" stroke="rgba(148,163,184,.25)"/>
+            <text x="40" y="58" fill="rgba(229,231,235,.95)" font-size="18" font-family="Arial" font-weight="700">
+              Event Loop (modelo mental)
+            </text>
+
+            <rect x="50" y="90" width="220" height="210" rx="14" fill="rgba(96,165,250,.14)" stroke="rgba(96,165,250,.45)"/>
+            <text x="70" y="120" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">Call Stack</text>
+            <text x="70" y="148" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">Executa 1 coisa por vez</text>
+            <text x="70" y="168" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">Funções entram e saem</text>
+
+            <rect x="320" y="90" width="240" height="130" rx="14" fill="rgba(167,139,250,.14)" stroke="rgba(167,139,250,.45)"/>
+            <text x="340" y="120" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">Web APIs</text>
+            <text x="340" y="148" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">Timers (setTimeout)</text>
+            <text x="340" y="168" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">Fetch, DOM, etc.</text>
+
+            <rect x="320" y="240" width="240" height="60" rx="14" fill="rgba(52,211,153,.12)" stroke="rgba(52,211,153,.40)"/>
+            <text x="340" y="272" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">Callback Queue</text>
+
+            <rect x="610" y="140" width="200" height="110" rx="14" fill="rgba(251,191,36,.12)" stroke="rgba(251,191,36,.40)"/>
+            <text x="630" y="172" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">Event Loop</text>
+            <text x="630" y="198" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">
+              Move callbacks
+            </text>
+            <text x="630" y="218" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">
+              p/ stack quando livre
+            </text>
+
+            <g stroke="rgba(148,163,184,.55)" stroke-width="3">
+              <line x1="270" y1="155" x2="320" y2="155"/>
+              <line x1="560" y1="205" x2="610" y2="205"/>
+              <path d="M440 220 L440 240" />
+              <path d="M610 195 L560 195" />
+              <path d="M560 195 L560 270" />
+              <path d="M560 270 L560 270" />
+            </g>
+
+            <text x="40" y="325" fill="rgba(148,163,184,.95)" font-size="12" font-family="Arial">
+              Ideia central: tarefas lentas vão para Web APIs. Quando terminam, entram na fila. O event loop joga no stack quando ele está vazio.
+            </text>
+          </svg>
+          `,
+            },
+          ],
+          content: `
+### 🎯 Objetivo da aula
+Você vai entender o **porquê** do assíncrono e como o JavaScript lida com tempo e tarefas lentas **sem travar** a aplicação.
+
+Você vai dominar:
+- Diferença entre **síncrono** e **assíncrono**
+- Como funciona \`setTimeout\` / \`setInterval\`
+- O modelo mental do **Event Loop**
+- Como evitar armadilhas clássicas (ordem de execução e “travamentos”)
+
+---
+
+## 1) Síncrono vs Assíncrono
+**Síncrono**: uma linha espera a anterior terminar.
+
+\`\`\`js
+console.log("A");
+console.log("B");
+console.log("C");
+\`\`\`
+
+Saída: A B C (sempre nessa ordem)
+
+**Assíncrono**: você dispara uma tarefa e o JS continua.
+
+\`\`\`js
+console.log("A");
+
+setTimeout(() => {
+  console.log("B (depois)");
+}, 1000);
+
+console.log("C");
+\`\`\`
+
+Saída: A C B (a ordem muda porque B acontece “no futuro”).
+
+---
+
+## 2) Por que o JS precisa disso?
+Porque o JS, no navegador, costuma rodar **na mesma thread** que desenha a página.
+Se você bloquear a thread com algo pesado, o site “congela”.
+
+---
+
+## 3) setTimeout e setInterval
+### \`setTimeout\`
+Executa uma função depois de X milissegundos.
+
+\`\`\`js
+setTimeout(() => console.log("rodou"), 2000);
+\`\`\`
+
+### \`setInterval\`
+Executa uma função repetidamente.
+
+\`\`\`js
+let i = 0;
+const id = setInterval(() => {
+  i++;
+  console.log("tick", i);
+  if (i === 5) clearInterval(id);
+}, 1000);
+\`\`\`
+
+---
+
+## 4) Modelo mental: Call Stack + Web APIs + Callback Queue
+- **Call Stack**: onde as funções executam (1 por vez)
+- **Web APIs**: onde o navegador “segura” timers/fetch
+- **Callback Queue**: onde callbacks esperam ser executados
+- **Event Loop**: move callbacks para o stack quando ele estiver livre
+
+> Se você entende isso, você entende Promises/Async/Await com muito mais facilidade.
+
+---
+
+## 5) Armadilha comum: “setTimeout 0”
+Mesmo com 0ms, ele não executa “agora”.
+
+\`\`\`js
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+console.log("3");
+\`\`\`
+
+Saída: 1 3 2 (porque 2 entra na fila)
+
+---
+
+### ✅ O que você aprendeu
+- Assíncrono existe para não travar a thread principal
+- Timers funcionam via filas e event loop
+- Ordem de execução pode mudar no assíncrono
+      `,
+          examples: [
+            {
+              title: "Exemplo: ordem de execução (síncrono vs assíncrono)",
+              description:
+                "Treine seu cérebro para prever a saída (isso te torna muito melhor em debug).",
+              code: `console.log("A");
+
+setTimeout(() => {
+  console.log("B");
+}, 10);
+
+Promise.resolve().then(() => console.log("C"));
+
+console.log("D");
+
+// Tente prever a ordem antes de rodar.
+// Dica: microtasks (Promise.then) rodam antes de timers.`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício 1 — Timer básico",
+              level: "Fácil",
+              prompt:
+                "Crie um setTimeout que exiba 'Olá depois de 2s'. Antes disso, exiba 'Olá agora'.",
+              solution: `console.log("Olá agora");
+setTimeout(() => console.log("Olá depois de 2s"), 2000);`,
+            },
+            {
+              title: "Exercício 2 — Relógio (setInterval)",
+              level: "Médio",
+              prompt:
+                "Crie um setInterval que exiba a hora atual (new Date().toLocaleTimeString()) a cada 1s e pare após 10 execuções.",
+              solution: `let count = 0;
+const id = setInterval(() => {
+  count++;
+  console.log(new Date().toLocaleTimeString());
+  if (count >= 10) clearInterval(id);
+}, 1000);`,
+            },
+            {
+              title: "Desafio — Sequência controlada",
+              level: "Médio",
+              prompt:
+                "Exiba: '1' agora, '2' após 1s, '3' após 2s, '4' após 3s. Use setTimeout.",
+              solution: `console.log("1");
+setTimeout(() => console.log("2"), 1000);
+setTimeout(() => console.log("3"), 2000);
+setTimeout(() => console.log("4"), 3000);`,
+            },
+          ],
+          checklist: [
+            "Consigo explicar o que é síncrono e assíncrono.",
+            "Entendi o papel do event loop (modelo mental).",
+            "Sei usar setTimeout e setInterval.",
+            "Sei parar um setInterval com clearInterval.",
+            "Consigo prever a ordem básica de execução em exemplos simples.",
+          ],
+          quiz: [
+            {
+              q: "Por que o JavaScript usa assíncrono no navegador?",
+              options: [
+                "Porque o JS não suporta matemática",
+                "Para não travar a thread principal ao lidar com tarefas lentas",
+                "Porque o HTML exige",
+                "Porque o CSS depende disso",
+              ],
+              answerIndex: 1,
+            },
+            {
+              q: "Mesmo com setTimeout(..., 0), o callback:",
+              options: [
+                "Roda imediatamente, antes de qualquer console.log",
+                "Roda depois, quando voltar do event loop",
+                "Nunca roda",
+                "Vira uma Promise automaticamente",
+              ],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m3a2",
+          title:
+            "Aula 2 — Promises: estados, then/catch/finally e encadeamento",
+          duration: "90–140 min",
+          level: "Intermediário",
+          tags: ["promise", "then", "catch", "finally", "encadeamento"],
+          tip: "Promise é um contrato: ou resolve com um valor ou falha com um erro. Encadeamento é o segredo para código limpo.",
+          content: `
+### 🎯 Objetivo
+Você vai aprender Promises de forma sólida:
+- O que são e por que existem
+- Estados: pending/fulfilled/rejected
+- \`.then()\`, \`.catch()\`, \`.finally()\`
+- Encadeamento (chain) e retorno
+- Erros e como propagam
+
+---
+
+## 1) O que é uma Promise?
+Uma Promise representa **um valor que ainda não chegou**.
+
+Exemplos de coisas que demoram:
+- Buscar dados de uma API
+- Ler um arquivo
+- Esperar um timer
+- Consultar banco de dados (no Node)
+
+Uma Promise pode:
+- **resolver** (sucesso) → entrega um valor
+- **rejeitar** (erro) → entrega um erro
+
+---
+
+## 2) Criando uma Promise (na raça)
+\`\`\`js
+const p = new Promise((resolve, reject) => {
+  const ok = true;
+  if (ok) resolve("Deu certo");
+  else reject(new Error("Deu ruim"));
+});
+\`\`\`
+
+Consumindo:
+\`\`\`js
+p.then(valor => console.log(valor))
+ .catch(err => console.error(err))
+ .finally(() => console.log("Sempre roda"));
+\`\`\`
+
+---
+
+## 3) Encadeamento (chain)
+O que você **retorna** dentro do \`.then\` vai para o próximo \`.then\`.
+
+\`\`\`js
+Promise.resolve(2)
+  .then(n => n * 2)      // 4
+  .then(n => n + 10)     // 14
+  .then(n => console.log(n));
+\`\`\`
+
+---
+
+## 4) Erro em qualquer ponto vai para o catch
+\`\`\`js
+Promise.resolve()
+  .then(() => { throw new Error("Falha"); })
+  .then(() => console.log("não roda"))
+  .catch(e => console.log("caiu aqui:", e.message));
+\`\`\`
+
+---
+
+## 5) Promise.all e Promise.race (visão profissional)
+- \`Promise.all\`: espera todas; se uma falhar, falha tudo
+- \`Promise.race\`: a primeira que finalizar “vence”
+
+\`\`\`js
+await Promise.all([p1, p2, p3]);
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- Uma Promise é um contrato de futuro
+- Encadeamento deixa o código organizado
+- Erros propagam para \`.catch\`
+      `,
+          examples: [
+            {
+              title: "Exemplo: encadeando e retornando promessa",
+              description:
+                "Se você retornar uma Promise dentro de um then, o chain espera ela resolver.",
+              code: `function esperar(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+esperar(500)
+  .then(() => {
+    console.log("meio segundo");
+    return esperar(500);
+  })
+  .then(() => console.log("1 segundo total"));`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício 1 — Criar uma Promise com timer",
+              level: "Médio",
+              prompt:
+                "Crie uma função esperar(ms) que retorna uma Promise e resolve após ms. Use para imprimir 'A' depois de 1s.",
+              solution: `function esperar(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+esperar(1000).then(() => console.log("A"));`,
+            },
+            {
+              title: "Exercício 2 — Encadeamento",
+              level: "Médio",
+              prompt:
+                "Use esperar(ms) para imprimir: '1' depois 0.5s, '2' mais 0.5s, '3' mais 0.5s (em sequência).",
+              solution: `function esperar(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+esperar(500)
+  .then(() => { console.log("1"); return esperar(500); })
+  .then(() => { console.log("2"); return esperar(500); })
+  .then(() => { console.log("3"); });`,
+            },
+          ],
+          checklist: [
+            "Entendi o que é pending/fulfilled/rejected.",
+            "Sei usar then/catch/finally.",
+            "Entendi encadeamento e retorno em then.",
+            "Sei o que é Promise.all e quando usar.",
+          ],
+          quiz: [
+            {
+              q: "O que acontece se uma Promise rejeitar no meio de um chain?",
+              options: [
+                "Nada",
+                "Os próximos then executam normalmente",
+                "A execução pula para o catch mais próximo",
+                "O navegador trava",
+              ],
+              answerIndex: 2,
+            },
+            {
+              q: "Promise.all faz o quê?",
+              options: [
+                "Executa uma por vez",
+                "Espera todas resolverem; se uma falhar, falha tudo",
+                "Sempre retorna o primeiro resultado",
+                "Transforma callbacks em promises automaticamente",
+              ],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m3a3",
+          title:
+            "Aula 3 — Async/Await + Try/Catch: escrevendo assíncrono como profissional",
+          duration: "80–120 min",
+          level: "Intermediário",
+          tags: ["async", "await", "try/catch", "erro", "boas práticas"],
+          tip: "Async/await deixa o código mais legível, mas você precisa dominar try/catch e validar respostas da API.",
+          content: `
+### 🎯 Objetivo
+Você vai:
+- Entender \`async\` e \`await\`
+- Converter \`.then()\` em \`await\`
+- Tratar erros com \`try/catch\`
+- Lidar com “erro silencioso”: HTTP 404/500 (fetch não lança erro automaticamente)
+
+---
+
+## 1) Async/Await em 1 minuto
+- Função \`async\` sempre retorna uma Promise
+- \`await\` “espera” a Promise resolver e pega o valor
+
+\`\`\`js
+async function buscarAlgo() {
+  const valor = await Promise.resolve(10);
+  return valor * 2;
+}
+\`\`\`
+
+---
+
+## 2) Por que try/catch é obrigatório?
+Sem try/catch, erros assíncronos podem “vazar” e quebrar seu fluxo.
+
+\`\`\`js
+async function run() {
+  try {
+    const res = await fetch("https://exemplo.com");
+    // fetch só lança erro em falha de rede.
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    console.log(data);
+  } catch (e) {
+    console.error("Falhou:", e.message);
+  }
+}
+\`\`\`
+
+---
+
+## 3) Padrão profissional: funções pequenas
+Separar responsabilidades:
+- \`fetchJson(url)\`
+- \`render(dados)\`
+- \`setLoading(true/false)\`
+- \`setError(msg)\`
+
+Isso vira “código de produção”.
+
+---
+
+## 4) Validando dados
+APIs mudam. Respostas podem vir faltando campos.
+Sempre proteja seu código com checagens.
+
+---
+
+### ✅ O que você aprendeu
+- Async/await é Promise com sintaxe mais legível
+- Fetch precisa de validação de \`res.ok\`
+- try/catch torna seu fluxo confiável
+      `,
+          examples: [
+            {
+              title: "Exemplo: helper fetchJson (padrão profissional)",
+              description:
+                "Crie uma função utilitária para buscar JSON com tratamento de erro.",
+              code: `async function fetchJson(url) {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error("HTTP " + res.status);
+  }
+  return res.json();
+}
+
+async function run() {
+  try {
+    const data = await fetchJson("https://viacep.com.br/ws/01001000/json/");
+    console.log("Cidade:", data.localidade);
+  } catch (e) {
+    console.error("Erro:", e.message);
+  }
+}
+
+run();`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício — Função fetchJson",
+              level: "Médio",
+              prompt:
+                "Implemente fetchJson(url) como no exemplo e use para buscar um CEP. Exiba bairro e cidade.",
+              solution: `async function fetchJson(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  return res.json();
+}
+
+(async () => {
+  try {
+    const d = await fetchJson("https://viacep.com.br/ws/01001000/json/");
+    console.log("Bairro:", d.bairro);
+    console.log("Cidade:", d.localidade);
+  } catch (e) {
+    console.error(e.message);
+  }
+})();`,
+            },
+          ],
+          checklist: [
+            "Sei transformar then/catch em async/await.",
+            "Sempre valido res.ok ao usar fetch.",
+            "Uso try/catch para capturar falhas.",
+            "Sei criar helpers para reaproveitar código.",
+          ],
+          quiz: [
+            {
+              q: "fetch() lança erro automaticamente em HTTP 404?",
+              options: [
+                "Sim, sempre",
+                "Não. Só em falha de rede; precisa checar res.ok",
+                "Apenas no Chrome",
+                "Apenas se usar await",
+              ],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m3proj1",
+          title:
+            "Projeto — App de Clima/CEP com API pública (UI + loading + erro)",
+          duration: "4–8 horas",
+          level: "Intermediário",
+          tags: ["projeto", "fetch", "api", "dom", "async/await", "loading"],
+          tip: "Projetos com API são os que mais ‘parecem’ mercado. Capriche no tratamento de erro e no loading.",
+          content: `
+Neste projeto você vai criar uma aplicação real, com:
+- Campo de busca
+- Botão
+- Loading enquanto busca
+- Renderização do resultado
+- Mensagem de erro amigável
+- Salvamento do último resultado (localStorage)
+
+Você pode escolher:
+- **CEP** (ViaCEP) — simples e ótimo pra treinar fluxo
+- **Clima** (requer API key em muitos serviços, então começamos com ViaCEP)
+
+> Recomendação: comece com ViaCEP, depois adapte para clima.
+
+      `,
+          project: {
+            goal: "Construir um app web que busca dados de CEP e renderiza na tela com fluxo profissional.",
+            steps: [
+              "Criar HTML: input + botão + área de resultado + área de erro + loading.",
+              "Criar função fetchJson(url) com res.ok + try/catch.",
+              "Ao clicar: validar input (8 dígitos).",
+              "Mostrar loading, limpar erro, buscar dados.",
+              "Renderizar rua/bairro/cidade/UF.",
+              "Salvar último CEP e dados no localStorage.",
+              "Ao carregar a página: se tiver último CEP, mostrar automaticamente.",
+            ],
+            starterCode: `// Sugestão de estrutura
+// 1) Seletores DOM
+// 2) fetchJson
+// 3) validarCEP
+// 4) render(dados)
+// 5) eventos (click/enter)
+// 6) localStorage (última busca)
+`,
+            solution: `// HTML mínimo sugerido:
+// <input id="cep" />
+// <button id="btn">Buscar</button>
+// <div id="loading"></div>
+// <div id="error"></div>
+// <pre id="out"></pre>
+
+const $ = (sel) => document.querySelector(sel);
+const input = $("#cep");
+const btn = $("#btn");
+const loading = $("#loading");
+const errorBox = $("#error");
+const out = $("#out");
+const KEY = "cep_last_v1";
+
+function setLoading(v) {
+  loading.textContent = v ? "Carregando..." : "";
+}
+
+function setError(msg) {
+  errorBox.textContent = msg || "";
+}
+
+function validarCEP(cep) {
+  return /^\\d{8}$/.test(cep);
+}
+
+async function fetchJson(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  return res.json();
+}
+
+function render(d) {
+  out.textContent = JSON.stringify({
+    cep: d.cep,
+    logradouro: d.logradouro,
+    bairro: d.bairro,
+    cidade: d.localidade,
+    uf: d.uf
+  }, null, 2);
+}
+
+async function buscar() {
+  const cep = input.value.replace(/\\D/g, "");
+  if (!validarCEP(cep)) {
+    setError("Digite um CEP com 8 dígitos (somente números).");
+    return;
+  }
+
+  setError("");
+  setLoading(true);
+
+  try {
+    const d = await fetchJson(\`https://viacep.com.br/ws/\${cep}/json/\`);
+    if (d.erro) throw new Error("CEP não encontrado.");
+    render(d);
+    localStorage.setItem(KEY, JSON.stringify({ cep, d }));
+  } catch (e) {
+    setError(e.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+btn.addEventListener("click", buscar);
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") buscar();
+});
+
+(function init() {
+  const saved = localStorage.getItem(KEY);
+  if (!saved) return;
+  const { cep, d } = JSON.parse(saved);
+  input.value = cep;
+  render(d);
+})();`,
+          },
+          checklist: [
+            "Tenho validação de CEP (8 dígitos).",
+            "Tenho loading durante a busca.",
+            "Tenho try/catch e mensagem amigável.",
+            "Renderizo os dados na tela.",
+            "Salvo e restauro o último resultado.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "m4",
+      title:
+        "Módulo 4 — Estruturas de Dados e Algoritmos (Intermediário/Avançado)",
+      description:
+        "Aqui você vira forte: arrays avançados, objetos, desestruturação, patterns, pilha/fila e um projeto completo (Jogo da Memória).",
+      lessons: [
+        {
+          id: "m4a1",
+          title:
+            "Aula 1 — Arrays avançados: map, filter, reduce (com padrões de mercado)",
+          duration: "100–160 min",
+          level: "Intermediário",
+          tags: ["arrays", "map", "filter", "reduce", "imutabilidade"],
+          tip: "Aprenda a pensar em transformação de listas: map transforma, filter seleciona, reduce agrega.",
+          content: `
+### 🎯 Objetivo
+Você vai dominar:
+- \`map\`, \`filter\`, \`reduce\` de forma profunda
+- Padrão de **imutabilidade** (evitar alterar a lista original)
+- Como isso aparece em React/Node e no mercado
+
+---
+
+## 1) Por que métodos funcionais importam?
+Porque deixam o código:
+- Mais legível
+- Menos propenso a bugs
+- Mais fácil de testar
+
+---
+
+## 2) map: transformar cada item
+\`\`\`js
+const nums = [1,2,3];
+const dobro = nums.map(n => n * 2); // [2,4,6]
+\`\`\`
+
+Pense assim:
+> map: “para cada item, gere um novo item”.
+
+---
+
+## 3) filter: escolher itens
+\`\`\`js
+const nums = [1,2,3,4,5];
+const pares = nums.filter(n => n % 2 === 0); // [2,4]
+\`\`\`
+
+Pense assim:
+> filter: “mantenha só os que passam no teste”.
+
+---
+
+## 4) reduce: transformar tudo em um único valor
+\`\`\`js
+const nums = [1,2,3,4];
+const soma = nums.reduce((acc, n) => acc + n, 0); // 10
+\`\`\`
+
+Pense assim:
+> reduce: “acumule”.
+
+---
+
+## 5) Reduce além de soma: agrupar dados
+Exemplo: contar ocorrências
+
+\`\`\`js
+const nomes = ["ana","joao","ana"];
+const contagem = nomes.reduce((acc, nome) => {
+  acc[nome] = (acc[nome] || 0) + 1;
+  return acc;
+}, {});
+// { ana: 2, joao: 1 }
+\`\`\`
+
+---
+
+## 6) Erros comuns
+- Usar reduce quando map/filter seria mais simples
+- Alterar o array original (mutação) sem perceber
+- Esquecer o valor inicial no reduce (pode quebrar em array vazio)
+
+---
+
+### ✅ O que você aprendeu
+- map/filter/reduce e quando usar cada um
+- como escrever código mais “limpo” e profissional
+      `,
+          examples: [
+            {
+              title: "Exemplo: carrinho de compras com reduce",
+              description: "Padrão real: somar itens e aplicar desconto.",
+              code: `const carrinho = [
+  { nome: "Mouse", preco: 80, qtd: 2 },
+  { nome: "Teclado", preco: 150, qtd: 1 }
+];
+
+const total = carrinho.reduce((acc, item) => acc + item.preco * item.qtd, 0);
+
+const totalComDesconto = total > 200 ? total * 0.9 : total;
+
+console.log({ total, totalComDesconto });`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício 1 — map básico",
+              level: "Fácil",
+              prompt:
+                "Dado um array de números, crie um novo array com todos ao quadrado.",
+              solution: `const nums = [2,3,4];
+const quad = nums.map(n => n * n);
+console.log(quad);`,
+            },
+            {
+              title: "Exercício 2 — filter",
+              level: "Médio",
+              prompt:
+                "Dado um array de idades, filtre apenas maiores ou iguais a 18.",
+              solution: `const idades = [12,18,20,15,30];
+const maiores = idades.filter(i => i >= 18);
+console.log(maiores);`,
+            },
+            {
+              title: "Exercício 3 — reduce (soma)",
+              level: "Médio",
+              prompt:
+                "Some todos os valores de um array usando reduce (com valor inicial 0).",
+              solution: `const nums = [10,20,30];
+const soma = nums.reduce((acc, n) => acc + n, 0);
+console.log(soma);`,
+            },
+            {
+              title: "Desafio — agrupar por categoria",
+              level: "Difícil",
+              prompt:
+                "Dada uma lista de produtos com categoria, gere um objeto agrupando por categoria.",
+              solution: `const itens = [
+  { nome:"Arroz", cat:"Mercado" },
+  { nome:"Feijão", cat:"Mercado" },
+  { nome:"Fone", cat:"Eletrônicos" }
+];
+
+const porCategoria = itens.reduce((acc, item) => {
+  acc[item.cat] = acc[item.cat] || [];
+  acc[item.cat].push(item.nome);
+  return acc;
+}, {});
+
+console.log(porCategoria);`,
+            },
+          ],
+          checklist: [
+            "Sei explicar map, filter e reduce sem olhar.",
+            "Consigo usar reduce com valor inicial.",
+            "Consigo escrever transformações sem mutar o array original.",
+            "Consigo aplicar map/filter/reduce em objetos reais (carrinho).",
+          ],
+          quiz: [
+            {
+              q: "Qual método é mais adequado para transformar itens (1 → 2, 2 → 4)?",
+              options: ["filter", "reduce", "map", "sort"],
+              answerIndex: 2,
+            },
+            {
+              q: "Qual método é mais adequado para selecionar apenas itens que passam em um teste?",
+              options: ["map", "filter", "reduce", "push"],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m4a2",
+          title:
+            "Aula 2 — Objetos avançados: desestruturação, spread/rest e padrões",
+          duration: "90–140 min",
+          level: "Intermediário",
+          tags: [
+            "objetos",
+            "desestruturação",
+            "spread",
+            "rest",
+            "imutabilidade",
+          ],
+          tip: "Objetos são a linguagem do mundo real: usuários, produtos, pedidos. Domine isso e você domina apps.",
+          content: `
+### 🎯 Objetivo
+Você vai dominar:
+- Desestruturação (object/array)
+- Spread (\`...\`) para copiar/combinar
+- Rest (\`...\`) para capturar o “resto”
+- Padrões de atualização imutável (muito usado em React)
+
+---
+
+## 1) Desestruturação (pegar campos rapidamente)
+\`\`\`js
+const user = { nome:"Ana", idade:28, cidade:"SP" };
+const { nome, idade } = user;
+\`\`\`
+
+Você pode renomear:
+\`\`\`js
+const { nome: nomeUsuario } = user;
+\`\`\`
+
+Com valores padrão:
+\`\`\`js
+const { cargo = "Aluno" } = user;
+\`\`\`
+
+---
+
+## 2) Spread (copiar/combinar)
+\`\`\`js
+const a = { x: 1 };
+const b = { y: 2 };
+const c = { ...a, ...b }; // { x:1, y:2 }
+\`\`\`
+
+Atualização imutável:
+\`\`\`js
+const user2 = { ...user, idade: user.idade + 1 };
+\`\`\`
+
+---
+
+## 3) Rest (capturar o restante)
+\`\`\`js
+const { nome, ...resto } = user;
+console.log(resto); // { idade: 28, cidade:"SP" }
+\`\`\`
+
+---
+
+## 4) Padrão real: atualizar item dentro de array
+\`\`\`js
+const tarefas = [
+  { id: 1, texto: "Estudar", done: false },
+  { id: 2, texto: "Treinar", done: false }
+];
+
+const atualizado = tarefas.map(t =>
+  t.id === 2 ? { ...t, done: true } : t
+);
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- desestruturação, spread/rest
+- atualização imutável em objetos e arrays
+      `,
+          exercises: [
+            {
+              title: "Exercício — Atualização imutável",
+              level: "Médio",
+              prompt:
+                "Dado um objeto produto {nome, preco, estoque}, crie um novo objeto com estoque - 1 sem mudar o original.",
+              solution: `const produto = { nome:"Mouse", preco:80, estoque:5 };
+const novo = { ...produto, estoque: produto.estoque - 1 };
+
+console.log(produto); // original
+console.log(novo);    // atualizado`,
+            },
+          ],
+          checklist: [
+            "Consigo desestruturar objetos.",
+            "Consigo usar spread para copiar/atualizar.",
+            "Entendi rest para capturar o restante.",
+            "Consigo atualizar itens em array sem mutar.",
+          ],
+          quiz: [
+            {
+              q: "Qual é o objetivo do spread (...) em objetos?",
+              options: [
+                "Deletar propriedades",
+                "Copiar/combinar propriedades em um novo objeto",
+                "Ordenar chaves",
+                "Transformar em array automaticamente",
+              ],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m4a3",
+          title:
+            "Aula 3 — Estruturas clássicas: Pilha, Fila e Lista (com implementações)",
+          duration: "90–140 min",
+          level: "Intermediário",
+          tags: ["pilha", "fila", "estrutura de dados", "algoritmos"],
+          tip: "Mesmo usando arrays, entender pilha/fila te dá base para entrevistas e projetos complexos.",
+          content: `
+### 🎯 Objetivo
+Você vai entender:
+- O que é **Pilha (Stack)** → LIFO
+- O que é **Fila (Queue)** → FIFO
+- Como implementar em JS
+- Casos reais: undo/redo, fila de processamento, histórico
+
+---
+
+## 1) Pilha (Stack) — LIFO
+**Último a entrar, primeiro a sair**.
+
+Exemplo real:
+- Desfazer (CTRL+Z)
+- Navegação do navegador (voltar)
+
+Implementação:
+\`\`\`js
+const stack = [];
+stack.push("A");
+stack.push("B");
+stack.pop(); // "B"
+\`\`\`
+
+---
+
+## 2) Fila (Queue) — FIFO
+**Primeiro a entrar, primeiro a sair**.
+
+Exemplo real:
+- Fila de atendimento
+- Processamento de jobs
+
+Implementação simples (cuidado com performance em arrays grandes):
+\`\`\`js
+const queue = [];
+queue.push("A");
+queue.push("B");
+queue.shift(); // "A"
+\`\`\`
+
+Implementação melhor (com índices):
+\`\`\`js
+class Queue {
+  constructor() {
+    this.items = {};
+    this.head = 0;
+    this.tail = 0;
+  }
+  enqueue(x) { this.items[this.tail++] = x; }
+  dequeue() {
+    if (this.head === this.tail) return undefined;
+    const v = this.items[this.head];
+    delete this.items[this.head++];
+    return v;
+  }
+  size() { return this.tail - this.head; }
+}
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- Pilha (push/pop) e fila (enqueue/dequeue)
+- Casos reais de uso
+      `,
+          examples: [
+            {
+              title: "Exemplo: mini histórico (undo)",
+              description: "Simule um histórico com stack para desfazer ações.",
+              code: `const historico = [];
+function fazer(acao) { historico.push(acao); console.log("Fez:", acao); }
+function desfazer() {
+  const ultima = historico.pop();
+  console.log("Desfez:", ultima);
+}
+
+fazer("digitou A");
+fazer("digitou B");
+desfazer();`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício — Implementar Stack com classe",
+              level: "Médio",
+              prompt: "Crie uma classe Stack com push, pop e size.",
+              solution: `class Stack {
+  constructor() { this.arr = []; }
+  push(x) { this.arr.push(x); }
+  pop() { return this.arr.pop(); }
+  size() { return this.arr.length; }
+}
+
+const s = new Stack();
+s.push(1); s.push(2);
+console.log(s.pop()); // 2
+console.log(s.size()); // 1`,
+            },
+          ],
+          checklist: [
+            "Entendi LIFO e FIFO.",
+            "Consigo implementar pilha e fila.",
+            "Sei citar casos reais de uso.",
+          ],
+          quiz: [
+            {
+              q: "Pilha é:",
+              options: ["FIFO", "LIFO", "Ordenação", "Busca binária"],
+              answerIndex: 1,
+            },
+            {
+              q: "Fila é:",
+              options: ["LIFO", "FIFO", "Recursão", "Hashing"],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m4proj1",
+          title: "Projeto — Jogo da Memória (DOM + Arrays + lógica de estado)",
+          duration: "8–16 horas",
+          level: "Intermediário/Avançado",
+          tags: ["projeto", "jogo", "dom", "arrays", "estado", "lógica"],
+          tip: "Esse projeto te ensina o que frameworks fazem: controlar estado e refletir na UI.",
+          content: `
+Você vai construir um **Jogo da Memória** com:
+- Cartas embaralhadas
+- Controle de estado (cartas viradas, pares encontrados)
+- Bloqueio enquanto compara duas cartas
+- Contador de tentativas
+- Botão de reiniciar
+- (Extra) cronômetro e ranking (localStorage)
+
+---
+
+## Regras do jogo
+1. Ao clicar em uma carta, ela vira (mostra o símbolo)
+2. Você pode virar duas cartas
+3. Se forem iguais: ficam abertas (par encontrado)
+4. Se forem diferentes: voltam a fechar após um delay
+5. O jogo termina quando todos os pares forem encontrados
+
+---
+
+## Dica profissional
+Você precisa de:
+- Uma lista de cartas (array)
+- Um estado: \`firstCard\`, \`secondCard\`, \`lockBoard\`
+- Uma função \`resetTurn()\`
+      `,
+          project: {
+            goal: "Construir um Jogo da Memória com lógica completa e UI em DOM.",
+            steps: [
+              "Criar HTML: grid de cartas e painel (tentativas, reset).",
+              "Criar array de símbolos e duplicar para formar pares.",
+              "Embaralhar (Fisher-Yates).",
+              "Renderizar cartas no DOM (data-id, data-symbol).",
+              "Ao clicar: virar carta (classe CSS).",
+              "Guardar primeira e segunda carta no estado.",
+              "Se bater: marcar como matched e limpar estado.",
+              "Se não bater: travar cliques, esperar 700ms, desvirar, liberar.",
+              "Contar tentativas e mostrar vitória ao final.",
+            ],
+            starterCode: `// Estado sugerido
+let first = null;
+let second = null;
+let lockBoard = false;
+let tentativas = 0;
+
+// TODO: gerar deck duplicado
+// TODO: shuffle
+// TODO: render
+// TODO: click handler
+`,
+            solution: `// Solução resumida (padrão do projeto):
+// 1) deck = símbolos duplicados
+// 2) shuffle(deck)
+// 3) render
+// 4) onCardClick controla estado first/second/lockBoard
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}`,
+          },
+          checklist: [
+            "Tenho embaralhamento correto.",
+            "Tenho controle de estado (first/second/lockBoard).",
+            "Tenho comparação de pares com delay.",
+            "Tenho contador de tentativas.",
+            "Tenho reset do jogo.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "m5",
+      title: "Módulo 5 — POO em JavaScript (Classes, this, herança e padrões)",
+      description:
+        "Você vai aprender POO de forma prática: modelagem, classes, encapsulamento, herança e um projeto de cadastro de produtos orientado a objetos.",
+      lessons: [
+        {
+          id: "m5a1",
+          title: "Aula 1 — Classes e Objetos: do básico ao profissional",
+          duration: "100–160 min",
+          level: "Intermediário",
+          tags: ["poo", "class", "constructor", "métodos", "modelagem"],
+          tip: "POO não é ‘moda’. É uma forma de organizar sistemas grandes usando modelos do mundo real.",
+          content: `
+### 🎯 Objetivo
+Você vai:
+- Entender o que é POO de verdade (não decorar sintaxe)
+- Criar classes com \`constructor\`
+- Criar métodos
+- Instanciar objetos
+- Entender “modelagem”: transformar um problema em classes
+
+---
+
+## 1) Por que POO existe?
+Quando um sistema cresce, você precisa organizar:
+- Dados (estado)
+- Regras (comportamento)
+
+POO sugere: agrupe isso em **objetos**.
+
+---
+
+## 2) Classe vs Objeto
+- **Classe**: molde/planta
+- **Objeto**: instância (um “exemplar” criado a partir do molde)
+
+\`\`\`js
+class Usuario {
+  constructor(nome, email) {
+    this.nome = nome;
+    this.email = email;
+  }
+
+  apresentar() {
+    return \`Olá, eu sou \${this.nome}\`;
+  }
+}
+
+const u1 = new Usuario("Ana", "ana@email.com");
+console.log(u1.apresentar());
+\`\`\`
+
+---
+
+## 3) this (explicação clara)
+\`this\` é “este objeto atual”.  
+Dentro de métodos, \`this\` aponta para a instância.
+
+Armadilha: \`this\` pode mudar dependendo de como a função é chamada.
+Por isso, em eventos, callbacks e classes, você deve entender bem contexto.
+
+---
+
+## 4) Padrão real: classe + validações
+Classe não é só “guardar campo”, ela também protege regras.
+
+Exemplo: impedir preço negativo.
+
+---
+
+### ✅ O que você aprendeu
+- Classes e instâncias
+- constructor e métodos
+- this e contexto
+      `,
+          examples: [
+            {
+              title: "Exemplo: Produto com regra de validação",
+              description:
+                "Classe que impede preço inválido e fornece método utilitário.",
+              code: `class Produto {
+  constructor(nome, preco, estoque) {
+    if (preco < 0) throw new Error("Preço não pode ser negativo");
+    this.nome = nome;
+    this.preco = preco;
+    this.estoque = estoque;
+  }
+
+  valorTotalEmEstoque() {
+    return this.preco * this.estoque;
+  }
+}
+
+const p = new Produto("Mouse", 80, 5);
+console.log(p.valorTotalEmEstoque());`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício — Classe Usuario",
+              level: "Médio",
+              prompt:
+                "Crie uma classe Usuario com nome e idade. Crie método podeDirigir() que retorna true se idade >= 18.",
+              solution: `class Usuario {
+  constructor(nome, idade) {
+    this.nome = nome;
+    this.idade = idade;
+  }
+  podeDirigir() {
+    return this.idade >= 18;
+  }
+}
+
+const u = new Usuario("João", 20);
+console.log(u.podeDirigir());`,
+            },
+          ],
+          checklist: [
+            "Sei criar classe com constructor.",
+            "Sei instanciar objetos com new.",
+            "Entendi this dentro de métodos.",
+            "Consigo criar métodos que implementam regras.",
+          ],
+          quiz: [
+            {
+              q: "Classe é:",
+              options: [
+                "Um objeto pronto",
+                "Um molde para criar objetos",
+                "Uma função que sempre retorna string",
+                "Um tipo especial de array",
+              ],
+              answerIndex: 1,
+            },
+          ],
+        },
+
+        {
+          id: "m5a2",
+          title:
+            "Aula 2 — Encapsulamento, getters/setters e propriedades privadas",
+          duration: "90–140 min",
+          level: "Intermediário",
+          tags: ["encapsulamento", "getter", "setter", "privado", "validação"],
+          tip: "Encapsular é proteger o estado. Você controla como dados entram e saem do objeto.",
+          content: `
+### 🎯 Objetivo
+Você vai:
+- Entender encapsulamento (proteger estado)
+- Usar getters e setters
+- Criar propriedades privadas com \`#\` (quando disponível)
+- Validar entradas
+
+---
+
+## 1) Encapsulamento
+Você não quer que qualquer parte do código faça:
+\`produto.preco = -999\`
+
+Então você cria uma barreira.
+
+---
+
+## 2) Getter/Setter (controle de acesso)
+\`\`\`js
+class Produto {
+  constructor(nome, preco) {
+    this.nome = nome;
+    this._preco = preco;
+  }
+
+  get preco() {
+    return this._preco;
+  }
+
+  set preco(valor) {
+    if (valor < 0) throw new Error("Preço inválido");
+    this._preco = valor;
+  }
+}
+\`\`\`
+
+---
+
+## 3) Propriedade privada (#)
+\`\`\`js
+class Conta {
+  #saldo = 0;
+  depositar(v) { this.#saldo += v; }
+  verSaldo() { return this.#saldo; }
+}
+\`\`\`
+
+Obs: funciona em navegadores modernos.
+
+---
+
+### ✅ O que você aprendeu
+- getters/setters para validação
+- estado privado para proteger regras
+      `,
+          examples: [
+            {
+              title: "Exemplo: Conta bancária (privado + regra)",
+              description: "Conta que não permite saque maior que saldo.",
+              code: `class Conta {
+  #saldo = 0;
+
+  depositar(v) {
+    if (v <= 0) throw new Error("Depósito inválido");
+    this.#saldo += v;
+  }
+
+  sacar(v) {
+    if (v <= 0) throw new Error("Saque inválido");
+    if (v > this.#saldo) throw new Error("Saldo insuficiente");
+    this.#saldo -= v;
+  }
+
+  verSaldo() { return this.#saldo; }
+}
+
+const c = new Conta();
+c.depositar(100);
+c.sacar(40);
+console.log(c.verSaldo());`,
+            },
+          ],
+          exercises: [
+            {
+              title: "Exercício — Setter com validação",
+              level: "Médio",
+              prompt:
+                "Crie uma classe Produto com _estoque e setter estoque que não permite valor negativo.",
+              solution: `class Produto {
+  constructor(nome, estoque) {
+    this.nome = nome;
+    this._estoque = 0;
+    this.estoque = estoque;
+  }
+  get estoque() { return this._estoque; }
+  set estoque(v) {
+    if (v < 0) throw new Error("Estoque inválido");
+    this._estoque = v;
+  }
+}
+
+const p = new Produto("Teclado", 10);
+p.estoque = 5;
+console.log(p.estoque);`,
+            },
+          ],
+          checklist: [
+            "Entendi encapsulamento (proteger estado).",
+            "Sei usar getter/setter para validar.",
+            "Entendi propriedade privada (#) e quando usar.",
+          ],
+        },
+
+        {
+          id: "m5a3",
+          title: "Aula 3 — Herança e Polimorfismo (com exemplos reais)",
+          duration: "90–150 min",
+          level: "Intermediário/Avançado",
+          tags: ["herança", "extends", "super", "polimorfismo"],
+          tip: "Herança é útil quando existe uma relação clara de ‘é um’. Evite herança só por ‘reutilizar’ código.",
+          content: `
+### 🎯 Objetivo
+Você vai:
+- Entender herança (extends) e super()
+- Criar classes base e classes filhas
+- Entender polimorfismo (mesmo método, comportamento diferente)
+
+---
+
+## 1) Herança: extends
+\`\`\`js
+class Animal {
+  constructor(nome) { this.nome = nome; }
+  falar() { return "Som genérico"; }
+}
+
+class Cachorro extends Animal {
+  falar() { return "Au au"; }
+}
+
+const rex = new Cachorro("Rex");
+console.log(rex.falar());
+\`\`\`
+
+Polimorfismo:
+- mesmo método \`falar()\`
+- comportamento diferente dependendo da classe
+
+---
+
+## 2) super()
+\`\`\`js
+class Funcionario {
+  constructor(nome, salario) {
+    this.nome = nome;
+    this.salario = salario;
+  }
+}
+
+class Gerente extends Funcionario {
+  constructor(nome, salario, area) {
+    super(nome, salario);
+    this.area = area;
+  }
+}
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- herança e polimorfismo com exemplos claros
+      `,
+          exercises: [
+            {
+              title: "Exercício — Funcionário e Estagiário",
+              level: "Médio",
+              prompt:
+                "Crie Funcionario com calcularBonus() que retorna 10% do salário. Crie Estagiario que retorna 5%.",
+              solution: `class Funcionario {
+  constructor(nome, salario) {
+    this.nome = nome;
+    this.salario = salario;
+  }
+  calcularBonus() { return this.salario * 0.10; }
+}
+
+class Estagiario extends Funcionario {
+  calcularBonus() { return this.salario * 0.05; }
+}
+
+console.log(new Funcionario("Ana", 5000).calcularBonus());
+console.log(new Estagiario("João", 2000).calcularBonus());`,
+            },
+          ],
+          checklist: [
+            "Entendi extends e super().",
+            "Consigo criar classes filhas.",
+            "Entendi polimorfismo na prática.",
+          ],
+        },
+
+        {
+          id: "m5proj1",
+          title:
+            "Projeto — Sistema de Cadastro de Produtos com POO (CRUD + LocalStorage)",
+          duration: "10–20 horas",
+          level: "Intermediário/Avançado",
+          tags: ["projeto", "poo", "crud", "dom", "localStorage"],
+          tip: "Esse projeto é um ótimo ‘mini-sistema’ para portfólio: cadastro, edição, validações e persistência.",
+          content: `
+Você vai construir um **Cadastro de Produtos** com:
+- Formulário (nome, preço, estoque, categoria)
+- Lista de produtos
+- Editar
+- Excluir
+- Persistir no localStorage
+- Validações (ex: preço > 0)
+- Organização por classes
+
+---
+
+## Modelagem sugerida (profissional)
+- Classe **Produto**
+- Classe **RepositorioProdutos** (carrega/salva)
+- Classe **UIProdutos** (render e eventos)
+
+Separar responsabilidades deixa o código limpo e escalável.
+
+      `,
+          project: {
+            goal: "Criar um sistema CRUD completo, persistente e organizado por classes (POO).",
+            steps: [
+              "Criar HTML com formulário e lista.",
+              "Criar classe Produto com validações.",
+              "Criar repositório que salva/carrega via localStorage.",
+              "Criar UI que renderiza a lista e controla eventos.",
+              "Implementar editar (carregar dados no form).",
+              "Implementar excluir.",
+              "Criar filtros simples por categoria (extra).",
+              "Criar ordenação por preço (extra).",
+            ],
+            starterCode: `// Estrutura sugerida:
+class Produto { /* validações */ }
+class RepoProdutos { /* load/save */ }
+class UIProdutos { /* render + eventos */ }`,
+            solution: `// Dica: a solução completa é longa.
+// Você vai montar por etapas com o passo a passo.
+// Use como base os padrões:
+// - repo.getAll(), repo.add(), repo.update(), repo.remove()
+// - ui.render(), ui.bindEvents()
+
+// Se quiser, eu te entrego a solução final completa desse projeto no Bloco 2.
+`,
+          },
+          checklist: [
+            "Tenho classe Produto com validações.",
+            "Tenho repo com persistência em localStorage.",
+            "Tenho renderização da lista.",
+            "Consigo editar e excluir produtos.",
+            "Projeto organizado em arquivos/pastas.",
+          ],
+        },
+      ],
+    },
+
+    // ======== FIM DO BLOCO 1 (m3, m4, m5) ========
+
+    // ======== INICO DO BLOCO 1 (m6, m7, m8, m9) ========
+  // ======== SUBSTITUA A PARTIR DO MÓDULO 6 (m6) ATÉ O FINAL (m9) ========
+
+{
+  id: "m6",
+  title: "Módulo 6 — Módulos, NPM, Bundlers e Node.js (profissional)",
+  description:
+    "Você vai aprender a trabalhar como dev de mercado: import/export, npm, scripts, Vite, estrutura de projeto e uma mini-biblioteca modular.",
+  lessons: [
+    {
+      id: "m6a1",
+      title: "Aula 1 — ES Modules (import/export) e organização real de código",
+      duration: "90–140 min",
+      level: "Intermediário",
+      tags: ["modules", "import", "export", "arquitetura", "clean code"],
+      tip:
+        "Código profissional não é arquivo único. Modularizar = separar responsabilidades e reduzir bugs.",
+      images: [
+        {
+          caption: "Padrão mental: separar por responsabilidade (UI, serviços, utils)",
+          svg: `
+          <svg viewBox="0 0 860 320" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="820" height="280" rx="18" fill="rgba(2,6,23,.55)" stroke="rgba(148,163,184,.25)"/>
+            <text x="40" y="60" fill="rgba(229,231,235,.95)" font-size="18" font-family="Arial" font-weight="700">Arquitetura simples (projeto pequeno → médio)</text>
+
+            <rect x="60" y="90" width="220" height="170" rx="14" fill="rgba(96,165,250,.14)" stroke="rgba(96,165,250,.45)"/>
+            <text x="80" y="122" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">UI</text>
+            <text x="80" y="146" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">render(), eventos</text>
+
+            <rect x="320" y="90" width="220" height="170" rx="14" fill="rgba(167,139,250,.14)" stroke="rgba(167,139,250,.45)"/>
+            <text x="340" y="122" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">Services</text>
+            <text x="340" y="146" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">API, storage</text>
+
+            <rect x="580" y="90" width="220" height="170" rx="14" fill="rgba(52,211,153,.12)" stroke="rgba(52,211,153,.40)"/>
+            <text x="600" y="122" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial" font-weight="700">Utils</text>
+            <text x="600" y="146" fill="rgba(229,231,235,.85)" font-size="12" font-family="Arial">format, validações</text>
+
+            <g stroke="rgba(148,163,184,.55)" stroke-width="3">
+              <line x1="280" y1="175" x2="320" y2="175"/>
+              <line x1="540" y1="175" x2="580" y2="175"/>
+            </g>
+
+            <text x="40" y="290" fill="rgba(148,163,184,.95)" font-size="12" font-family="Arial">
+              Dica: módulos evitam “código macarrão”. Um arquivo deve ter um propósito claro.
+            </text>
+          </svg>
+          `
+        }
+      ],
+      content: `
+### 🎯 Objetivo
+Você vai aprender:
+- O que são **módulos** e por que eles existem
+- Como usar **import/export** (ESM)
+- Como organizar pastas como um dev profissional
+- Como evitar dependência circular e “bagunça”
+
+---
+
+## 1) Por que modularizar?
+Quando o projeto cresce, um arquivo gigante vira:
+- difícil de entender
+- difícil de debugar
+- difícil de testar
+- propenso a bugs
+
+Modularizar é separar o sistema em partes pequenas e claras.
+
+---
+
+## 2) export e import (o básico)
+### Export nomeado
+\`\`\`js
+// math.js
+export function soma(a, b) { return a + b; }
+export function sub(a, b) { return a - b; }
+\`\`\`
+
+\`\`\`js
+// app.js
+import { soma } from "./math.js";
+console.log(soma(2, 3));
+\`\`\`
+
+### Export default
+\`\`\`js
+// logger.js
+export default function log(msg) {
+  console.log("[LOG]", msg);
+}
+\`\`\`
+
+\`\`\`js
+import log from "./logger.js";
+log("Olá");
+\`\`\`
+
+> Dica: use **named exports** quando tiver várias funções; use **default** quando for “uma coisa principal”.
+
+---
+
+## 3) Organização real de pastas (projetos pequenos/médios)
+- \`/src\`
+  - \`/ui\` (render, eventos, componentes)
+  - \`/services\` (API, storage, regras externas)
+  - \`/utils\` (validações, formatação)
+  - \`main.js\` (ponto de entrada)
+
+---
+
+## 4) Erros comuns
+- Importar com caminho errado (./ vs ../)
+- Esquecer extensão \`.js\` em ESM no navegador
+- Criar dependência circular (A importa B e B importa A)
+
+---
+
+### ✅ O que você aprendeu
+- Import/export e quando usar cada tipo
+- Estrutura profissional de pastas
+      `,
+      examples: [
+        {
+          title: "Exemplo: módulo de validação",
+          description: "Um módulo que valida email e senha, usado pela UI.",
+          code: `// src/utils/validate.js
+export function validarEmail(email) {
+  return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+}
+
+export function validarSenha(senha) {
+  return senha.length >= 8;
+}
+
+// src/main.js
+import { validarEmail, validarSenha } from "./utils/validate.js";
+
+console.log(validarEmail("a@b.com"));
+console.log(validarSenha("12345678"));`
+        }
+      ],
+      exercises: [
+        {
+          title: "Exercício — Criar módulo de formatação",
+          level: "Médio",
+          prompt:
+            "Crie um arquivo format.js com função formatarMoeda(valor) e importe em main.js para testar.",
+          solution: `// format.js
+export function formatarMoeda(v) {
+  return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+// main.js
+import { formatarMoeda } from "./format.js";
+console.log(formatarMoeda(1234.56));`
+        }
+      ],
+      checklist: [
+        "Sei criar e importar módulos.",
+        "Entendi named export vs default export.",
+        "Consigo organizar pastas por responsabilidade.",
+        "Consigo evitar import circular (conceito)."
+      ],
+      quiz: [
+        {
+          q: "Quando usar named exports?",
+          options: [
+            "Quando só existe uma função no arquivo",
+            "Quando o arquivo exporta várias coisas",
+            "Nunca, use sempre default",
+            "Somente com React"
+          ],
+          answerIndex: 1
+        }
+      ]
+    },
+
+    {
+      id: "m6a2",
+      title: "Aula 2 — Node.js + NPM (scripts, dependências, sem medo)",
+      duration: "90–150 min",
+      level: "Intermediário",
+      tags: ["node", "npm", "package.json", "scripts", "dependências"],
+      tip:
+        "NPM é parte do trabalho. Aprenda a ler package.json e entender scripts: isso te libera no mercado.",
+      content: `
+### 🎯 Objetivo
+Você vai aprender:
+- O que é Node.js (runtime do JS fora do navegador)
+- O que é NPM e package.json
+- Dependências vs devDependencies
+- Scripts e automação (\`npm run\`)
+- Semântica de versões (\`^, ~\`)
+
+---
+
+## 1) Node.js
+Node é um runtime que permite executar JS no servidor e no terminal.
+
+Exemplo:
+\`\`\`js
+// index.js
+console.log("Rodando no Node");
+\`\`\`
+
+Terminal:
+\`\`\`bash
+node index.js
+\`\`\`
+
+---
+
+## 2) package.json (coração do projeto)
+\`\`\`json
+{
+  "name": "meu-projeto",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "test": "jest"
+  }
+}
+\`\`\`
+
+---
+
+## 3) dependencies x devDependencies
+- **dependencies**: necessárias em produção
+- **devDependencies**: necessárias só no desenvolvimento (ex: prettier, jest)
+
+---
+
+## 4) Scripts
+Você cria “atalhos”:
+\`\`\`json
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
+\`\`\`
+
+Rodar:
+\`\`\`bash
+npm run dev
+\`\`\`
+
+---
+
+## 5) Versionamento (visão prática)
+- \`^1.2.3\`: aceita novas versões menores/patch (com cuidado)
+- \`~1.2.3\`: aceita patch
+- Sem símbolo: versão fixa
+
+---
+
+### ✅ O que você aprendeu
+- Node executa JS fora do navegador
+- NPM gerencia pacotes e scripts
+      `,
+      exercises: [
+        {
+          title: "Exercício — Criar um projeto Node",
+          level: "Fácil",
+          prompt:
+            "Crie uma pasta, rode npm init -y, crie index.js e rode node index.js.",
+          solution: `# Terminal:
+mkdir meu-projeto
+cd meu-projeto
+npm init -y
+
+# crie index.js com:
+console.log("OK");
+
+# rode:
+node index.js`
+        }
+      ],
+      checklist: [
+        "Sei o que é Node.js.",
+        "Entendi o que é package.json.",
+        "Sei a diferença entre dependencies e devDependencies.",
+        "Consigo rodar scripts com npm run."
+      ]
+    },
+
+    {
+      id: "m6a3",
+      title: "Aula 3 — Vite (bundler moderno) + estrutura de projeto front",
+      duration: "80–130 min",
+      level: "Intermediário",
+      tags: ["vite", "bundler", "build", "deploy", "frontend tooling"],
+      tip:
+        "Vite é o jeito moderno de trabalhar no front. Você ganha hot reload, build e organização profissional.",
+      content: `
+### 🎯 Objetivo
+Você vai:
+- Criar projeto com Vite
+- Entender dev server e build
+- Usar módulos sem dor
+- Preparar para deploy
+
+---
+
+## 1) Criar projeto
+\`\`\`bash
+npm create vite@latest
+\`\`\`
+
+Escolha:
+- Vanilla
+- JavaScript
+
+Depois:
+\`\`\`bash
+cd projeto
+npm install
+npm run dev
+\`\`\`
+
+---
+
+## 2) Estrutura típica
+- \`index.html\`
+- \`src/main.js\`
+- \`src/style.css\`
+
+---
+
+## 3) Por que isso importa?
+Porque no mercado, a maioria dos projetos:
+- tem build
+- usa import/export
+- usa bundler
+- tem lint/test
+
+---
+
+### ✅ O que você aprendeu
+- Criar e rodar projeto com Vite
+- Estrutura típica do front moderno
+      `,
+      exercises: [
+        {
+          title: "Exercício — Criar projeto Vite e importar módulo",
+          level: "Médio",
+          prompt:
+            "Crie um projeto Vite e crie src/utils/soma.js exportando soma. Importe em main.js e mostre no console.",
+          solution: `// src/utils/soma.js
+export const soma = (a,b) => a + b;
+
+// src/main.js
+import { soma } from "./utils/soma";
+console.log(soma(2,3));`
+        }
+      ],
+      checklist: [
+        "Consigo criar projeto com Vite.",
+        "Consigo rodar npm run dev.",
+        "Consigo importar módulos no src."
+      ]
+    },
+
+    {
+      id: "m6proj1",
+      title: "Projeto — Mini biblioteca modular (utils + docs + exemplo real)",
+      duration: "6–12 horas",
+      level: "Intermediário",
+      tags: ["projeto", "modules", "npm", "docs", "clean code"],
+      tip:
+        "Esse projeto dá muito valor no portfólio porque mostra organização e documentação.",
+      content: `
+Você vai criar uma mini-biblioteca \`my-utils\` com:
+- Funções úteis (formatarMoeda, validarEmail, clamp, debounce)
+- Organização em módulos
+- Exemplo de uso (uma página demonstrando)
+- README bem feito (muito importante)
+
+---
+
+## Funções sugeridas
+- \`formatarMoeda(valor)\`
+- \`validarEmail(email)\`
+- \`clamp(valor, min, max)\`
+- \`debounce(fn, delay)\` (muito usado em busca/input)
+
+---
+
+## Requisito de profissionalismo
+- Código bem nomeado
+- Comentários curtos e úteis
+- README com exemplos
+- Pasta \`/examples\` com demonstração
+      `,
+      project: {
+        goal:
+          "Criar biblioteca modular com documentação e demo, no padrão de portfólio.",
+        steps: [
+          "Criar projeto Vite Vanilla JS.",
+          "Criar pasta src/utils com funções separadas.",
+          "Criar index.js exportando tudo (barrel).",
+          "Criar uma página /demo usando as funções.",
+          "Criar README com exemplos copiáveis.",
+          "Extra: publicar no GitHub Pages."
+        ],
+        starterCode: `// src/utils/format.js
+export function formatarMoeda(v) { /* ... */ }
+
+// src/utils/validate.js
+export function validarEmail(email) { /* ... */ }
+
+// src/utils/index.js (barrel export)
+export * from "./format";
+export * from "./validate";`,
+        solution: `// Exemplo: debounce
+export function debounce(fn, delay = 300) {
+  let id;
+  return (...args) => {
+    clearTimeout(id);
+    id = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// Exemplo: clamp
+export function clamp(v, min, max) {
+  return Math.min(max, Math.max(min, v));
+}`
+      },
+      checklist: [
+        "Tenho funções separadas em arquivos.",
+        "Tenho barrel export (index.js).",
+        "Tenho demo funcionando.",
+        "Tenho README com exemplos.",
+        "Tenho deploy (extra)."
+      ]
+    }
+  ]
+},
+
+{
+  id: "m7",
+  title: "Módulo 7 — React (Avançado, padrão mercado)",
+  description:
+    "Você vai aprender React do jeito certo: componentes, props, estado, hooks, router, context e um dashboard de portfólio.",
+  lessons: [
+    {
+      id: "m7a1",
+      title: "Aula 1 — React do zero (Componentes, JSX, Props)",
+      duration: "120–180 min",
+      level: "Avançado",
+      tags: ["react", "jsx", "components", "props", "render"],
+      tip:
+        "React é uma forma de pensar: UI como função do estado. Domine esse conceito e o resto encaixa.",
+      content: `
+### 🎯 Objetivo
+Você vai aprender:
+- O que é React e por que ele existe
+- JSX e mentalidade de componente
+- Props e reutilização
+- Estrutura de projeto React (Vite)
+
+---
+
+## 1) Por que React?
+Quando o DOM cresce, manipular tudo “na mão” fica difícil.
+React organiza UI em **componentes**, e você descreve a tela baseado no estado.
+
+> UI = f(estado)
+
+---
+
+## 2) Criando projeto
+\`\`\`bash
+npm create vite@latest
+# escolha React + JavaScript
+npm install
+npm run dev
+\`\`\`
+
+---
+
+## 3) Componente básico
+\`\`\`jsx
+function Hello() {
+  return <h1>Olá!</h1>;
+}
+export default Hello;
+\`\`\`
+
+---
+
+## 4) Props (dados que entram no componente)
+\`\`\`jsx
+function Card({ title, children }) {
+  return (
+    <div className="card">
+      <h2>{title}</h2>
+      <div>{children}</div>
+    </div>
+  );
+}
+\`\`\`
+
+Uso:
+\`\`\`jsx
+<Card title="Bem-vindo">
+  <p>Conteúdo dentro do card</p>
+</Card>
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- Componente é uma função que retorna UI
+- Props são entradas que tornam componentes reutilizáveis
+      `,
+      exercises: [
+        {
+          title: "Exercício — Componente Botao",
+          level: "Médio",
+          prompt:
+            "Crie um componente Botao({texto}) e use 3 vezes na tela com textos diferentes.",
+          solution: `function Botao({ texto }) {
+  return <button>{texto}</button>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <Botao texto="Salvar" />
+      <Botao texto="Cancelar" />
+      <Botao texto="Excluir" />
+    </div>
+  );
+}`
+        }
+      ],
+      checklist: [
+        "Consegui criar projeto React com Vite.",
+        "Criei componente funcional.",
+        "Passei props e renderizei valores."
+      ],
+      quiz: [
+        {
+          q: "Props são:",
+          options: [
+            "Dados que entram no componente",
+            "Estado global automático",
+            "Funções do navegador",
+            "Uma API do Node"
+          ],
+          answerIndex: 0
+        }
+      ]
+    },
+
+    {
+      id: "m7a2",
+      title: "Aula 2 — useState, eventos e renderização condicional",
+      duration: "120–180 min",
+      level: "Avançado",
+      tags: ["react", "useState", "events", "conditional rendering"],
+      tip:
+        "Se você dominar useState + render condicional, você consegue fazer 70% das telas reais.",
+      content: `
+### 🎯 Objetivo
+Você vai dominar:
+- \`useState\` (estado local)
+- Eventos (onClick, onChange)
+- Renderização condicional
+- Lista com \`.map\` (padrão real)
+
+---
+
+## 1) useState
+\`\`\`jsx
+import { useState } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Contador: {count}
+    </button>
+  );
+}
+\`\`\`
+
+---
+
+## 2) Render condicional
+\`\`\`jsx
+{count >= 10 ? <p>Você chegou a 10!</p> : <p>Continue...</p>}
+\`\`\`
+
+---
+
+## 3) Listas
+\`\`\`jsx
+{items.map(item => <li key={item.id}>{item.nome}</li>)}
+\`\`\`
+
+> Importante: \`key\` deve ser estável (id real, não index).
+
+---
+
+### ✅ O que você aprendeu
+- React atualiza UI automaticamente quando o estado muda
+- Você escreve a UI “como deveria ser”, não “como manipular DOM”
+      `,
+      exercises: [
+        {
+          title: "Exercício — Lista de tarefas (mini)",
+          level: "Médio",
+          prompt:
+            "Faça um input + botão para adicionar itens em uma lista usando useState. Exiba em <ul>.",
+          solution: `import { useState } from "react";
+
+export default function App() {
+  const [texto, setTexto] = useState("");
+  const [items, setItems] = useState([]);
+
+  function add() {
+    if (!texto.trim()) return;
+    setItems([...items, { id: crypto.randomUUID(), texto }]);
+    setTexto("");
+  }
+
+  return (
+    <div>
+      <input value={texto} onChange={(e) => setTexto(e.target.value)} />
+      <button onClick={add}>Adicionar</button>
+      <ul>
+        {items.map(i => <li key={i.id}>{i.texto}</li>)}
+      </ul>
+    </div>
+  );
+}`
+        }
+      ],
+      checklist: [
+        "Usei useState corretamente.",
+        "Atualizei lista com imutabilidade.",
+        "Renderizei lista com map e key."
+      ]
+    },
+
+    {
+      id: "m7a3",
+      title: "Aula 3 — useEffect, consumo de API, loading e erros (padrão real)",
+      duration: "120–200 min",
+      level: "Avançado",
+      tags: ["react", "useEffect", "fetch", "api", "loading", "error"],
+      tip:
+        "useEffect é para sincronizar com efeitos externos: API, storage, timers. Evite efeitos desnecessários.",
+      content: `
+### 🎯 Objetivo
+Você vai:
+- Entender \`useEffect\`
+- Buscar dados de API no React
+- Controlar loading/erro
+- Evitar loops infinitos de render
+
+---
+
+## 1) useEffect básico
+\`\`\`jsx
+useEffect(() => {
+  console.log("Rodou ao montar");
+}, []);
+\`\`\`
+
+---
+
+## 2) Fetch com loading e erro
+Padrão real:
+- state: data, loading, error
+- try/catch
+- abort controller (extra)
+
+---
+
+### ✅ O que você aprendeu
+- useEffect roda quando dependências mudam
+- padrão real de fetch em componentes
+      `,
+      examples: [
+        {
+          title: "Exemplo: buscar usuários (JSONPlaceholder)",
+          description: "Exemplo clássico com loading/erro.",
+          code: `import { useEffect, useState } from "react";
+
+export default function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+
+    async function load() {
+      try {
+        setLoading(true);
+        setError("");
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (alive) setUsers(data);
+      } catch (e) {
+        if (alive) setError(e.message);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    }
+
+    load();
+    return () => { alive = false; };
+  }, []);
+
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>Erro: {error}</p>;
+
+  return (
+    <ul>
+      {users.map(u => <li key={u.id}>{u.name}</li>)}
+    </ul>
+  );
+}`
+        }
+      ],
+      checklist: [
+        "Entendi useEffect com dependências.",
+        "Consegui buscar dados com fetch no React.",
+        "Tenho loading e error states."
+      ]
+    },
+
+    {
+      id: "m7a4",
+      title: "Aula 4 — React Router + Context (navegação e estado global)",
+      duration: "120–200 min",
+      level: "Avançado",
+      tags: ["react", "router", "context", "state management"],
+      tip:
+        "Router resolve navegação. Context resolve estado global leve (tema, auth). Para muito estado, você pode evoluir para Redux/Zustand depois.",
+      content: `
+### 🎯 Objetivo
+- Configurar React Router
+- Criar páginas
+- Context para estado global (ex: usuário logado)
+- Proteger rotas (conceito)
+
+---
+
+## 1) Router
+\`\`\`bash
+npm i react-router-dom
+\`\`\`
+
+\`\`\`jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+\`\`\`
+
+---
+
+## 2) Context
+\`\`\`jsx
+import { createContext, useContext, useState } from "react";
+const AuthContext = createContext(null);
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- Rotas e navegação
+- Estado global leve com Context
+      `
+    },
+
+    {
+      id: "m7proj1",
+      title: "Projeto — Dashboard em React (cards, filtros, gráficos simples e rotas)",
+      duration: "12–25 horas",
+      level: "Avançado",
+      tags: ["projeto", "react", "dashboard", "router", "context"],
+      tip:
+        "Esse projeto é perfeito para portfólio: mostra UI, estado, roteamento e organização.",
+      content: `
+Você vai construir um dashboard com:
+- Página Home (visão geral)
+- Página Relatórios (tabela + filtro)
+- Página Configurações (tema simples com Context)
+- Componentes reutilizáveis (Card, Table)
+- (Extra) gráfico simples (pode ser SVG ou lib)
+
+---
+
+## Requisitos de profissionalismo
+- Componentes pequenos e reutilizáveis
+- Pasta /components, /pages, /context
+- README e prints
+      `,
+      project: {
+        goal:
+          "Construir um dashboard React com páginas, estado e componentes reutilizáveis.",
+        steps: [
+          "Criar projeto React com Vite.",
+          "Instalar react-router-dom.",
+          "Criar páginas: Home, Reports, Settings.",
+          "Criar componentes: Card, Table, Filter.",
+          "Criar ThemeContext para alternar tema (claro/escuro simples).",
+          "Adicionar navegação (Navbar).",
+          "Adicionar dados fake (mock) para relatórios.",
+          "Extra: salvar tema no localStorage."
+        ],
+        starterCode: `// Estrutura sugerida
+// src/pages/Home.jsx
+// src/pages/Reports.jsx
+// src/pages/Settings.jsx
+// src/components/Card.jsx
+// src/context/ThemeContext.jsx`,
+        solution: `// Dica: esse projeto é grande.
+// Se quiser, eu te passo um starter kit completo (estrutura + arquivos principais) no próximo passo.`
+      },
+      checklist: [
+        "Tenho rotas funcionando.",
+        "Tenho componentes reutilizáveis.",
+        "Tenho Context para tema/estado.",
+        "Tenho filtros e listagem.",
+        "Tenho README com prints."
+      ]
+    }
+  ]
+},
+
+{
+  id: "m8",
+  title: "Módulo 8 — Testes, Boas Práticas e Debug (nível mercado)",
+  description:
+    "Você vai aprender a testar com Jest, organizar projeto, usar lint/prettier, debugar de verdade e melhorar a qualidade do código.",
+  lessons: [
+    {
+      id: "m8a1",
+      title: "Aula 1 — Debug profissional (console, breakpoints, leitura de stacktrace)",
+      duration: "90–140 min",
+      level: "Avançado",
+      tags: ["debug", "devtools", "breakpoint", "stacktrace"],
+      tip:
+        "Quem sabe debugar bem aprende 3x mais rápido. Debug é habilidade de sênior.",
+      content: `
+### 🎯 Objetivo
+Você vai:
+- Ler erros (stacktrace) com calma
+- Usar breakpoints no DevTools
+- Entender escopo e valores em tempo real
+- Usar console de forma inteligente (table, dir)
+
+---
+
+## 1) Ler stacktrace
+Quando aparece:
+\`TypeError: cannot read property...\`
+- veja a linha
+- entenda qual variável está undefined
+- volte um passo (origem do undefined)
+
+---
+
+## 2) Breakpoints
+No Chrome DevTools:
+- Sources → clique na linha → breakpoint
+- rode o fluxo → examine variáveis
+
+---
+
+## 3) Console avançado
+\`\`\`js
+console.table([{a:1},{a:2}]);
+console.dir(obj, { depth: null });
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- Debug é processo: reproduzir → isolar → corrigir → prevenir
+      `,
+      exercises: [
+        {
+          title: "Exercício — Depurar undefined",
+          level: "Médio",
+          prompt:
+            "Crie um código que dê erro (acessar prop de undefined). Use breakpoint para ver por que ficou undefined.",
+          solution: `const user = null;
+// Vai dar erro:
+console.log(user.nome);
+
+// Correção:
+if (user) console.log(user.nome);
+else console.log("user está null");`
+        }
+      ],
+      checklist: [
+        "Consigo ler stacktrace.",
+        "Sei usar breakpoint no DevTools.",
+        "Uso console.table/dir quando necessário."
+      ]
+    },
+
+    {
+      id: "m8a2",
+      title: "Aula 2 — Testes com Jest (unitário na prática)",
+      duration: "120–180 min",
+      level: "Avançado",
+      tags: ["jest", "tests", "unit tests", "tdd basics"],
+      tip:
+        "Teste unitário foca em funções puras (input → output). Comece testando utils e regras de negócio.",
+      content: `
+### 🎯 Objetivo
+Você vai:
+- Instalar e rodar Jest
+- Criar testes unitários
+- Entender expect, toBe, toEqual
+- Testar erros (toThrow)
+- Entender por que testes salvam seu projeto
+
+---
+
+## 1) Instalação
+\`\`\`bash
+npm i -D jest
+\`\`\`
+
+No package.json:
+\`\`\`json
+"scripts": { "test": "jest" }
+\`\`\`
+
+---
+
+## 2) Função para testar
+\`\`\`js
+export function soma(a,b){ return a+b; }
+\`\`\`
+
+Teste:
+\`\`\`js
+import { soma } from "./soma";
+
+test("soma 2+3=5", () => {
+  expect(soma(2,3)).toBe(5);
+});
+\`\`\`
+
+---
+
+## 3) Testar objetos/arrays
+\`toEqual\` compara estrutura:
+\`\`\`js
+expect({a:1}).toEqual({a:1});
+\`\`\`
+
+---
+
+## 4) Testar erros
+\`\`\`js
+expect(() => fn()).toThrow();
+\`\`\`
+
+---
+
+### ✅ O que você aprendeu
+- Teste unitário protege regras
+- Você ganha confiança para refatorar
+      `,
+      exercises: [
+        {
+          title: "Exercício — Testar validarEmail",
+          level: "Difícil",
+          prompt:
+            "Crie validarEmail(email) e escreva 3 testes: email válido, inválido, vazio.",
+          solution: `// validate.js
+export function validarEmail(email) {
+  return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+}
+
+// validate.test.js
+import { validarEmail } from "./validate";
+
+test("email válido", () => {
+  expect(validarEmail("a@b.com")).toBe(true);
+});
+
+test("email inválido", () => {
+  expect(validarEmail("abc")).toBe(false);
+});
+
+test("vazio", () => {
+  expect(validarEmail("")).toBe(false);
+});`
+        }
+      ],
+      checklist: [
+        "Instalei e rodei Jest.",
+        "Criei testes para funções puras.",
+        "Sei a diferença entre toBe e toEqual.",
+        "Consigo testar erro com toThrow."
+      ],
+      quiz: [
+        {
+          q: "toEqual é usado para:",
+          options: [
+            "Comparar números apenas",
+            "Comparar objetos/arrays por estrutura",
+            "Comparar referência de função",
+            "Executar o código mais rápido"
+          ],
+          answerIndex: 1
+        }
+      ]
+    },
+
+    {
+      id: "m8a3",
+      title: "Aula 3 — Linting, Prettier e Clean Code (padrão time/empresa)",
+      duration: "90–150 min",
+      level: "Avançado",
+      tags: ["eslint", "prettier", "clean code", "boas práticas"],
+      tip:
+        "Em time, estilo não é opinião: é padrão. Lint/Prettier evita discussões e reduz bugs bobos.",
+      content: `
+### 🎯 Objetivo
+Você vai:
+- Entender ESLint e Prettier
+- Criar padrão de código
+- Aprender princípios de Clean Code aplicáveis no dia a dia
+
+---
+
+## 1) Clean Code (prático)
+- nomes claros
+- funções pequenas
+- uma responsabilidade por função
+- evitar duplicação
+- tratar erros cedo
+
+Exemplo:
+✅ bom:
+\`\`\`js
+function calcularTotal(itens) {
+  return itens.reduce((acc, i) => acc + i.preco * i.qtd, 0);
+}
+\`\`\`
+
+❌ ruim:
+\`\`\`js
+function x(a){ let t=0; for(...) t+=...; return t; }
+\`\`\`
+
+---
+
+## 2) ESLint/Prettier (visão)
+- ESLint: regras de qualidade (evita bugs)
+- Prettier: formatação automática
+
+---
+
+### ✅ O que você aprendeu
+- Código limpo é sobre legibilidade e manutenção
+      `,
+      checklist: [
+        "Entendi princípios básicos de Clean Code.",
+        "Sei o que ESLint e Prettier fazem.",
+        "Consigo manter consistência no projeto."
+      ]
+    },
+
+    {
+      id: "m8proj1",
+      title: "Projeto — Testando uma To-do List (regras + utils + qualidade)",
+      duration: "8–14 horas",
+      level: "Avançado",
+      tags: ["projeto", "jest", "tests", "clean code"],
+      tip:
+        "Teste o que importa: regras. DOM é mais difícil de testar no começo; foque em funções puras.",
+      content: `
+Você vai pegar a lógica de uma To-do List (regras) e testar com Jest:
+- addTask(texto)
+- removeTask(id)
+- toggleTask(id)
+- validarTexto(texto)
+
+A UI pode ficar fora do teste.
+Isso é exatamente como times fazem: testar regras, não cliquezinho.
+
+      `,
+      project: {
+        goal:
+          "Criar módulo de regras e testes unitários completos.",
+        steps: [
+          "Criar arquivo src/domain/todo.js com funções puras.",
+          "Criar testes para cada função.",
+          "Cobrir casos de erro (id inexistente, texto vazio).",
+          "Refatorar mantendo testes verdes."
+        ],
+        starterCode: `// todo.js
+export function addTask(tasks, texto) { /* retorna novo array */ }
+export function removeTask(tasks, id) { /* retorna novo array */ }
+export function toggleTask(tasks, id) { /* retorna novo array */ }`,
+        solution: `// Dica: sempre retorne novo array (imutável)
+export function addTask(tasks, texto) {
+  const t = texto.trim();
+  if (!t) throw new Error("Texto inválido");
+  return [...tasks, { id: crypto.randomUUID(), texto: t, done: false }];
+}`
+      },
+      checklist: [
+        "Criei regras puras para To-do.",
+        "Criei testes para add/remove/toggle.",
+        "Tratei erros e casos de borda.",
+        "Consigo refatorar sem medo (testes verdes)."
+      ]
+    }
+  ]
+},
+
+{
+  id: "m9",
+  title: "Módulo 9 — Projeto Final e Entrada no Mercado",
+  description:
+    "Módulo final focado em projeto real, portfólio profissional, entrevistas técnicas e preparação para o mercado de trabalho.",
+  lessons: [
+    {
+      id: "m9a1",
+      title: "Aula 1 — Portfólio Profissional e Posicionamento",
+      duration: "90–120 min",
+      level: "Intermediário",
+      tags: ["portfólio", "carreira", "github"],
+      content: `
+### 🎯 Objetivo
+Aprender a montar um portfólio profissional que realmente chama atenção de recrutadores.
+
+---
+
+### O que um bom portfólio precisa ter
+- 3 a 5 projetos bem feitos (qualidade > quantidade)
+- Código organizado e funcional
+- README bem escrito
+- Link para demo online
+- Histórico no GitHub
+
+---
+
+### Estrutura recomendada do portfólio
+- Sobre mim
+- Projetos (com imagens e links)
+- Tecnologias
+- Contato
+
+---
+
+### Erros comuns
+- Muitos projetos inacabados
+- Código sem README
+- Projetos copiados sem entendimento
+
+---
+
+### Checklist
+- [ ] Projeto funcional
+- [ ] README claro
+- [ ] Link público
+- [ ] Código organizado
+`
+    },
+
+    {
+      id: "m9a2",
+      title: "Aula 2 — Git, GitHub e Fluxo Profissional",
+      duration: "90–120 min",
+      level: "Intermediário",
+      tags: ["git", "github", "versionamento"],
+      content: `
+### 🎯 Objetivo
+Aprender como profissionais usam Git no dia a dia.
+
+---
+
+### Conceitos fundamentais
+- commit
+- branch
+- merge
+- pull request
+
+---
+
+### Fluxo comum
+1. Criar branch
+2. Desenvolver
+3. Commitar
+4. Abrir PR
+5. Revisar e mergear
+
+---
+
+### Boas práticas
+- Commits pequenos
+- Mensagens claras
+- Um objetivo por commit
+`
+    },
+
+    {
+      id: "m9a3",
+      title: "Aula 3 — Preparação para Entrevistas Técnicas",
+      duration: "90–120 min",
+      level: "Intermediário",
+      tags: ["entrevista", "soft skills", "carreira"],
+      content: `
+### 🎯 Objetivo
+Se preparar para entrevistas técnicas e comportamentais.
+
+---
+
+### O que estudam nas entrevistas
+- JavaScript básico e avançado
+- Estruturas de dados
+- Projetos anteriores
+- Raciocínio lógico
+
+---
+
+### Dicas importantes
+- Explique seu raciocínio
+- Não tente adivinhar
+- Seja honesto sobre o que não sabe
+`
+    },
+
+    {
+      id: "m9a4",
+      title: "Aula 4 — Projeto Final Profissional",
+      duration: "120–200 min",
+      level: "Avançado",
+      tags: ["projeto", "fullstack", "portfolio"],
+      content: `
+### 🎯 Objetivo
+Criar um projeto completo para usar como cartão de visitas profissional.
+
+---
+
+### Requisitos mínimos
+- Frontend com React
+- Backend com Node.js
+- Banco de dados (PostgreSQL ou MongoDB)
+- Autenticação
+- CRUD completo
+- Deploy funcional
+
+---
+
+### Sugestão de projeto
+Sistema de tarefas, agenda ou controle financeiro.
+
+---
+
+### Entregáveis
+- Repositório GitHub
+- README detalhado
+- Deploy funcionando
+`
+    }
+   ]
+  }
+ ],  
+}
