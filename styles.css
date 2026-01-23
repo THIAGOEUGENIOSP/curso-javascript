@@ -15,18 +15,18 @@
 
 /* Tema Claro */
 [data-theme="light"] {
-  --bg: #f8fafc;
-  --panel: #ffffff;
+  --bg: #ffffff;
+  --panel: #f8fafc;
   --card: #ffffff;
-  --muted: #64748b;
-  --text: #0f172a;
-  --border: rgba(148,163,184,0.2);
+  --muted: #475569;
+  --text: #1e293b;
+  --border: rgba(100,116,139,0.25);
   --accent: #2563eb;
   --accent2: #7c3aed;
-  --good: #10b981;
-  --warn: #f59e0b;
-  --bad: #ef4444;
-  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --good: #059669;
+  --warn: #d97706;
+  --bad: #dc2626;
+  --shadow: 0 4px 20px rgba(0,0,0,.1);
 }
 
 *{ box-sizing:border-box; }
@@ -50,12 +50,15 @@ body{
               var(--bg);
   color:var(--text);
   transition: background 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Ajuste do gradiente para modo claro */
 [data-theme="light"] body {
-  background: radial-gradient(1200px 700px at 20% -10%, rgba(96,165,250,.15), transparent 70%),
-              radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.15), transparent 65%),
+  background: radial-gradient(1200px 700px at 20% -10%, rgba(59,130,246,.08), transparent 70%),
+              radial-gradient(900px 600px at 90% 10%, rgba(124,58,237,.08), transparent 65%),
               var(--bg);
 }
 
@@ -69,8 +72,9 @@ code{
 }
 
 [data-theme="light"] code {
-  background: rgba(100,116,139,0.15);
-  color: #0f172a;
+  background: #e2e8f0;
+  color: #1e293b;
+  font-weight: 500;
 }
 
 pre{
@@ -90,12 +94,17 @@ pre{
 
 [data-theme="light"] pre {
   background: #f1f5f9;
-  border: 1px solid rgba(100,116,139,0.2);
+  border: 1px solid #cbd5e1;
 }
 pre code{ 
   background: transparent; 
   padding:0;
   word-break: break-word; /* Quebra palavras longas */
+  font-weight: normal;
+}
+
+[data-theme="light"] pre code {
+  color: #1e293b;
 }
 
 .topbar{
@@ -618,17 +627,26 @@ pre code{
 }
 
 [data-theme="light"] .card {
-  background: rgba(255,255,255,.95);
-  border: 1px solid rgba(148,163,184,0.25);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
 }
 
 .sidebar{ display:flex; flex-direction: column; gap: 14px; }
 
 h1,h2,h3{ margin: 0 0 10px 0; }
-h1{ font-size: 28px; }
-h2{ font-size: 16px; color: rgba(229,231,235,.95); }
-h3{ font-size: 15px; }
+h1{ font-size: 28px; font-weight: 700; }
+h2{ font-size: 16px; color: rgba(229,231,235,.95); font-weight: 600; }
+h3{ font-size: 15px; font-weight: 600; }
 .small{ font-size: 12px; color: var(--muted); }
+
+[data-theme="light"] h2 {
+  color: #1e293b;
+}
+
+[data-theme="light"] h3 {
+  color: #1e293b;
+}
 
 #searchInfo {
   font-size: 12px;
