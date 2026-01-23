@@ -13,6 +13,22 @@
   --shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 
+/* Tema Claro */
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --card: #ffffff;
+  --muted: #64748b;
+  --text: #0f172a;
+  --border: rgba(148,163,184,0.2);
+  --accent: #2563eb;
+  --accent2: #7c3aed;
+  --good: #10b981;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
 *{ box-sizing:border-box; }
 
 /* Previne imagens e elementos de causar overflow */
@@ -33,6 +49,14 @@ body{
               radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.25), transparent 55%),
               var(--bg);
   color:var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Ajuste do gradiente para modo claro */
+[data-theme="light"] body {
+  background: radial-gradient(1200px 700px at 20% -10%, rgba(96,165,250,.15), transparent 70%),
+              radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.15), transparent 65%),
+              var(--bg);
 }
 
 code{
@@ -41,6 +65,12 @@ code{
   border-radius:.4rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
   font-size: .95em;
+  transition: background 0.3s ease;
+}
+
+[data-theme="light"] code {
+  background: rgba(100,116,139,0.15);
+  color: #0f172a;
 }
 
 pre{
@@ -55,6 +85,12 @@ pre{
   box-shadow: var(--shadow);
   word-wrap: break-word;
   white-space: pre-wrap; /* Quebra linhas quando necessário */
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+[data-theme="light"] pre {
+  background: #f1f5f9;
+  border: 1px solid rgba(100,116,139,0.2);
 }
 pre code{ 
   background: transparent; 
@@ -73,6 +109,12 @@ pre code{
   border-bottom: 1px solid var(--border);
   background: rgba(11,18,32,.8);
   backdrop-filter: blur(10px);
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+[data-theme="light"] .topbar {
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid rgba(148,163,184,0.2);
 }
 
 .brand{ display:flex; gap:12px; align-items:center; }
@@ -572,6 +614,12 @@ pre code{
   max-width: 100%; /* Não ultrapassa o container */
   overflow-wrap: break-word; /* Quebra palavras longas */
   word-wrap: break-word; /* Suporte legado */
+  transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="light"] .card {
+  background: rgba(255,255,255,.95);
+  border: 1px solid rgba(148,163,184,0.25);
 }
 
 .sidebar{ display:flex; flex-direction: column; gap: 14px; }

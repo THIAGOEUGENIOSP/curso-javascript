@@ -938,6 +938,60 @@ window.saveProgress = function() {
   syncProgress();
 };
 
+// ===== Sistema de Temas (Claro/Escuro) =====
+const THEME_KEY = "curso_js_theme";
+
+function getTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved) return saved;
+  // Detecta preferência do sistema
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    return 'light';
+  }
+  return 'dark';
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem(THEME_KEY, theme);
+  
+  // Atualiza ícones
+  const iconSun = document.getElementById('iconSun');
+  const iconMoon = document.getElementById('iconMoon');
+  
+  if (theme === 'light') {
+    if (iconSun) iconSun.style.display = 'none';
+    if (iconMoon) iconMoon.style.display = 'block';
+  } else {
+    if (iconSun) iconSun.style.display = 'block';
+    if (iconMoon) iconMoon.style.display = 'none';
+  }
+}
+
+function toggleTheme() {
+  const current = getTheme();
+  const newTheme = current === 'light' ? 'dark' : 'light';
+  setTheme(newTheme);
+}
+
+// Inicializa tema
+setTheme(getTheme());
+
+// Adiciona event listener ao botão de tema
+const btnThemeToggle = document.getElementById('btnThemeToggle');
+if (btnThemeToggle) {
+  btnThemeToggle.addEventListener('click', toggleTheme);
+}
+
+// Detecta mudança de preferência do sistema
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    if (!localStorage.getItem(THEME_KEY)) {
+      setTheme(e.matches ? 'light' : 'dark');
+    }
+  });
+}
+
 // Inicializar aplicação quando DOM estiver pronto
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
