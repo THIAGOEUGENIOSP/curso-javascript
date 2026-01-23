@@ -14,7 +14,18 @@
 }
 
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
+
+/* Previne imagens e elementos de causar overflow */
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+
+html,body{ 
+  height:100%; 
+  overflow-x: hidden; /* Previne scroll horizontal */
+  max-width: 100vw; /* Força largura máxima da viewport */
+}
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -38,10 +49,18 @@ pre{
   border:1px solid rgba(148,163,184,0.18);
   border-radius: 14px;
   padding: 14px;
-  overflow:auto;
+  overflow: auto;
+  overflow-x: auto; /* Permite scroll horizontal para code que não couber */
+  max-width: 100%; /* Não ultrapassa o container */
   box-shadow: var(--shadow);
+  word-wrap: break-word;
+  white-space: pre-wrap; /* Quebra linhas quando necessário */
 }
-pre code{ background: transparent; padding:0; }
+pre code{ 
+  background: transparent; 
+  padding:0;
+  word-break: break-word; /* Quebra palavras longas */
+}
 
 .topbar{
   position: sticky;
@@ -73,6 +92,8 @@ pre code{ background: transparent; padding:0; }
   padding: 16px;
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%; /* Garante que não ultrapasse a largura do container pai */
+  overflow-x: hidden; /* Previne overflow horizontal */
 }
 
 @media (max-width: 1100px){
@@ -81,75 +102,91 @@ pre code{ background: transparent; padding:0; }
 }
 
 @media (max-width: 800px) {
+  /* Previne overflow horizontal em mobile */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Todos os containers respeitam a largura da viewport */
+  * {
+    max-width: 100%;
+  }
+  
   /* Topbar mobile */
   .topbar {
-    padding: 12px 14px;
+    padding: 16px 18px;
+    overflow-x: hidden;
   }
   
   .brand {
-    gap: 10px;
+    gap: 12px;
   }
   
   .brand-title {
-    font-size: 18px;
+    font-size: 20px;
   }
   
   .brand-subtitle {
-    font-size: 11px;
+    font-size: 13px;
   }
   
   .logo svg {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
   }
   
   /* Layout mobile */
   .layout {
     grid-template-columns: 1fr;
-    padding: 12px;
-    gap: 12px;
+    padding: 16px;
+    gap: 16px;
   }
   
-  /* Typography mobile */
+  /* Typography mobile - MAIOR E MAIS LEGÍVEL */
   h1 {
-    font-size: 22px;
-    margin-bottom: 12px;
+    font-size: 28px;
+    margin-bottom: 16px;
+    line-height: 1.3;
   }
   
   h2 {
-    font-size: 15px;
+    font-size: 20px;
+    margin-bottom: 14px;
   }
   
   h3 {
-    font-size: 14px;
+    font-size: 18px;
+    margin-bottom: 12px;
   }
   
   body {
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
   }
   
-  /* Card spacing */
+  /* Card spacing - MAIS ESPAÇOSO */
   .card {
-    padding: 16px;
-    border-radius: 14px;
+    padding: 20px;
+    border-radius: 16px;
   }
   
   /* Sidebar mobile */
   .sidebar {
-    gap: 16px;
+    gap: 20px;
   }
   
-  /* Button mobile */
+  /* Button mobile - MAIOR E MAIS FÁCIL DE CLICAR */
   .btn {
-    padding: 12px 16px;
-    font-size: 14px;
-    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 16px;
+    border-radius: 12px;
+    min-height: 48px;
   }
   
   .hamburger {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
   
   /* Lesson container */
@@ -158,100 +195,344 @@ pre code{ background: transparent; padding:0; }
   }
   
   .lesson-header {
-    padding: 14px;
-    margin-bottom: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
   }
   
   .lesson-header h1 {
-    font-size: 20px;
+    font-size: 26px;
+    line-height: 1.3;
   }
   
-  /* Pedagogical sections */
+  /* Pedagogical sections - MAIS ESPAÇO */
   .lesson-outcomes-section,
   .lesson-context-section,
   .lesson-difficulty-section {
-    padding: 16px;
-    margin: 12px 0;
-    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    border-radius: 14px;
   }
   
   .lesson-outcomes-section h2,
+  .lesson-outcomes-section h3,
   .lesson-context-section h2,
-  .lesson-difficulty-section h2 {
-    font-size: 15px;
-    margin-bottom: 12px;
+  .lesson-context-section h3,
+  .lesson-difficulty-section h2,
+  .lesson-difficulty-section h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  
+  .lesson-outcomes-section li,
+  .lesson-context-section li,
+  .lesson-context-section p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 10px 0;
   }
   
   .learning-outcome {
-    padding: 8px 0;
-    font-size: 14px;
-    line-height: 1.6;
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 1.7;
   }
   
   /* Difficulty gauge mobile */
   .difficulty-gauge {
-    gap: 6px;
+    gap: 10px;
   }
   
   .difficulty-bar {
-    height: 12px;
-    border-radius: 4px;
+    height: 14px;
+    width: 50px;
+    border-radius: 6px;
   }
   
   .difficulty-label {
-    font-size: 12px;
-    margin-left: 6px;
+    font-size: 15px;
+    margin-left: 10px;
   }
   
   /* Common mistakes mobile */
   .common-mistake {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 14px;
-    margin-bottom: 14px;
+    gap: 16px;
+    padding: 18px;
+    margin-bottom: 18px;
   }
   
   .mistake-label {
-    font-size: 13px;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
   
   .mistake-code {
-    padding: 10px;
+    padding: 14px;
   }
   
   .mistake-code pre {
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 1.5;
   }
   
   .mistake-explanation {
-    font-size: 13px;
-    padding: 12px;
-    margin-top: 12px;
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 14px;
+    line-height: 1.6;
   }
   
   /* Prerequisites mobile */
   .prerequisite-item,
   .next-step-item {
-    padding: 12px 14px;
-    font-size: 14px;
-    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 16px;
+    border-radius: 10px;
     cursor: pointer;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
   }
   
   .prerequisites-list {
-    gap: 10px;
-    margin: 12px 0;
+    gap: 12px;
+    margin: 16px 0;
   }
   
   /* Real world context mobile */
   .context-example {
-    padding: 10px;
-    margin: 8px 0;
+    padding: 14px;
+    margin: 12px 0;
   }
   
   .context-example strong {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  
+  /* Hero section mobile - MELHOR LEGIBILIDADE */
+  .hero {
+    padding: 24px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  
+  .hero p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+  
+  .hero-actions {
+    margin-top: 20px;
+    gap: 12px;
+  }
+  
+  .hero-kpi {
+    padding: 18px;
+  }
+  
+  .kpi-title {
+    font-size: 14px;
+  }
+  
+  .kpi-value {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+  
+  .kpi-sub {
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  
+  /* Module and lesson links - MAIS ESPAÇO PARA TOCAR */
+  .module-title {
+    padding: 14px 16px;
+    font-size: 16px;
+    min-height: 52px;
+  }
+  
+  .module-lessons {
+    padding: 12px 8px 0 16px;
+    gap: 10px;
+  }
+  
+  .lesson-link {
+    padding: 14px 16px;
+    min-height: 60px;
+    font-size: 16px;
+  }
+  
+  .lesson-link .meta {
+    font-size: 14px;
+  }
+  
+  /* Progress section - MAIS VISÍVEL */
+  .progress {
+    height: 14px;
+  }
+  
+  .progress-meta {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  
+  .badge {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+  
+  /* Search and input - MAIOR */
+  .input {
+    padding: 14px 16px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+  
+  #searchInfo {
+    font-size: 14px;
+    padding: 12px;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+  
+  /* Content sections - MAIS RESPIRO */
+  .section {
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+  
+  .section h2 {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  
+  /* Examples and exercises - MELHOR ESPAÇAMENTO */
+  .example {
+    margin-bottom: 16px;
+  }
+  
+  .example .ex-title {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+  
+  .example .ex-desc {
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  .exercise {
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .exercise .ex-title {
+    font-size: 17px;
+  }
+  
+  .exercise .ex-level {
+    font-size: 14px;
+  }
+  
+  .exercise .ex-body {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  
+  .exercise .ex-actions {
+    margin-top: 14px;
+    gap: 12px;
+  }
+  
+  /* Quiz - MAIS ESPAÇOSO */
+  .quiz-q {
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  
+  .quiz-q .q-title {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+  
+  .quiz-q label {
+    margin: 12px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(148,163,184,.04);
+  }
+  
+  /* Checklist - ITENS MAIORES */
+  .check-item {
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    min-height: 52px;
+  }
+  
+  .check-item span {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Tip section - MAIS LEGÍVEL */
+  .tip {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  
+  /* Code blocks - MELHOR TAMANHO */
+  code {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+  
+  pre {
+    padding: 16px;
+    margin: 16px 0;
+  }
+  
+  pre code {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Markdown content - MELHOR LEGIBILIDADE */
+  .md p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 14px 0;
+  }
+  
+  .md ul {
+    margin: 12px 0 12px 20px;
+  }
+  
+  .md li {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .md h3 {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  .md blockquote {
+    margin: 16px 0;
+    padding: 14px 16px;
+    font-size: 16px;
   }
 }
 
@@ -261,6 +542,9 @@ pre code{ background: transparent; padding:0; }
   border-radius: 18px;
   box-shadow: var(--shadow);
   padding: 14px;
+  max-width: 100%; /* Não ultrapassa o container */
+  overflow-wrap: break-word; /* Quebra palavras longas */
+  word-wrap: break-word; /* Suporte legado */
 }
 
 .sidebar{ display:flex; flex-direction: column; gap: 14px; }
@@ -669,29 +953,35 @@ body.sidebar-collapsed .layout{
 
 /* Mobile: esconder subtitle e reduzir paddings/tamanhos para caber melhor */
 @media (max-width: 800px) {
-  .brand-title{ font-size: 16px; }
+  .brand-title{ font-size: 20px; }
   .brand-subtitle{ display: none; } /* economiza linha no topo */
-  .topbar{ padding: 10px; }
-  .top-actions .btn{ padding: 8px 10px; font-size: 13px; }
-  .logo svg{ width:34px; height:34px; }
-}
-
-/* Evita sobreposição do título pelos botões no topo */
-.brand { flex: 1 1 auto; min-width: 0; overflow: hidden; }
-.brand-title {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; /* "..." quando não couber */
-  max-width: calc(100% - 160px); /* reserva ~160px para botões à direita */
+  .topbar{ padding: 14px 16px; }
+  .top-actions .btn{ padding: 12px 16px; font-size: 15px; min-height: 44px; }
+  .logo svg{ width: 36px; height: 36px; }
 }
 
 /* Ajustes para telas menores */
-@media (max-width: px) {
-  .brand-title { max-width: calc(100% - 64px); } /* menos espaço necessário quando escondemos botões */
+@media (max-width: 500px) {
+  .brand-title { 
+    max-width: calc(100% - 64px);
+    font-size: 18px;
+  }
   /* Deixar só o hambúrguer visível para economizar espaço */
   .top-actions .btn:not(.hamburger) { display: none; }
   .top-actions { gap: 8px; }
+  
+  /* Ajustes adicionais para telas muito pequenas */
+  .hero h1 {
+    font-size: 28px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 18px;
+  }
 }
 
 /* pequena classe para indicar visual do botão quando menu fechado */
