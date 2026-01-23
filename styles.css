@@ -648,6 +648,30 @@ h3{ font-size: 15px; font-weight: 600; }
   color: #1e293b;
 }
 
+/* Light mode text overrides for all content */
+[data-theme="light"] .md p,
+[data-theme="light"] .md ul,
+[data-theme="light"] .md blockquote,
+[data-theme="light"] .exercise .ex-body,
+[data-theme="light"] .check-item span,
+[data-theme="light"] .check-item label,
+[data-theme="light"] .quiz-q label,
+[data-theme="light"] .lesson-meta,
+[data-theme="light"] .lesson-tip,
+[data-theme="light"] .tip-content,
+[data-theme="light"] .lesson-prereq li {
+  color: #1e293b !important;
+}
+
+[data-theme="light"] .md blockquote {
+  background: rgba(59,130,246,.08);
+  border-left-color: #2563eb;
+}
+
+[data-theme="light"] .side.card {
+  background: #f8fafc;
+}
+
 #searchInfo {
   font-size: 12px;
   color: var(--muted);
