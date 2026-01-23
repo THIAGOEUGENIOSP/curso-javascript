@@ -29,6 +29,7 @@ html,body{
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font-size: 17px; /* Tamanho base maior para melhor legibilidade */
   background: radial-gradient(1200px 700px at 20% -10%, rgba(96,165,250,.25), transparent 60%),
               radial-gradient(900px 600px at 90% 10%, rgba(167,139,250,.25), transparent 55%),
               var(--bg);
@@ -40,7 +41,7 @@ code{
   padding:.12rem .35rem;
   border-radius:.4rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
-  font-size: .95em;
+  font-size: 1em; /* Aumentado de .95em para 1em */
 }
 
 pre{
@@ -81,7 +82,7 @@ pre code{
 .logo path{ fill: rgba(229,231,235,.92); }
 
 .brand-title{ font-weight: 800; letter-spacing: .2px; }
-.brand-subtitle{ font-size: 12px; color: var(--muted); margin-top:2px; }
+.brand-subtitle{ font-size: 13px; color: var(--muted); margin-top:2px; } /* Aumentado de 12px para 13px */
 
 .top-actions{ display:flex; gap:10px; }
 
@@ -577,10 +578,10 @@ pre code{
 .sidebar{ display:flex; flex-direction: column; gap: 14px; }
 
 h1,h2,h3{ margin: 0 0 10px 0; }
-h1{ font-size: 28px; }
-h2{ font-size: 16px; color: rgba(229,231,235,.95); }
-h3{ font-size: 15px; }
-.small{ font-size: 12px; color: var(--muted); }
+h1{ font-size: 30px; } /* Aumentado de 28px para 30px */
+h2{ font-size: 18px; color: rgba(229,231,235,.95); } /* Aumentado de 16px para 18px */
+h3{ font-size: 17px; } /* Aumentado de 15px para 17px */
+.small{ font-size: 13px; color: var(--muted); } /* Aumentado de 12px para 13px */
 
 #searchInfo {
   font-size: 12px;
