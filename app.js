@@ -149,16 +149,15 @@ function renderProgress() {
   const all = flatLessons();
   const total = all.length;
   const done = all.filter(
-    (x) => !!state.progress.doneLessons[x.lesson.id]
+    (x) => !!state.progress.doneLessons[x.lesson.id],
   ).length;
 
   const pct = total === 0 ? 0 : Math.round((done / total) * 100);
 
   document.getElementById("progressBar").style.width = `${pct}%`;
   document.getElementById("progressText").textContent = `${pct}%`;
-  document.getElementById(
-    "progressCount"
-  ).textContent = `${done}/${total} aulas`;
+  document.getElementById("progressCount").textContent =
+    `${done}/${total} aulas`;
 
   renderBadges(done, total);
 }
@@ -192,7 +191,7 @@ function renderBadges(done, total) {
 function renderLearningOutcomes(lesson) {
   const el = document.getElementById("lessonOutcomes");
   if (!el) return;
-  
+
   if (lesson.learningOutcomes && lesson.learningOutcomes.length > 0) {
     let html = "<h3>📚 O que você aprenderá</h3><ul>";
     for (const outcome of lesson.learningOutcomes) {
@@ -209,7 +208,7 @@ function renderLearningOutcomes(lesson) {
 function renderRealWorldContext(lesson) {
   const el = document.getElementById("lessonContext");
   if (!el) return;
-  
+
   if (lesson.realWorldContext) {
     const ctx = lesson.realWorldContext;
     let html = "<h3>🌍 Contexto do mundo real</h3>";
@@ -233,11 +232,11 @@ function renderRealWorldContext(lesson) {
 function renderDifficultyGauge(lesson) {
   const el = document.getElementById("lessonDifficulty");
   if (!el) return;
-  
+
   const diffMap = { Iniciante: 1, Intermediário: 2, Avançado: 3 };
   const level = lesson.level || "Iniciante";
   const bars = diffMap[level] || 1;
-  
+
   let html = "<h3>🎯 Dificuldade</h3><div class='difficulty-gauge'>";
   for (let i = 1; i <= 3; i++) {
     const filled = i <= bars ? "filled" : "empty";
@@ -245,7 +244,7 @@ function renderDifficultyGauge(lesson) {
     html += `<div class='${classNameStr}'></div>`;
   }
   html += `<span class='difficulty-label'>${level}</span></div>`;
-  
+
   el.innerHTML = html;
   el.style.display = "block";
 }
@@ -253,11 +252,11 @@ function renderDifficultyGauge(lesson) {
 function renderCommonMistakes(lesson) {
   const el = document.getElementById("lessonMistakesWrap");
   if (!el) return;
-  
+
   if (lesson.commonMistakes && lesson.commonMistakes.length > 0) {
     const mistakesEl = document.getElementById("lessonMistakes");
     mistakesEl.innerHTML = "";
-    
+
     for (const mistake of lesson.commonMistakes) {
       const html = `
         <div class="common-mistake">
@@ -276,7 +275,7 @@ function renderCommonMistakes(lesson) {
       `;
       mistakesEl.innerHTML += html;
     }
-    
+
     el.style.display = "block";
   } else {
     el.style.display = "none";
@@ -286,18 +285,18 @@ function renderCommonMistakes(lesson) {
 function renderPrerequisites(lesson) {
   const el = document.getElementById("lessonPrerequisitesWrap");
   if (!el) return;
-  
+
   const preReq = lesson.prerequisites && lesson.prerequisites.length > 0;
   const nextRec = lesson.nextRecommended && lesson.nextRecommended.length > 0;
-  
+
   if (!preReq && !nextRec) {
     el.style.display = "none";
     return;
   }
-  
+
   const preqEl = document.getElementById("lessonPrerequisites");
   let html = "";
-  
+
   if (preReq) {
     html += "<h3>📋 Pré-requisitos</h3><div class='prerequisites-list'>";
     for (const preqId of lesson.prerequisites) {
@@ -309,9 +308,10 @@ function renderPrerequisites(lesson) {
     }
     html += "</div>";
   }
-  
+
   if (nextRec) {
-    html += "<h3>➡️ Próximos passos recomendados</h3><div class='prerequisites-list'>";
+    html +=
+      "<h3>➡️ Próximos passos recomendados</h3><div class='prerequisites-list'>";
     for (const nextId of lesson.nextRecommended) {
       const found = getLessonById(nextId);
       if (found) {
@@ -320,7 +320,7 @@ function renderPrerequisites(lesson) {
     }
     html += "</div>";
   }
-  
+
   preqEl.innerHTML = html;
   el.style.display = "block";
 }
@@ -360,9 +360,15 @@ function openLesson(lessonId) {
   // ===== FIM FUNÇÕES PEDAGÓGICAS =====
 
   // content (markdown)
-  document.getElementById("lessonContent").innerHTML = marked.parse(
-    lesson.content || ""
-  );
+  const contentEl = document.getElementById("lessonContent");
+  if (typeof marked !== "undefined" && marked.parse) {
+    contentEl.innerHTML = marked.parse(lesson.content || "");
+  } else {
+    // Fallback: display content as plain HTML/text if marked is not available
+    contentEl.innerHTML = lesson.content
+      ? lesson.content.replace(/\n/g, "<br>")
+      : "";
+  }
 
   // images
   const imagesWrap = document.getElementById("lessonImagesWrap");
@@ -425,7 +431,7 @@ function openLesson(lessonId) {
         <div class="ex-head">
           <div>
             <div class="ex-title">${escapeHtml(
-              ex.title || `Exercício ${idx + 1}`
+              ex.title || `Exercício ${idx + 1}`,
             )}</div>
             <div class="ex-level">${escapeHtml(ex.level || "")}</div>
           </div>
@@ -485,14 +491,14 @@ function openLesson(lessonId) {
         ${
           p.starterCode
             ? `<h3>Starter code</h3><pre><code>${escapeHtml(
-                p.starterCode
+                p.starterCode,
               )}</code></pre>`
             : ""
         }
         ${
           p.solution
             ? `<h3>Solução</h3><pre><code>${escapeHtml(
-                p.solution
+                p.solution,
               )}</code></pre>`
             : ""
         }
@@ -702,7 +708,7 @@ function init() {
       alert("Progresso copiado para a área de transferência ✅");
     } catch {
       alert(
-        "Não consegui copiar automaticamente. Abra o console para ver o JSON."
+        "Não consegui copiar automaticamente. Abra o console para ver o JSON.",
       );
       console.log(payload);
     }
@@ -713,8 +719,7 @@ function init() {
   // if (state.progress.lastLessonId) openLesson(state.progress.lastLessonId);
 }
 
-
-//novo trecho 
+//novo trecho
 // ===== Toggle do menu hambúrguer (mostrar/ocultar sidebar) =====
 (function () {
   const KEY = "curso_sidebar_collapsed_v1";
@@ -741,7 +746,10 @@ function init() {
 
   // Fechar com Esc
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && document.body.classList.contains("sidebar-collapsed") === false) {
+    if (
+      e.key === "Escape" &&
+      document.body.classList.contains("sidebar-collapsed") === false
+    ) {
       // se estiver visível em mobile, fechar; aqui vamos fechar apenas em viewport small
       if (window.innerWidth <= 1100) toggle();
     }
@@ -781,7 +789,8 @@ function updateAuthUI() {
   if (currentUser) {
     btnLogin.style.display = "none";
     btnLogout.style.display = "block";
-    userDisplay.textContent = currentUser.displayName || currentUser.email || "Usuário";
+    userDisplay.textContent =
+      currentUser.displayName || currentUser.email || "Usuário";
   } else {
     btnLogin.style.display = "block";
     btnLogout.style.display = "none";
@@ -791,11 +800,13 @@ function updateAuthUI() {
 
 // Verificar se Firebase está disponível
 function isFirebaseAvailable() {
-  return typeof firebase !== "undefined" && 
-         firebase.apps && 
-         firebase.apps.length > 0 &&
-         firebase.auth && 
-         firebase.database;
+  return (
+    typeof firebase !== "undefined" &&
+    firebase.apps &&
+    firebase.apps.length > 0 &&
+    firebase.auth &&
+    firebase.database
+  );
 }
 
 // Login com Google
@@ -804,9 +815,11 @@ function loginWithGoogle() {
     alert("⚠️ Firebase não foi configurado. Veja firebase-config.js");
     return;
   }
-  
+
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
+  firebase
+    .auth()
+    .signInWithPopup(provider)
     .then((result) => {
       currentUser = result.user;
       updateAuthUI();
@@ -826,9 +839,11 @@ function loginWithGitHub() {
     alert("⚠️ Firebase não foi configurado. Veja firebase-config.js");
     return;
   }
-  
+
   const provider = new firebase.auth.GithubAuthProvider();
-  firebase.auth().signInWithPopup(provider)
+  firebase
+    .auth()
+    .signInWithPopup(provider)
     .then((result) => {
       currentUser = result.user;
       updateAuthUI();
@@ -844,8 +859,10 @@ function loginWithGitHub() {
 // Logout
 function logout() {
   if (!isFirebaseAvailable()) return;
-  
-  firebase.auth().signOut()
+
+  firebase
+    .auth()
+    .signOut()
     .then(() => {
       currentUser = null;
       updateAuthUI();
@@ -859,14 +876,15 @@ function logout() {
 // Carregar progresso do Firebase
 function loadProgressFromFirebase() {
   if (!currentUser || !isFirebaseAvailable()) return;
-  
+
   const db = firebase.database();
   const ref = db.ref(`users/${currentUser.uid}/progress`);
-  
+
   ref.once("value", (snapshot) => {
     if (snapshot.exists()) {
       state.progress = snapshot.val();
-      render();
+      renderNav(document.getElementById("searchInput").value || "");
+      renderProgress();
       console.log("✅ Progresso carregado do Firebase");
     }
   });
@@ -875,11 +893,12 @@ function loadProgressFromFirebase() {
 // Salvar progresso no Firebase
 function saveProgressToFirebase() {
   if (!currentUser || !isFirebaseAvailable()) return;
-  
+
   const db = firebase.database();
   const ref = db.ref(`users/${currentUser.uid}/progress`);
-  
-  ref.set(state.progress)
+
+  ref
+    .set(state.progress)
     .then(() => {
       console.log("✅ Progresso salvo no Firebase");
     })
@@ -893,7 +912,8 @@ function syncProgress() {
   if (currentUser) {
     saveProgressToFirebase();
   } else {
-    saveProgress(); // localStorage
+    // Usar a função original de salvar no localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
   }
 }
 
@@ -925,7 +945,17 @@ if (btnLogout) {
   btnLogout.addEventListener("click", logout);
 }
 
-// Substituir saveProgress() por syncProgress()
+// Substituir todas as chamadas de saveProgress() por syncProgress()
+// nas funções que precisam sincronizar com Firebase
 const originalSaveProgress = saveProgress;
-saveProgress = syncProgress;
+window.saveProgress = function () {
+  syncProgress();
+};
+
+// Inicializar aplicação quando DOM estiver pronto
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
 
