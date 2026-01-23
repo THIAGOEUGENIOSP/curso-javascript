@@ -461,13 +461,13 @@ pre code{
   }
   
   .quiz-q .q-title {
-    font-size: 17px;
+    font-size: 19px; /* Aumentado de 17px para 19px */
     margin-bottom: 12px;
   }
   
   .quiz-q label {
     margin: 12px 0;
-    font-size: 16px;
+    font-size: 18px; /* Aumentado de 16px para 18px */
     line-height: 1.5;
     padding: 12px;
     border-radius: 8px;
@@ -899,9 +899,9 @@ h3{ font-size: 17px; } /* Aumentado de 15px para 17px */
   padding: 10px;
   margin-bottom: 10px;
 }
-.quiz-q .q-title{ font-weight: 900; margin-bottom: 8px; }
-.quiz-q label{ display:block; margin: 8px 0; color: rgba(229,231,235,.92); cursor:pointer; }
-.quiz-result{ margin-top: 10px; color: var(--muted); font-size: 13px; }
+.quiz-q .q-title{ font-weight: 900; margin-bottom: 8px; font-size: 18px; } /* Aumentado para melhor legibilidade */
+.quiz-q label{ display:block; margin: 8px 0; color: rgba(229,231,235,.92); cursor:pointer; font-size: 17px; } /* Aumentado para melhor legibilidade */
+.quiz-result{ margin-top: 10px; color: var(--muted); font-size: 14px; } /* Aumentado de 13px para 14px */
 
 .footer{
   padding: 10px 4px 20px 4px;
