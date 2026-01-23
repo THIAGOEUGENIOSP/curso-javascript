@@ -534,6 +534,33 @@ pre code{
     padding: 14px 16px;
     font-size: 16px;
   }
+  
+  /* Seções especiais em mobile - MAIS ESPAÇO E DESTAQUE */
+  .lesson-checklist-section,
+  .lesson-quiz-section,
+  .lesson-tip-section {
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 18px;
+  }
+  
+  .lesson-checklist-section h2,
+  .lesson-quiz-section h2,
+  .lesson-tip-section h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  
+  /* Quiz items em mobile */
+  .lesson-quiz-section .quiz-q {
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .lesson-quiz-section .btn {
+    margin-top: 16px;
+    width: 100%;
+  }
 }
 
 .card{
@@ -729,12 +756,11 @@ h3{ font-size: 15px; }
 .lesson-actions{ display:flex; gap: 10px; flex-wrap: wrap; }
 
 .lesson-body{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
   margin-top: 14px;
 }
-@media (max-width: 1100px){ .lesson-body{ grid-template-columns: 1fr; } }
 
 .section{
   margin-bottom: 14px;
@@ -744,6 +770,48 @@ h3{ font-size: 15px; }
   background: rgba(2,6,23,.22);
 }
 .section h2{ margin-bottom: 10px; }
+
+/* Seções especiais: Checklist, Quiz, Dica do Professor */
+.lesson-checklist-section,
+.lesson-quiz-section,
+.lesson-tip-section {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+}
+
+.lesson-checklist-section {
+  background: linear-gradient(135deg, rgba(52,211,153,.15), rgba(52,211,153,.08));
+  border: 1px solid rgba(52,211,153,.3);
+}
+
+.lesson-checklist-section h2 {
+  color: rgba(52,211,153,.95);
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.lesson-quiz-section {
+  background: linear-gradient(135deg, rgba(96,165,250,.15), rgba(96,165,250,.08));
+  border: 1px solid rgba(96,165,250,.3);
+}
+
+.lesson-quiz-section h2 {
+  color: rgba(96,165,250,.95);
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.lesson-tip-section {
+  background: linear-gradient(135deg, rgba(251,191,36,.15), rgba(251,191,36,.08));
+  border: 1px solid rgba(251,191,36,.3);
+}
+
+.lesson-tip-section h2 {
+  color: rgba(251,191,36,.95);
+  font-size: 20px;
+  margin-bottom: 16px;
+}
 
 .side.card{ background: rgba(2,6,23,.22); }
 

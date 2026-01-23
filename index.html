@@ -172,61 +172,59 @@
 
         <div class="lesson-difficulty-section" id="lessonDifficulty"></div>
 
+        <!-- Checklist, Quiz e Dica do Professor logo após Dificuldade -->
+        <section class="section lesson-checklist-section">
+          <h2>📝 Checklist</h2>
+          <div id="lessonChecklist"></div>
+        </section>
+
+        <section class="section lesson-quiz-section" id="lessonQuizWrap" hidden>
+          <h2>❓ Quiz</h2>
+          <div id="lessonQuiz"></div>
+          <button class="btn" id="btnGradeQuiz">Corrigir quiz</button>
+          <div class="quiz-result" id="quizResult"></div>
+        </section>
+
+        <section class="section lesson-tip-section">
+          <h2>💡 Dica do professor</h2>
+          <div class="tip" id="lessonTip"></div>
+        </section>
+
+        <!-- Conteúdo principal em coluna única -->
         <div class="lesson-body">
-          <div class="lesson-left">
-            <div id="lessonMistakesWrap" class="section" hidden>
-              <h2>⚠️ Armadilhas Comuns & Correções</h2>
-              <div id="lessonMistakes"></div>
-            </div>
-
-            <div class="section">
-              <h2>Conteúdo</h2>
-              <div id="lessonContent" class="md"></div>
-            </div>
-
-            <div class="section" id="lessonImagesWrap" hidden>
-              <h2>Imagens e diagramas</h2>
-              <div id="lessonImages" class="images"></div>
-            </div>
-
-            <div class="section" id="lessonExamplesWrap" hidden>
-              <h2>Exemplos</h2>
-              <div id="lessonExamples"></div>
-            </div>
-
-            <div class="section" id="lessonExercisesWrap" hidden>
-              <h2>Exercícios</h2>
-              <div id="lessonExercises"></div>
-            </div>
-
-            <div class="section" id="lessonProjectWrap" hidden>
-              <h2>Projeto / prática guiada</h2>
-              <div id="lessonProject"></div>
-            </div>
-
-            <div class="section" id="lessonPrerequisitesWrap" hidden>
-              <h2>📌 Pré-requisitos & Próximos Passos</h2>
-              <div id="lessonPrerequisites"></div>
-            </div>
+          <div id="lessonMistakesWrap" class="section" hidden>
+            <h2>⚠️ Armadilhas Comuns & Correções</h2>
+            <div id="lessonMistakes"></div>
           </div>
 
-          <div class="lesson-right">
-            <section class="side card">
-              <h3>Checklist</h3>
-              <div id="lessonChecklist"></div>
-            </section>
+          <div class="section">
+            <h2>Conteúdo</h2>
+            <div id="lessonContent" class="md"></div>
+          </div>
 
-            <section class="side card" id="lessonQuizWrap" hidden>
-              <h3>Quiz</h3>
-              <div id="lessonQuiz"></div>
-              <button class="btn" id="btnGradeQuiz">Corrigir quiz</button>
-              <div class="quiz-result" id="quizResult"></div>
-            </section>
+          <div class="section" id="lessonImagesWrap" hidden>
+            <h2>Imagens e diagramas</h2>
+            <div id="lessonImages" class="images"></div>
+          </div>
 
-            <section class="side card">
-              <h3>Dica do professor</h3>
-              <div class="tip" id="lessonTip"></div>
-            </section>
+          <div class="section" id="lessonExamplesWrap" hidden>
+            <h2>Exemplos</h2>
+            <div id="lessonExamples"></div>
+          </div>
+
+          <div class="section" id="lessonExercisesWrap" hidden>
+            <h2>Exercícios</h2>
+            <div id="lessonExercises"></div>
+          </div>
+
+          <div class="section" id="lessonProjectWrap" hidden>
+            <h2>Projeto / prática guiada</h2>
+            <div id="lessonProject"></div>
+          </div>
+
+          <div class="section" id="lessonPrerequisitesWrap" hidden>
+            <h2>📌 Pré-requisitos & Próximos Passos</h2>
+            <div id="lessonPrerequisites"></div>
           </div>
         </div>
       </section>
