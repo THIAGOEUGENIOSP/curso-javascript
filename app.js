@@ -360,9 +360,13 @@ function openLesson(lessonId) {
   // ===== FIM FUNÇÕES PEDAGÓGICAS =====
 
   // content (markdown)
-  document.getElementById("lessonContent").innerHTML = marked.parse(
-    lesson.content || ""
-  );
+  const contentEl = document.getElementById("lessonContent");
+  if (typeof marked !== "undefined" && marked.parse) {
+    contentEl.innerHTML = marked.parse(lesson.content || "");
+  } else {
+    // Fallback: display content as plain HTML/text if marked is not available
+    contentEl.innerHTML = lesson.content ? lesson.content.replace(/\n/g, '<br>') : "";
+  }
 
   // images
   const imagesWrap = document.getElementById("lessonImagesWrap");
@@ -866,7 +870,8 @@ function loadProgressFromFirebase() {
   ref.once("value", (snapshot) => {
     if (snapshot.exists()) {
       state.progress = snapshot.val();
-      render();
+      renderNav(document.getElementById("searchInput").value || "");
+      renderProgress();
       console.log("✅ Progresso carregado do Firebase");
     }
   });
@@ -893,7 +898,8 @@ function syncProgress() {
   if (currentUser) {
     saveProgressToFirebase();
   } else {
-    saveProgress(); // localStorage
+    // Usar a função original de salvar no localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
   }
 }
 
@@ -925,7 +931,17 @@ if (btnLogout) {
   btnLogout.addEventListener("click", logout);
 }
 
-// Substituir saveProgress() por syncProgress()
+// Substituir todas as chamadas de saveProgress() por syncProgress()
+// nas funções que precisam sincronizar com Firebase
 const originalSaveProgress = saveProgress;
-saveProgress = syncProgress;
+window.saveProgress = function() {
+  syncProgress();
+};
+
+// Inicializar aplicação quando DOM estiver pronto
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
