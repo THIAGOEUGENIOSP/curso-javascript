@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Curso Completo de JavaScript — Do Zero ao Profissional</title>
+  <title>Trilha Web Completa — HTML, CSS, JavaScript e SQL</title>
   <link rel="stylesheet" href="styles.css" />
   <!-- Markdown renderer -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -25,8 +25,8 @@
         </svg>
       </div>
       <div>
-        <div class="brand-title">JavaScript</div>
-        <div class="brand-subtitle">Do Zero ao Profissional • Aula por aula • Projetos reais</div>
+        <div class="brand-title">Web Dev</div>
+        <div class="brand-subtitle">HTML • CSS • JavaScript • SQL • Projetos reais</div>
       </div>
     </div>
 
@@ -56,6 +56,9 @@
       <button class="btn" id="btnExport">Exportar progresso</button>
     </div>
   </header>
+  <div class="top-progress">
+    <div class="top-progress-bar" id="topProgress"></div>
+  </div>
 
   <main class="layout">
     <aside class="sidebar">
@@ -91,10 +94,10 @@
     <section class="content">
       <section class="hero card" id="hero">
         <div class="hero-text">
-          <h1>Aprenda JavaScript do jeito certo</h1>
+          <h1>Aprenda Web do jeito certo</h1>
           <p>
-            Aqui você aprende <strong>lógica</strong>, <strong>fundamentos</strong>, <strong>DOM</strong>, <strong>assíncrono</strong>,
-            <strong>boas práticas</strong>, <strong>Git/GitHub</strong> e entra no caminho para <strong>React + Node.js</strong>.
+            Aqui você aprende <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, <strong>SQL</strong>,
+            <strong>projetos reais</strong>, <strong>portfólio</strong> e entra no caminho para <strong>trabalho remoto</strong>.
           </p>
           <div class="hero-actions">
             <button class="btn" id="btnContinue">Continuar de onde parei</button>
@@ -152,6 +155,113 @@
         </div>
       </section>
 
+      <section class="card glossary" id="glossary">
+        <div class="glossary-header">
+          <h2>Dicionário rápido</h2>
+          <div class="glossary-actions">
+            <input class="input glossary-search" id="glossarySearch" placeholder="Buscar termo (ex: h1, margin, click)" />
+            <div class="small">Clique para expandir e consultar.</div>
+          </div>
+        </div>
+        <div class="glossary-tabs" id="glossaryTabs">
+          <button class="glossary-tab active" data-tab="html">HTML</button>
+          <button class="glossary-tab" data-tab="css">CSS</button>
+          <button class="glossary-tab" data-tab="js">JS</button>
+        </div>
+        <div class="glossary-grid">
+          <div class="glossary-item" data-tab="html">
+            <button class="glossary-toggle">HTML — tags (básico → avançado)</button>
+            <div class="glossary-body">
+              <ul>
+                <li><span class="lvl b">Básico</span> <code>&lt;h1&gt;</code> — título principal <span class="ex">Ex h1: <code>&lt;h1&gt;Meu site&lt;/h1&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;h2&gt;...&lt;h6&gt;</code> — subtítulos <span class="ex">Ex h2: <code>&lt;h2&gt;Seção&lt;/h2&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;p&gt;</code> — parágrafo <span class="ex">Ex p: <code>&lt;p&gt;Texto&lt;/p&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;a&gt;</code> — link <span class="ex">Ex a: <code>&lt;a href="..."&gt;Abrir&lt;/a&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;img&gt;</code> — imagem <span class="ex">Ex img: <code>&lt;img src="foto.jpg"&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</code> — listas <span class="ex">Ex ul: <code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;div&gt;</code> — caixa genérica <span class="ex">Ex div: <code>&lt;div&gt;Bloco&lt;/div&gt;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>&lt;span&gt;</code> — texto inline <span class="ex">Ex span: <code>&lt;span&gt;destaque&lt;/span&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;header&gt;</code> — cabeçalho <span class="ex">Ex header: <code>&lt;header&gt;Topo&lt;/header&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;main&gt;</code> — conteúdo principal <span class="ex">Ex main: <code>&lt;main&gt;...&lt;/main&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;section&gt;</code> — seção de conteúdo <span class="ex">Ex section: <code>&lt;section&gt;...&lt;/section&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;article&gt;</code> — bloco independente <span class="ex">Ex article: <code>&lt;article&gt;Post&lt;/article&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;nav&gt;</code> — navegação <span class="ex">Ex nav: <code>&lt;nav&gt;Menu&lt;/nav&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;footer&gt;</code> — rodapé <span class="ex">Ex footer: <code>&lt;footer&gt;©&lt;/footer&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;button&gt;</code> — botão <span class="ex">Ex button: <code>&lt;button&gt;OK&lt;/button&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;input&gt;</code> — campo de formulário <span class="ex">Ex input: <code>&lt;input type="text"&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;label&gt;</code> — rótulo de campo <span class="ex">Ex label: <code>&lt;label&gt;Nome&lt;/label&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;form&gt;</code> — formulário <span class="ex">Ex form: <code>&lt;form&gt;...&lt;/form&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;textarea&gt;</code> — texto multilinha <span class="ex">Ex textarea: <code>&lt;textarea&gt;&lt;/textarea&gt;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>&lt;select&gt;</code> — seleção <span class="ex">Ex select: <code>&lt;select&gt;...&lt;/select&gt;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>&lt;strong&gt;</code> — destaque forte <span class="ex">Ex strong: <code>&lt;strong&gt;importante&lt;/strong&gt;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>&lt;em&gt;</code> — ênfase <span class="ex">Ex em: <code>&lt;em&gt;ênfase&lt;/em&gt;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>&lt;br&gt;</code> — quebra de linha <span class="ex">Ex br: <code>linha&lt;br&gt;linha</code></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="glossary-item" data-tab="css">
+            <button class="glossary-toggle">CSS — propriedades (básico → avançado)</button>
+            <div class="glossary-body">
+              <ul>
+                <li><span class="lvl b">Básico</span> <code>color</code> — cor do texto <span class="ex">Ex color: <code>color: #fff;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>background</code> — fundo <span class="ex">Ex background: <code>background: #111;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>font-size</code> — tamanho da fonte <span class="ex">Ex font-size: <code>font-size: 16px;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>font-family</code> — família da fonte <span class="ex">Ex font-family: <code>font-family: Arial;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>line-height</code> — altura da linha <span class="ex">Ex line-height: <code>line-height: 1.6;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>margin</code> — espaço externo <span class="ex">Ex margin: <code>margin: 16px;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>padding</code> — espaço interno <span class="ex">Ex padding: <code>padding: 12px;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>border</code> — borda <span class="ex">Ex border: <code>border: 1px solid #333;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>border-radius</code> — cantos arredondados <span class="ex">Ex border-radius: <code>border-radius: 12px;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>box-shadow</code> — sombra <span class="ex">Ex box-shadow: <code>box-shadow: 0 10px 20px #0003;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>width/height</code> — tamanho <span class="ex">Ex width: <code>width: 300px;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>max-width</code> — largura máxima <span class="ex">Ex max-width: <code>max-width: 100%;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>display</code> — tipo de layout <span class="ex">Ex display: <code>display: block;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>display: flex</code> — layout flexível <span class="ex">Ex flex: <code>display: flex;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>gap</code> — espaço entre itens <span class="ex">Ex gap: <code>gap: 12px;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>justify-content</code> — alinhamento horizontal <span class="ex">Ex justify-content: <code>justify-content: center;</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>align-items</code> — alinhamento vertical <span class="ex">Ex align-items: <code>align-items: center;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>flex-direction</code> — direção do flex <span class="ex">Ex flex-direction: <code>flex-direction: column;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>position</code> — posicionamento <span class="ex">Ex position: <code>position: absolute;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>top/left/right/bottom</code> — ajuste de posição <span class="ex">Ex top: <code>top: 10px;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>z-index</code> — profundidade <span class="ex">Ex z-index: <code>z-index: 10;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>overflow</code> — controle de conteúdo <span class="ex">Ex overflow: <code>overflow: hidden;</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>transition</code> — animações suaves <span class="ex">Ex transition: <code>transition: .2s;</code></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="glossary-item" data-tab="js">
+            <button class="glossary-toggle">JS — comandos (básico → avançado)</button>
+            <div class="glossary-body">
+              <ul>
+                <li><span class="lvl b">Básico</span> <code>let/const</code> — criar variáveis <span class="ex">Ex let: <code>let x = 1;</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>document.getElementById</code> — pegar elemento <span class="ex">Ex getElementById: <code>getElementById("btn")</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>querySelector</code> — selecionar com CSS <span class="ex">Ex querySelector: <code>querySelector(".box")</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>textContent</code> — mudar texto <span class="ex">Ex textContent: <code>el.textContent = "Oi";</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>innerHTML</code> — inserir HTML <span class="ex">Ex innerHTML: <code>el.innerHTML = "&lt;b&gt;OK&lt;/b&gt;";</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>classList</code> — classes CSS <span class="ex">Ex classList: <code>el.classList.add("on");</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>addEventListener</code> — eventos <span class="ex">Ex addEventListener: <code>btn.addEventListener("click", fn)</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>if/else</code> — decisão <span class="ex">Ex if: <code>if (x&gt;0) {}</code></span></li>
+                <li><span class="lvl b">Básico</span> <code>for</code> — repetição <span class="ex">Ex for: <code>for (let i=0; i&lt;3; i++) {}</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>while</code> — repetição por condição <span class="ex">Ex while: <code>while (ok) {}</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>Array.push</code> — adicionar no array <span class="ex">Ex push: <code>arr.push(1)</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>Array.map</code> — transformar array <span class="ex">Ex map: <code>arr.map(x=&gt;x*2)</code></span></li>
+                <li><span class="lvl i">Interm.</span> <code>Array.filter</code> — filtrar array <span class="ex">Ex filter: <code>arr.filter(x=&gt;x&gt;0)</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>JSON.stringify</code> — transformar em texto <span class="ex">Ex stringify: <code>JSON.stringify(obj)</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>JSON.parse</code> — transformar em objeto <span class="ex">Ex parse: <code>JSON.parse(txt)</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>localStorage</code> — salvar no navegador <span class="ex">Ex localStorage: <code>localStorage.setItem()</code></span></li>
+                <li><span class="lvl a">Avanç.</span> <code>console.log</code> — mostrar no console <span class="ex">Ex console.log: <code>console.log(x)</code></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card module-showcase" id="moduleShowcase">
+        <h2>Mapa da Trilha</h2>
+        <div class="small">Escolha um módulo para começar ou continuar.</div>
+        <div id="moduleCards" class="module-cards"></div>
+      </section>
+
       <section class="card lesson" id="lessonView" hidden>
         <div class="lesson-header">
           <div>
@@ -160,6 +270,7 @@
             <div class="lesson-meta" id="lessonMeta"></div>
           </div>
           <div class="lesson-actions">
+            <button class="btn ghost" id="btnBackToTrail">← Voltar para a trilha</button>
             <button class="btn ghost" id="btnPrev">← Anterior</button>
             <button class="btn ghost" id="btnNext">Próxima →</button>
             <button class="btn" id="btnDone">Marcar como concluída</button>
@@ -172,34 +283,65 @@
 
         <div class="lesson-difficulty-section" id="lessonDifficulty"></div>
 
-        <div class="lesson-body">
+          <div class="lesson-body">
           <div class="lesson-left">
             <div id="lessonMistakesWrap" class="section" hidden>
               <h2>⚠️ Armadilhas Comuns & Correções</h2>
               <div id="lessonMistakes"></div>
             </div>
 
-            <div class="section">
+            <div class="lesson-tabs" id="lessonTabs">
+              <button class="tab-btn" data-tab="content">Conteúdo</button>
+              <button class="tab-btn" data-tab="summary">Resumo</button>
+              <button class="tab-btn" data-tab="why">Por que importa</button>
+              <button class="tab-btn" data-tab="mindmap">Mapa mental</button>
+              <button class="tab-btn" data-tab="images">Imagens</button>
+              <button class="tab-btn" data-tab="examples">Exemplos</button>
+              <button class="tab-btn" data-tab="exercises">Exercícios</button>
+              <button class="tab-btn" data-tab="project">Projeto</button>
+            </div>
+
+            <div class="section tab-section" data-tab="content">
               <h2>Conteúdo</h2>
               <div id="lessonContent" class="md"></div>
             </div>
 
-            <div class="section" id="lessonImagesWrap" hidden>
+            <div class="section summary-section tab-section" data-tab="summary" id="lessonSummaryWrap" hidden>
+              <h2>Resumo em 30s</h2>
+              <div id="lessonSummary" class="summary-contents"></div>
+            </div>
+
+            <div class="section why-section tab-section" data-tab="why" id="lessonWhyWrap" hidden>
+              <h2>Por que isso importa?</h2>
+              <div id="lessonWhy" class="why-contents"></div>
+            </div>
+
+            <div class="section mindmap-section tab-section" data-tab="mindmap" id="lessonMindMapWrap" hidden>
+              <h2>Mapa mental</h2>
+              <div id="lessonMindMap" class="mindmap"></div>
+            </div>
+
+            <div class="section tab-section" data-tab="images" id="lessonImagesWrap" hidden>
               <h2>Imagens e diagramas</h2>
               <div id="lessonImages" class="images"></div>
             </div>
 
-            <div class="section" id="lessonExamplesWrap" hidden>
+            <div class="section tab-section" data-tab="examples" id="lessonExamplesWrap" hidden>
               <h2>Exemplos</h2>
               <div id="lessonExamples"></div>
             </div>
 
-            <div class="section" id="lessonExercisesWrap" hidden>
+            <div class="section tab-section" data-tab="exercises" id="lessonExercisesWrap" hidden>
               <h2>Exercícios</h2>
               <div id="lessonExercises"></div>
             </div>
 
-            <div class="section" id="lessonProjectWrap" hidden>
+            <div class="section micro-section tab-section" data-tab="exercises" id="lessonMicroWrap" hidden>
+              <h2>Micro‑exercícios rápidos</h2>
+              <div id="lessonMicro"></div>
+            </div>
+
+            <div class="section tab-section" data-tab="project" id="lessonProjectWrap" hidden>
               <h2>Projeto / prática guiada</h2>
               <div id="lessonProject"></div>
             </div>
@@ -243,3 +385,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+

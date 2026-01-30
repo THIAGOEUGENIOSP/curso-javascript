@@ -1,5 +1,5 @@
 // app.js
-const STORAGE_KEY = "curso_js_progress_v1";
+const STORAGE_KEY = "curso_web_progress_v1";
 
 const state = {
   expandedModules: new Set(),
@@ -136,11 +136,11 @@ function renderNav(filterText = "") {
     searchInfo.innerHTML = `
       💡 <strong>Dica:</strong> busque por:
       <br/>
-      • Tópicos: <code>arrays</code>, <code>funções</code>, <code>async</code>
+      • Tópicos: <code>HTML</code>, <code>CSS</code>, <code>SQL</code>, <code>arrays</code>
       <br/>
       • Nível: <code>Iniciante</code>, <code>Intermediário</code>
       <br/>
-      • Tags: <code>DOM</code>, <code>loops</code>, <code>classes</code>
+      • Tags: <code>DOM</code>, <code>flexbox</code>, <code>localStorage</code>
     `;
   }
 }
@@ -155,11 +155,57 @@ function renderProgress() {
   const pct = total === 0 ? 0 : Math.round((done / total) * 100);
 
   document.getElementById("progressBar").style.width = `${pct}%`;
+  const topBar = document.getElementById("topProgress");
+  if (topBar) topBar.style.width = `${pct}%`;
   document.getElementById("progressText").textContent = `${pct}%`;
   document.getElementById("progressCount").textContent =
     `${done}/${total} aulas`;
 
   renderBadges(done, total);
+  renderModuleShowcase();
+}
+
+function renderModuleShowcase() {
+  const wrap = document.getElementById("moduleCards");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+
+  for (const mod of COURSE.modules) {
+    const total = mod.lessons.length;
+    const done = mod.lessons.filter(
+      (l) => !!state.progress.doneLessons[l.id],
+    ).length;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+
+    const card = document.createElement("div");
+    card.className = "module-card";
+    card.innerHTML = `
+      <div class="module-card-title">${escapeHtml(mod.title)}</div>
+      <div class="module-card-desc">${escapeHtml(mod.description || "")}</div>
+      <div class="module-card-footer">
+        <div class="module-card-meta">${done}/${total} aulas • ${pct}%</div>
+        <div class="module-card-progress">
+          <div class="module-card-bar" style="width:${pct}%"></div>
+        </div>
+        <div class="module-card-actions">
+          <button class="btn ghost" data-action="open">Abrir módulo</button>
+          <button class="btn" data-action="start">Começar</button>
+        </div>
+      </div>
+    `;
+
+    card.querySelector('[data-action="open"]').onclick = () => {
+      state.expandedModules.add(mod.id);
+      renderNav(document.getElementById("searchInput").value || "");
+      openLesson(mod.lessons[0].id);
+    };
+
+    card.querySelector('[data-action="start"]').onclick = () => {
+      openLesson(mod.lessons[0].id);
+    };
+
+    wrap.appendChild(card);
+  }
 }
 
 function renderBadges(done, total) {
@@ -167,9 +213,14 @@ function renderBadges(done, total) {
   container.innerHTML = "";
 
   const badges = [];
+  const mastered = state.progress.mastered
+    ? Object.keys(state.progress.mastered).length
+    : 0;
   if (done >= 1) badges.push({ label: "Primeira aula ✅", kind: "good" });
   if (done >= 5) badges.push({ label: "Ritmo bom (5+) 🔥", kind: "good" });
   if (done >= 10) badges.push({ label: "Consistente (10+) 💪", kind: "good" });
+  if (mastered >= 1)
+    badges.push({ label: `Quiz 80%+ (${mastered}) 🧠`, kind: "good" });
   if (done >= Math.ceil(total / 2))
     badges.push({ label: "Meio caminho 🧭", kind: "warn" });
   if (done === total && total > 0)
@@ -335,6 +386,7 @@ function openLesson(lessonId) {
 
   // show lesson view, hide hero
   setVisible(document.getElementById("hero"), false);
+  setVisible(document.getElementById("moduleShowcase"), false);
   setVisible(document.getElementById("lessonView"), true);
 
   const { module, lesson } = found;
@@ -369,6 +421,66 @@ function openLesson(lessonId) {
       ? lesson.content.replace(/\n/g, "<br>")
       : "";
   }
+  // summary 30s
+  const summaryWrap = document.getElementById("lessonSummaryWrap");
+  const summaryEl = document.getElementById("lessonSummary");
+  if (lesson.summary30s) {
+    summaryEl.innerHTML = `<p>${escapeHtml(lesson.summary30s)}</p>`;
+    setVisible(summaryWrap, true);
+  } else {
+    summaryEl.innerHTML = "";
+    setVisible(summaryWrap, false);
+  }
+
+  // why it matters
+  const whyWrap = document.getElementById("lessonWhyWrap");
+  const whyEl = document.getElementById("lessonWhy");
+  if (lesson.whyItMatters) {
+    whyEl.innerHTML = `<p>${escapeHtml(lesson.whyItMatters)}</p>`;
+    setVisible(whyWrap, true);
+  } else {
+    whyEl.innerHTML = "";
+    setVisible(whyWrap, false);
+  }
+
+  // mind map
+  const mindMapWrap = document.getElementById("lessonMindMapWrap");
+  const mindMapEl = document.getElementById("lessonMindMap");
+  mindMapEl.innerHTML = "";
+  if (lesson.mindMap && lesson.mindMap.length) {
+    const ul = document.createElement("ul");
+    for (const item of lesson.mindMap) {
+      const li = document.createElement("li");
+      li.textContent = item;
+      ul.appendChild(li);
+    }
+    mindMapEl.appendChild(ul);
+    setVisible(mindMapWrap, true);
+  } else if (lesson.mindMapSvg) {
+    mindMapEl.innerHTML = lesson.mindMapSvg;
+    setVisible(mindMapWrap, true);
+  } else {
+    setVisible(mindMapWrap, false);
+  }
+
+  // micro exercises
+  const microWrap = document.getElementById("lessonMicroWrap");
+  const microEl = document.getElementById("lessonMicro");
+  microEl.innerHTML = "";
+  if (lesson.microExercises && lesson.microExercises.length) {
+    for (const m of lesson.microExercises) {
+      const card = document.createElement("div");
+      card.className = "micro-ex";
+      card.innerHTML = `
+        <div class="micro-title">${escapeHtml(m.title || "Micro‑exercício")}</div>
+        <div class="micro-body">${escapeHtml(m.prompt || "")}</div>
+      `;
+      microEl.appendChild(card);
+    }
+    setVisible(microWrap, true);
+  } else {
+    setVisible(microWrap, false);
+  }
 
   // images
   const imagesWrap = document.getElementById("lessonImagesWrap");
@@ -396,7 +508,22 @@ function openLesson(lessonId) {
     }
     setVisible(imagesWrap, true);
   } else {
-    setVisible(imagesWrap, false);
+    const auto = buildAutoDiagram(lesson);
+    if (auto) {
+      const card = document.createElement("div");
+      card.className = "img-card";
+      card.innerHTML = auto.svg;
+      if (auto.caption) {
+        const cap = document.createElement("div");
+        cap.className = "img-caption";
+        cap.textContent = auto.caption;
+        card.appendChild(cap);
+      }
+      imagesEl.appendChild(card);
+      setVisible(imagesWrap, true);
+    } else {
+      setVisible(imagesWrap, false);
+    }
   }
 
   // examples
@@ -515,6 +642,9 @@ function openLesson(lessonId) {
   // quiz
   renderQuiz(lesson);
 
+  // tabs
+  setupLessonTabs();
+
   // prev/next buttons
   wirePrevNext(lessonId);
 
@@ -609,6 +739,46 @@ function renderQuiz(lesson) {
   document.getElementById("btnGradeQuiz").onclick = () => gradeQuiz(lesson);
 }
 
+function setupLessonTabs() {
+  const tabsWrap = document.getElementById("lessonTabs");
+  if (!tabsWrap) return;
+
+  const buttons = Array.from(tabsWrap.querySelectorAll(".tab-btn"));
+  const sections = Array.from(
+    document.querySelectorAll(".lesson-left .tab-section"),
+  );
+
+  // show only tabs that have visible sections
+  buttons.forEach((btn) => {
+    const tab = btn.getAttribute("data-tab");
+    const hasVisible = sections.some(
+      (s) => s.getAttribute("data-tab") === tab && !s.hidden,
+    );
+    btn.style.display = hasVisible ? "inline-flex" : "none";
+  });
+
+  const firstVisibleBtn = buttons.find((b) => b.style.display !== "none");
+  const activeTab = firstVisibleBtn
+    ? firstVisibleBtn.getAttribute("data-tab")
+    : "content";
+
+  function setActive(tab) {
+    buttons.forEach((b) => {
+      b.classList.toggle("active", b.getAttribute("data-tab") === tab);
+    });
+    sections.forEach((s) => {
+      const match = s.getAttribute("data-tab") === tab;
+      s.classList.toggle("tab-hidden", !match);
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.onclick = () => setActive(btn.getAttribute("data-tab"));
+  });
+
+  setActive(activeTab);
+}
+
 function gradeQuiz(lesson) {
   const lessonId = lesson.id;
   const answers = state.progress.quizAnswers[lessonId] || {};
@@ -665,6 +835,49 @@ function escapeHtml(str) {
     .replaceAll("'", "&#039;");
 }
 
+function buildAutoDiagram(lesson) {
+  const rawItems =
+    lesson.mindMap ||
+    lesson.learningOutcomes ||
+    (lesson.tags ? lesson.tags.map((t) => `#${t}`) : []);
+
+  const items = rawItems
+    .map((t) => String(t).replace(/^✓\s*/, ""))
+    .filter(Boolean)
+    .slice(0, 3);
+
+  if (!items.length) return null;
+
+  const title = escapeHtml(lesson.title || "Resumo visual");
+  const lines = items
+    .map(
+      (t, i) =>
+        `<text x="40" y="${130 + i * 26}" fill="rgba(229,231,235,.92)" font-size="14" font-family="Arial">• ${escapeHtml(
+          t,
+        )}</text>`,
+    )
+    .join("");
+
+  const svg = `
+    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="autoG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(93,216,255,.35)"/>
+          <stop offset="1" stop-color="rgba(139,139,255,.35)"/>
+        </linearGradient>
+      </defs>
+      <rect x="18" y="18" width="664" height="184" rx="16" fill="rgba(2,6,23,.55)" stroke="rgba(148,163,184,.25)"/>
+      <rect x="28" y="28" width="644" height="64" rx="12" fill="url(#autoG)" opacity="0.35"/>
+      <text x="40" y="66" fill="rgba(229,231,235,.98)" font-size="16" font-family="Arial" font-weight="700">${title}</text>
+      ${lines}
+      <text x="40" y="198" fill="rgba(148,163,184,.9)" font-size="12" font-family="Arial">
+        Diagrama automático (resumo rápido da aula)
+      </text>
+    </svg>`;
+
+  return { svg, caption: "Diagrama gerado automaticamente" };
+}
+
 function init() {
   loadProgress();
 
@@ -695,6 +908,16 @@ function init() {
     openLesson(last || COURSE.modules[0].lessons[0].id);
   });
 
+  const btnBack = document.getElementById("btnBackToTrail");
+  if (btnBack) {
+    btnBack.addEventListener("click", () => {
+      setVisible(document.getElementById("lessonView"), false);
+      setVisible(document.getElementById("hero"), true);
+      setVisible(document.getElementById("moduleShowcase"), true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   document.getElementById("btnReset").addEventListener("click", () => {
     if (!confirm("Tem certeza? Isso apaga seu progresso.")) return;
     localStorage.removeItem(STORAGE_KEY);
@@ -717,6 +940,50 @@ function init() {
   // If user previously opened something, keep hero visible (user choice)
   // If you want auto-open last lesson, uncomment:
   // if (state.progress.lastLessonId) openLesson(state.progress.lastLessonId);
+
+  // glossary toggles
+  document.querySelectorAll(".glossary-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("open");
+      const body = btn.nextElementSibling;
+      if (!body) return;
+      body.classList.toggle("open");
+    });
+  });
+  // open all by default so content is visible
+  document.querySelectorAll(".glossary-toggle").forEach((btn) => {
+    btn.classList.add("open");
+    const body = btn.nextElementSibling;
+    if (body) body.classList.add("open");
+  });
+
+  const glossarySearch = document.getElementById("glossarySearch");
+  if (glossarySearch) {
+    glossarySearch.addEventListener("input", (e) => {
+      const q = String(e.target.value || "").toLowerCase().trim();
+      const items = document.querySelectorAll(".glossary-item");
+      items.forEach((item) => {
+        const text = item.textContent.toLowerCase();
+        const matches = q === "" || text.includes(q);
+        item.style.display = matches ? "" : "none";
+      });
+    });
+  }
+
+  const glossaryTabs = document.querySelectorAll(".glossary-tab");
+  if (glossaryTabs.length) {
+    glossaryTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        glossaryTabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        const key = tab.getAttribute("data-tab");
+        document.querySelectorAll(".glossary-item").forEach((item) => {
+          item.style.display =
+            item.getAttribute("data-tab") === key ? "" : "none";
+        });
+      });
+    });
+  }
 }
 
 //novo trecho
@@ -958,4 +1225,3 @@ if (document.readyState === "loading") {
 } else {
   init();
 }
-

@@ -3,9 +3,1167 @@
 // O app renderiza Markdown em "content".
 
 window.COURSE = {
-  title: "Curso Completo de JavaScript — Do Zero ao Profissional",
-  version: "v1.0",
+  title: "Trilha Web Completa — HTML, CSS, JavaScript e SQL",
+  version: "v1.1",
   modules: [
+    {
+      id: "m0",
+      title: "Trilha Web Completa — do zero ao avançado (passo a passo)",
+      description:
+        "Uma trilha visual e prática: HTML, CSS, JavaScript, SQL, projetos e portfólio.",
+      lessons: [
+        {
+          id: "m0a1",
+          title: "Módulo 1 — Introdução ao HTML (estrutura do site)",
+          duration: "45–90 min",
+          level: "Iniciante absoluto",
+          tags: ["HTML", "estrutura", "iniciante"],
+          tip: "HTML é o esqueleto. Se a base estiver certa, o resto fica fácil.",
+          learningOutcomes: [
+            "✓ Entender o que é HTML e para que ele serve",
+            "✓ Criar a estrutura básica de uma página",
+            "✓ Usar títulos, parágrafos, links e imagens",
+            "✓ Começar a pensar em páginas reais, não em teoria",
+          ],
+          summary30s:
+            "HTML é a estrutura do site. Ele define o que é título, texto, imagem e link. Tudo visível fica no <body> e as configurações no <head>.",
+          whyItMatters:
+            "Sem HTML bem estruturado, o navegador não entende o que é importante. Isso afeta acessibilidade, SEO e até a organização visual.",
+          mindMap: [
+            "HTML = estrutura",
+            "head = informações (title, css)",
+            "body = conteúdo visível",
+            "tags básicas: h1, p, img, a, ul",
+            "arquivo principal: index.html",
+          ],
+          microExercises: [
+            {
+              title: "1 minuto",
+              prompt: "Crie só o esqueleto HTML com <head> e <body>.",
+            },
+            {
+              title: "2 minutos",
+              prompt: "Crie um h1 com seu nome e um p com uma frase.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "Todo site começa com HTML. É ele que diz ao navegador o que é título, texto, imagem e link.",
+            examples: [
+              "Uma notícia tem título (h1), subtítulo (h2) e parágrafos (p).",
+              "Uma loja online usa listas (ul/li) para mostrar produtos.",
+              "Um formulário de cadastro usa input para receber dados.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Esquecer a estrutura básica do HTML",
+              wrong: `<h1>Minha página</h1>
+<p>Sem head e body...</p>`,
+              right: `<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minha página</title>
+  </head>
+  <body>
+    <h1>Minha página</h1>
+    <p>Agora está correto.</p>
+  </body>
+</html>`,
+              explanation:
+                "Sem a estrutura correta, o navegador tenta adivinhar, mas você perde controle.",
+            },
+            {
+              title: "Usar imagem sem texto alternativo (alt)",
+              wrong: `<img src="foto.jpg">`,
+              right: `<img src="foto.jpg" alt="Foto de perfil">`,
+              explanation:
+                "O alt ajuda acessibilidade e aparece se a imagem não carregar.",
+            },
+          ],
+          images: [
+            {
+              caption: "Estrutura básica de uma página HTML",
+              svg: `
+              <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="680" height="220" rx="16" fill="rgba(2,6,23,.55)" stroke="rgba(148,163,184,.25)"/>
+                <text x="40" y="60" fill="rgba(229,231,235,.95)" font-size="18" font-family="Arial" font-weight="700">&lt;html&gt;</text>
+                <rect x="60" y="80" width="260" height="60" rx="10" fill="rgba(96,165,250,.18)" stroke="rgba(96,165,250,.45)"/>
+                <text x="80" y="115" fill="rgba(229,231,235,.9)" font-size="14" font-family="Arial">&lt;head&gt; (título, meta)</text>
+                <rect x="340" y="80" width="320" height="60" rx="10" fill="rgba(167,139,250,.18)" stroke="rgba(167,139,250,.45)"/>
+                <text x="360" y="115" fill="rgba(229,231,235,.9)" font-size="14" font-family="Arial">&lt;body&gt; (conteúdo)</text>
+                <text x="40" y="200" fill="rgba(148,163,184,.95)" font-size="13" font-family="Arial">
+                  Dica: tudo que aparece na tela fica dentro do &lt;body&gt;.
+                </text>
+              </svg>`,
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Página mínima",
+              description: "O menor HTML completo possível.",
+              code: `<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meu site</title>
+  </head>
+  <body>
+    <h1>Olá, mundo!</h1>
+  </body>
+</html>`,
+            },
+            {
+              title: "Exemplo — Link e imagem",
+              description: "Link clicável e imagem com alt.",
+              code: `<a href="https://example.com">Visitar site</a>
+<img src="foto.jpg" alt="Minha foto">`,
+            },
+          ],
+          checklist: [
+            "Criei um arquivo index.html",
+            "Usei h1, p e img",
+            "Adicionei uma lista com 3 itens",
+            "Testei no navegador (abrir o arquivo)",
+          ],
+          quiz: [
+            {
+              q: "O que é HTML?",
+              options: [
+                "Uma linguagem de marcação para estruturar páginas",
+                "Uma linguagem de programação para servidor",
+                "Um banco de dados",
+              ],
+              answerIndex: 0,
+            },
+            {
+              q: "Qual tag contém todo o conteúdo visível da página?",
+              options: ["<head>", "<body>", "<title>"],
+              answerIndex: 1,
+            },
+          ],
+          prerequisites: [],
+          nextRecommended: ["m0a2"],
+          content: `
+### 🧠 Explicação simples
+HTML é a **estrutura** de um site, como o esqueleto de uma casa.  
+Sem ele, não existe página — só ideias.
+
+### 🎥 Vídeo recomendado (em português)
+Assista e **digite junto**:
+https://www.youtube.com/playlist?list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n
+
+### ✅ Depois do vídeo, pratique assim
+1) Crie um arquivo \`index.html\`  
+2) Monte um título, um parágrafo e uma imagem  
+3) Adicione uma lista com 3 itens  
+
+### 🧩 Por que a estrutura do HTML existe?
+- **\<head\>** guarda informações que o navegador precisa (título, ícone, CSS, fonte).  
+- **\<body\>** é tudo o que aparece na tela.  
+- Se você mistura tudo, o navegador até tenta “consertar”, mas o resultado fica imprevisível.
+
+### ✅ Regra simples para nunca errar
+**Tudo que o usuário vê fica no \`<body>\`.**  
+O resto (título, CSS, meta) fica no \`<head>\`.
+
+---
+
+### 📌 Guia rápido: tags HTML mais usadas (e para que servem)
+- **\<h1\> ... \<h6\>** — títulos (h1 é o principal).
+- **\<p\>** — parágrafo (texto comum).
+- **\<a href=""\>** — link para outra página.
+- **\<img src="" alt=""\>** — imagem (alt descreve a imagem).
+- **\<ul\> / \<ol\> / \<li\>** — listas (sem ordem / ordenadas / item).
+- **\<div\>** — “caixa” genérica para agrupar conteúdo.
+- **\<span\>** — texto pequeno dentro de um bloco.
+- **\<header\> / \<main\> / \<footer\>** — estrutura semântica do site.
+`,
+          exercises: [
+            {
+              title: "Exercício — Minha primeira página",
+              level: "Fácil",
+              prompt:
+                "Crie uma página com: um título, um parágrafo, uma imagem e uma lista com 3 itens.",
+              solution: `<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Minha Primeira Página</title>
+  </head>
+  <body>
+    <h1>Olá, eu sou o(a) [seu nome]</h1>
+    <p>Estou começando no HTML!</p>
+    <img src="minha-foto.jpg" alt="Minha foto" />
+    <ul>
+      <li>Gosto de música</li>
+      <li>Quero aprender programação</li>
+      <li>Vou criar meus sites</li>
+    </ul>
+  </body>
+</html>`,
+            },
+            {
+              title: "Exercício — Links úteis",
+              level: "Fácil",
+              prompt:
+                "Crie 3 links: YouTube, Google e GitHub. Cada um deve abrir em nova aba.",
+              solution: `<a href="https://www.youtube.com" target="_blank">YouTube</a>
+<a href="https://www.google.com" target="_blank">Google</a>
+<a href="https://github.com" target="_blank">GitHub</a>`,
+            },
+          ],
+          project: {
+            goal: "Criar uma página de apresentação pessoal simples.",
+            steps: [
+              "Crie um cabeçalho com seu nome e uma frase.",
+              "Adicione uma foto e uma lista de interesses.",
+              "Inclua um link para seu Instagram ou GitHub.",
+            ],
+          },
+        },
+        {
+          id: "m0a2",
+          title: "Módulo 2 — HTML + CSS (visual e organização)",
+          duration: "1–2 h",
+          level: "Iniciante",
+          tags: ["HTML", "CSS", "flexbox", "layout"],
+          tip: "CSS é a roupa do site. Deixe tudo limpo e bem alinhado.",
+          learningOutcomes: [
+            "✓ Entender o papel do CSS no visual do site",
+            "✓ Aplicar cores, fontes e espaçamentos",
+            "✓ Usar Flexbox para organizar elementos",
+            "✓ Construir uma home simples com header e footer",
+          ],
+          summary30s:
+            "CSS controla o visual do site: cores, fontes e layout. Separar HTML e CSS deixa tudo organizado e fácil de manter.",
+          whyItMatters:
+            "CSS separa estilo de estrutura. Isso evita bagunça, facilita manutenção e deixa o site mais profissional.",
+          mindMap: [
+            "CSS = aparência",
+            "separar arquivos (HTML + CSS)",
+            "cores e fontes",
+            "espaçamento (margin/padding)",
+            "layout com flexbox",
+          ],
+          microExercises: [
+            {
+              title: "1 minuto",
+              prompt: "Troque a cor do fundo do body para #111 e o texto para #fff.",
+            },
+            {
+              title: "2 minutos",
+              prompt: "Crie um botão com padding, borda arredondada e cor.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "CSS deixa seu site legível e bonito. Sem CSS, tudo fica amontoado.",
+            examples: [
+              "Botões com cor e borda para parecerem clicáveis.",
+              "Menus alinhados com Flexbox.",
+              "Espaçamento entre seções para facilitar a leitura.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Esquecer de linkar o CSS no HTML",
+              wrong: `<!-- O CSS existe, mas não foi conectado -->
+<body>...</body>`,
+              right: `<head>
+  <link rel="stylesheet" href="style.css" />
+</head>`,
+              explanation:
+                "Sem o link, o navegador não aplica os estilos.",
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Centralizar com Flexbox",
+              description: "Alinha itens no centro horizontal e vertical.",
+              code: `.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}`,
+            },
+            {
+              title: "Exemplo — Botão simples",
+              description: "Botão com cor e borda arredondada.",
+              code: `.btn {
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+}`,
+            },
+          ],
+          checklist: [
+            "Linkei o CSS no HTML",
+            "Mudei cor do fundo e do texto",
+            "Usei Flexbox em pelo menos 1 bloco",
+            "Criei um botão estilizado",
+          ],
+          quiz: [
+            {
+              q: "Para que serve o CSS?",
+              options: [
+                "Para estilizar o visual da página",
+                "Para criar banco de dados",
+                "Para programar o servidor",
+              ],
+              answerIndex: 0,
+            },
+            {
+              q: "Qual propriedade ativa o Flexbox?",
+              options: ["display: flex", "position: flex", "float: flex"],
+              answerIndex: 0,
+            },
+          ],
+          prerequisites: ["m0a1"],
+          nextRecommended: ["m0a3"],
+          content: `
+### 🧠 Explicação simples
+CSS é o **visual**: cor, tamanho, alinhamento e beleza.  
+HTML é o esqueleto, CSS é a roupa e o acabamento.
+
+### 🎥 Vídeo recomendado (em português)
+Assista e **copie o código**:
+https://www.youtube.com/playlist?list=PLHz_AreHm4dlUpEXkY1AyVLQGcpSgVF8s
+
+### ✅ Depois do vídeo, pratique assim
+1) Crie um \`style.css\`  
+2) Mude cor do fundo e do texto  
+3) Use Flexbox para alinhar um menu  
+
+### 🧩 Por que separar HTML e CSS?
+- **HTML** é a estrutura (o que é cada coisa).  
+- **CSS** é o visual (como fica).  
+Separar deixa o site mais organizado, fácil de mexer e profissional.
+
+### ✅ Regra simples para o visual ficar limpo
+**Use espaçamento (margin/padding) antes de colocar mais cor.**  
+Sites feios normalmente têm “tudo colado”.
+
+---
+
+### 🎨 Guia rápido: CSS mais usado (e para que serve)
+- **color** — cor do texto.
+- **background** — cor ou imagem de fundo.
+- **font-size** — tamanho da fonte.
+- **font-weight** — “peso” da fonte (negrito).
+- **margin** — espaço fora do elemento.
+- **padding** — espaço dentro do elemento.
+- **border** — borda do elemento.
+- **border-radius** — cantos arredondados.
+- **display: flex** — alinha itens em linha/coluna.
+- **justify-content** — alinhamento horizontal no flex.
+- **align-items** — alinhamento vertical no flex.
+`,
+          exercises: [
+            {
+              title: "Exercício — Cartão simples com CSS",
+              level: "Fácil",
+              prompt:
+                "Crie um card com nome, descrição e botão usando borda, sombra e padding.",
+              solution: `.card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  max-width: 320px;
+  font-family: Arial, sans-serif;
+}
+.card h3 { margin: 0 0 8px; }
+.card p { margin: 0 0 12px; color: #444; }
+.card button {
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+}`,
+            },
+            {
+              title: "Exercício — Menu horizontal",
+              level: "Fácil",
+              prompt:
+                "Crie um menu com 4 links alinhados na horizontal usando Flexbox.",
+              solution: `.menu {
+  display: flex;
+  gap: 16px;
+}
+.menu a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+}`,
+            },
+          ],
+          project: {
+            goal: "Criar uma home simples (menu + conteúdo + rodapé).",
+            steps: [
+              "Crie um header com logo e links.",
+              "Monte um bloco principal com título e botão.",
+              "Finalize com um rodapé simples.",
+            ],
+          },
+        },
+        {
+          id: "m0a3",
+          title: "Módulo 3 — JavaScript Básico (interatividade)",
+          duration: "1–2 h",
+          level: "Iniciante",
+          tags: ["javascript", "lógica", "eventos"],
+          tip: "JS é a parte que faz o site reagir ao clique do usuário.",
+          learningOutcomes: [
+            "✓ Criar variáveis e funções simples",
+            "✓ Usar eventos de clique",
+            "✓ Alterar texto e classes no HTML",
+            "✓ Entender lógica básica (if e loops)",
+          ],
+          summary30s:
+            "JavaScript dá vida ao site. Ele reage ao clique, muda textos e controla a lógica. Primeiro crie o HTML, depois conecte o JS.",
+          whyItMatters:
+            "Sem JavaScript o site fica estático. JS permite interatividade real e experiência do usuário melhor.",
+          mindMap: [
+            "JS = interatividade",
+            "eventos (click)",
+            "DOM: pegar elemento por id",
+            "mudar texto/classe",
+            "lógica: if, loops",
+          ],
+          microExercises: [
+            {
+              title: "1 minuto",
+              prompt: "Crie um botão que mostra um alert com seu nome.",
+            },
+            {
+              title: "2 minutos",
+              prompt: "Crie um parágrafo e altere o texto ao clicar.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "JavaScript faz o site reagir. É ele que valida formulário, abre menus e muda conteúdo.",
+            examples: [
+              "Botão 'curtir' que aumenta o contador.",
+              "Mostrar/ocultar uma senha no formulário.",
+              "Exibir mensagem de erro ao enviar dados vazios.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Tentar usar JS sem ligar no HTML",
+              wrong: `// JS
+document.getElementById("btn").onclick = () => alert("Oi");`,
+              right: `<!-- HTML -->
+<button id="btn">Clique</button>
+<script src="script.js"></script>`,
+              explanation:
+                "Sem o elemento no HTML, o JS não encontra o botão.",
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Trocar texto",
+              description: "Ao clicar, muda o texto de um parágrafo.",
+              code: `document.getElementById("btn").onclick = () => {
+  document.getElementById("msg").textContent = "Mudou!";
+};`,
+            },
+            {
+              title: "Exemplo — Mostrar/ocultar",
+              description: "Alterna uma classe CSS no elemento.",
+              code: `const box = document.getElementById("box");
+box.classList.toggle("hidden");`,
+            },
+          ],
+          checklist: [
+            "Criei um botão no HTML",
+            "Adicionei um script.js",
+            "Fiz o botão mudar algo na tela",
+            "Testei no navegador (F12 > Console)",
+          ],
+          quiz: [
+            {
+              q: "Qual é a função do JavaScript no navegador?",
+              options: [
+                "Dar interatividade à página",
+                "Estilizar a página",
+                "Salvar dados no banco",
+              ],
+              answerIndex: 0,
+            },
+            {
+              q: "Qual evento é usado para clique?",
+              options: ["onhover", "onclick", "onscroll"],
+              answerIndex: 1,
+            },
+          ],
+          prerequisites: ["m0a2"],
+          nextRecommended: ["m0a4"],
+          content: `
+### 🧠 Explicação simples
+JavaScript é o **cérebro** do site.  
+Com ele você faz botão funcionar, muda texto e cria ações.
+
+### 🎥 Vídeo recomendado (em português)
+Assista e pratique junto:
+https://www.youtube.com/playlist?list=PLHz_AreHm4dlsK3Nr9GVvXCbpQyHQl1o1
+
+### ✅ Depois do vídeo, pratique assim
+1) Crie um botão e um número na tela  
+2) Ao clicar, o número aumenta  
+
+### 🧩 Por que o JS “precisa” do HTML?
+O JavaScript **não cria a página sozinho**.  
+Ele manipula elementos que já existem no HTML.  
+Por isso você primeiro cria o botão no HTML e depois liga o JS nele.
+
+### ✅ Regra simples para não quebrar
+**Se o JS não acha o elemento, sempre verifique o \`id\`.**
+
+---
+
+### ⚙️ Guia rápido: JS mais usado (e para que serve)
+- **let / const** — criar variáveis (const não muda).
+- **document.getElementById** — pegar elemento do HTML.
+- **textContent** — mudar texto de um elemento.
+- **classList.add/remove/toggle** — adicionar/remover classes CSS.
+- **addEventListener("click")** — reagir a cliques.
+- **if / else** — decisões.
+- **for / while** — repetir ações.
+- **console.log** — ver valores no console.
+`,
+          exercises: [
+            {
+              title: "Exercício — Contador simples",
+              level: "Fácil",
+              prompt:
+                "Crie um contador que soma 1 toda vez que o botão é clicado.",
+              solution: `// HTML
+<button id="btn">Clique</button>
+<p id="n">0</p>
+
+// JS
+let n = 0;
+document.getElementById("btn").onclick = () => {
+  n++;
+  document.getElementById("n").textContent = n;
+};`,
+            },
+            {
+              title: "Exercício — Trocar cor",
+              level: "Fácil",
+              prompt:
+                "Crie um botão que troca a cor de fundo do body para azul.",
+              solution: `document.getElementById("btn").onclick = () => {
+  document.body.style.background = "#2563eb";
+};`,
+            },
+          ],
+          project: {
+            goal: "Criar um contador visual com botões + e -.",
+            steps: [
+              "Crie botões de aumentar e diminuir.",
+              "Mostre o número na tela.",
+              "Adicione um botão de reset.",
+            ],
+          },
+        },
+        {
+          id: "m0a4",
+          title: "Módulo 4 — JavaScript Intermediário (projetos)",
+          duration: "2–4 h",
+          level: "Intermediário",
+          tags: ["javascript", "projeto", "dom", "localStorage"],
+          tip: "Projetos reais fixam o aprendizado. Repita até ficar natural.",
+          learningOutcomes: [
+            "✓ Criar elementos com JavaScript",
+            "✓ Usar arrays e objetos na prática",
+            "✓ Salvar dados no navegador (localStorage)",
+            "✓ Organizar código por funções",
+          ],
+          summary30s:
+            "Projetos unem HTML, CSS e JS. Use funções para organizar o código e salve dados no localStorage para não perder ao recarregar.",
+          whyItMatters:
+            "Projetos reais treinam lógica e organização. É aqui que o aprendizado “cola”.",
+          mindMap: [
+            "projeto real",
+            "DOM: criar elementos",
+            "arrays e objetos",
+            "localStorage",
+            "funções para organizar",
+          ],
+          microExercises: [
+            {
+              title: "2 minutos",
+              prompt: "Crie um array com 3 tarefas e mostre no console.",
+            },
+            {
+              title: "3 minutos",
+              prompt: "Salve esse array no localStorage com JSON.stringify.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "Aqui você cria mini-sistemas reais, como lista de tarefas e notas.",
+            examples: [
+              "To‑Do list com adicionar e remover itens.",
+              "Lista de compras que salva no navegador.",
+              "App de notas simples para o dia a dia.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Não salvar no localStorage",
+              wrong: `const tasks = [];
+// ao recarregar a página, tudo some`,
+              right: `localStorage.setItem("tasks", JSON.stringify(tasks));`,
+              explanation:
+                "Sem salvar, o navegador apaga tudo quando você recarrega.",
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Criar item na lista",
+              description: "Cria um elemento <li> com JS.",
+              code: `const li = document.createElement("li");
+li.textContent = "Nova tarefa";
+lista.appendChild(li);`,
+            },
+            {
+              title: "Exemplo — Salvar no localStorage",
+              description: "Guarda as tarefas como texto.",
+              code: `localStorage.setItem("tasks", JSON.stringify(tasks));`,
+            },
+          ],
+          checklist: [
+            "Criei input e botão de adicionar",
+            "Listei tarefas na tela",
+            "Implementei remover tarefa",
+            "Salvei e carreguei do localStorage",
+          ],
+          quiz: [
+            {
+              q: "Para que serve o localStorage?",
+              options: [
+                "Salvar dados no navegador",
+                "Guardar imagens no servidor",
+                "Substituir o banco de dados",
+              ],
+              answerIndex: 0,
+            },
+            {
+              q: "Qual método cria um elemento no DOM?",
+              options: ["document.createElement", "document.make", "createHTML"],
+              answerIndex: 0,
+            },
+          ],
+          prerequisites: ["m0a3"],
+          nextRecommended: ["m0a5"],
+          content: `
+### 🧠 Explicação simples
+Agora você vai **juntar tudo** e criar projetos reais.  
+Projeto é onde o cérebro aprende de verdade.
+
+### 🎥 Vídeo recomendado (em português)
+Playlist de projetos para treinar:
+https://www.youtube.com/playlist?list=PLajjpPyc2dmbt0KebBvT9VQV8y2R_IO7j
+
+### ✅ Depois do vídeo, pratique assim
+1) Faça uma lista de tarefas  
+2) Salve no \`localStorage\`  
+3) Crie botão de remover tarefa  
+
+### 🧩 Por que usar funções?
+Funções deixam o código **organizado** e **fácil de repetir**.  
+Se você copia e cola tudo, vira bagunça e fica difícil de corrigir.
+
+### ✅ Regra simples para projeto crescer sem bagunça
+**Cada ação importante vira uma função.**  
+Ex: \`addTask()\`, \`removeTask()\`, \`render()\`.
+`,
+          exercises: [
+            {
+              title: "Exercício — To-Do simples",
+              level: "Médio",
+              prompt:
+                "Crie uma lista de tarefas com adicionar e remover itens.",
+              solution: `const list = [];
+function addTask(task) {
+  list.push(task);
+  render();
+}
+function removeTask(index) {
+  list.splice(index, 1);
+  render();
+}`,
+            },
+            {
+              title: "Exercício — Persistência simples",
+              level: "Médio",
+              prompt:
+                "Salve o array de tarefas no localStorage e recupere ao carregar.",
+              solution: `const saved = JSON.parse(localStorage.getItem("tasks") || "[]");
+const tasks = saved;
+localStorage.setItem("tasks", JSON.stringify(tasks));`,
+            },
+          ],
+          project: {
+            goal: "Lista de tarefas (To‑Do) com salvar no navegador.",
+            steps: [
+              "Criar input e botão de adicionar.",
+              "Listar tarefas na tela.",
+              "Salvar e carregar do localStorage.",
+            ],
+          },
+        },
+        {
+          id: "m0a5",
+          title: "Módulo 5 — Banco de Dados (SQL / MySQL)",
+          duration: "1–2 h",
+          level: "Iniciante",
+          tags: ["sql", "mysql", "banco de dados"],
+          tip: "Banco de dados é uma caixa organizada: você guarda e busca tudo.",
+          learningOutcomes: [
+            "✓ Entender o que é uma tabela",
+            "✓ Criar banco e tabela com SQL",
+            "✓ Inserir e consultar dados",
+            "✓ Fazer UPDATE e DELETE",
+          ],
+          summary30s:
+            "SQL organiza dados em tabelas. Você cria a tabela, insere registros e depois busca, atualiza ou apaga quando precisa.",
+          whyItMatters:
+            "Sem banco de dados, você perde tudo ao fechar o site. SQL é a base de sistemas reais.",
+          mindMap: [
+            "banco de dados = guardar dados",
+            "tabela = linhas e colunas",
+            "CREATE / INSERT / SELECT",
+            "UPDATE / DELETE",
+            "id como chave primaria",
+          ],
+          microExercises: [
+            {
+              title: "2 minutos",
+              prompt: "Crie uma tabela `produtos` com id e nome.",
+            },
+            {
+              title: "3 minutos",
+              prompt: "Insira 2 produtos e faça um SELECT.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "Sites de verdade guardam dados em banco: usuários, pedidos, mensagens.",
+            examples: [
+              "Cadastro de clientes em uma loja.",
+              "Registro de tarefas em um app.",
+              "Mensagens de um chat.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Esquecer de escolher o banco (USE)",
+              wrong: `CREATE TABLE users (...);`,
+              right: `USE meu_banco;
+CREATE TABLE users (...);`,
+              explanation:
+                "Sem escolher o banco, a tabela pode ir para o lugar errado.",
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Criar tabela",
+              description: "Tabela simples de usuários.",
+              code: `CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(120)
+);`,
+            },
+            {
+              title: "Exemplo — Buscar com filtro",
+              description: "Seleciona por email.",
+              code: `SELECT * FROM users WHERE email = "ana@email.com";`,
+            },
+          ],
+          checklist: [
+            "Criei um banco e uma tabela",
+            "Inseri pelo menos 3 registros",
+            "Usei SELECT com filtro",
+            "Testei UPDATE e DELETE",
+          ],
+          quiz: [
+            {
+              q: "Qual comando cria uma tabela?",
+              options: ["CREATE TABLE", "INSERT TABLE", "NEW TABLE"],
+              answerIndex: 0,
+            },
+            {
+              q: "Qual comando altera dados existentes?",
+              options: ["INSERT", "UPDATE", "SELECT"],
+              answerIndex: 1,
+            },
+          ],
+          prerequisites: ["m0a4"],
+          nextRecommended: ["m0a6"],
+          content: `
+### 🧠 Explicação simples
+Banco de dados é onde você **guarda informação** de verdade.  
+Sem banco, tudo some quando fecha o navegador.
+
+### 🎥 Vídeo recomendado (em português)
+Assista e copie os comandos:
+https://www.youtube.com/watch?v=cHLKtALWDos
+
+### ✅ Depois do vídeo, pratique assim
+1) Crie uma tabela de usuários  
+2) Insira 3 registros  
+3) Faça um SELECT com filtro  
+
+### 🧩 Por que o SQL usa tabelas?
+Tabela é a forma mais simples de **organizar dados**: linhas e colunas.  
+Assim fica rápido para **salvar**, **buscar** e **editar** informação.
+
+### ✅ Regra simples para evitar confusão
+**Sempre crie uma chave primária (\`id\`).**  
+Isso evita dados duplicados e facilita buscar registros.
+`,
+          exercises: [
+            {
+              title: "Exercício — SQL básico",
+              level: "Fácil",
+              prompt:
+                "Crie uma tabela users e insira 3 registros. Depois faça um SELECT.",
+              solution: `CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(120)
+);
+
+INSERT INTO users (name, email) VALUES
+("Ana", "ana@email.com"),
+("João", "joao@email.com"),
+("Rafa", "rafa@email.com");
+
+SELECT * FROM users;`,
+            },
+            {
+              title: "Exercício — Atualizar registro",
+              level: "Fácil",
+              prompt:
+                "Atualize o email do usuário 'Ana' para 'ana@novo.com'.",
+              solution: `UPDATE users
+SET email = "ana@novo.com"
+WHERE name = "Ana";`,
+            },
+          ],
+          project: {
+            goal: "Criar um banco simples com tabela de usuários.",
+            steps: [
+              "Crie o banco e a tabela.",
+              "Insira dados de teste.",
+              "Faça consultas com filtros.",
+            ],
+          },
+        },
+        {
+          id: "m0a6",
+          title: "Módulo 6 — Conectar Frontend com Banco (PHP + MySQL)",
+          duration: "2–4 h",
+          level: "Intermediário",
+          tags: ["php", "mysql", "formulario", "backend"],
+          tip: "Aqui você cria algo de verdade: formulário que salva no banco.",
+          learningOutcomes: [
+            "✓ Enviar dados de formulário",
+            "✓ Conectar com banco MySQL",
+            "✓ Salvar e listar dados",
+            "✓ Entender o básico de backend",
+          ],
+          summary30s:
+            "O backend recebe o formulário e salva no banco. O navegador sozinho não pode acessar o banco por segurança.",
+          whyItMatters:
+            "Sem backend, você não salva dados de verdade. É o passo para criar sistemas reais.",
+          mindMap: [
+            "formulario HTML",
+            "POST envia dados",
+            "PHP processa",
+            "MySQL guarda",
+            "listar dados na tela",
+          ],
+          microExercises: [
+            {
+              title: "2 minutos",
+              prompt: "Crie um formulário com nome e email.",
+            },
+            {
+              title: "3 minutos",
+              prompt: "Crie um PHP que só imprime o nome enviado.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "Quando o formulário envia dados, o servidor salva no banco e retorna a resposta.",
+            examples: [
+              "Cadastro de leads em landing page.",
+              "Formulário de contato que salva no banco.",
+              "Sistema simples de login.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Esquecer método do formulário",
+              wrong: `<form action="processa.php">`,
+              right: `<form action="processa.php" method="POST">`,
+              explanation:
+                "Sem method, o padrão é GET. Para enviar dados, o correto é POST.",
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Conectar no MySQL (PHP)",
+              description: "Conexão básica com banco.",
+              code: `<?php
+$conn = new mysqli("localhost", "root", "", "meubanco");
+if ($conn->connect_error) die("Erro");
+?>`,
+            },
+            {
+              title: "Exemplo — Inserir dados",
+              description: "Inserção simples via PHP.",
+              code: `<?php
+$nome = $_POST["nome"];
+$email = $_POST["email"];
+$sql = "INSERT INTO users (name, email) VALUES ('$nome', '$email')";
+$conn->query($sql);
+?>`,
+            },
+          ],
+          checklist: [
+            "Criei o formulário HTML",
+            "Enviei dados via POST",
+            "Conectei ao banco",
+            "Salvei e listei os registros",
+          ],
+          quiz: [
+            {
+              q: "Qual método é mais comum para enviar dados de formulário?",
+              options: ["POST", "TRACE", "HEAD"],
+              answerIndex: 0,
+            },
+            {
+              q: "Onde o PHP roda?",
+              options: ["No navegador", "No servidor", "No banco"],
+              answerIndex: 1,
+            },
+          ],
+          prerequisites: ["m0a5"],
+          nextRecommended: ["m0a7"],
+          content: `
+### 🧠 Explicação simples
+Agora seu site **conversa** com o banco.  
+Você envia dados e o servidor salva.
+
+### 🎥 Vídeo recomendado (em português)
+Curso de PHP (base para salvar dados):
+https://www.youtube.com/playlist?list=PLHz_AreHm4dm4beCCCmW4xwpmLf6EHY9k
+
+### ✅ Depois do vídeo, pratique assim
+1) Crie um formulário (nome + email)  
+2) Envie para \`processa.php\`  
+3) Salve no banco  
+
+### 🧩 Por que precisa de backend?
+O navegador **não pode** salvar dados direto no banco por segurança.  
+O servidor (PHP) recebe o formulário e conversa com o banco.
+
+### ✅ Regra simples de segurança
+**Nunca confie no que o usuário envia.**  
+Sempre valide os dados antes de salvar.
+`,
+          exercises: [
+            {
+              title: "Exercício — Formulário simples",
+              level: "Médio",
+              prompt:
+                "Crie um formulário HTML que envia nome e email via POST.",
+              solution: `<form action="processa.php" method="POST">
+  <input name="nome" placeholder="Nome" />
+  <input name="email" placeholder="Email" />
+  <button>Salvar</button>
+</form>`,
+            },
+            {
+              title: "Exercício — Listar dados",
+              level: "Médio",
+              prompt:
+                "Crie uma página PHP que liste os usuários do banco em uma tabela HTML.",
+              solution: `<?php
+$res = $conn->query("SELECT * FROM users");
+while ($row = $res->fetch_assoc()) {
+  echo "<p>{$row['name']} - {$row['email']}</p>";
+}
+?>`,
+            },
+          ],
+          project: {
+            goal: "Sistema simples de cadastro (nome + email).",
+            steps: [
+              "Formulário HTML para cadastro.",
+              "Arquivo PHP que salva no MySQL.",
+              "Página que lista os usuários.",
+            ],
+          },
+        },
+        {
+          id: "m0a7",
+          title: "Módulo 7 — Projetos finais, portfólio e freelas",
+          duration: "2–4 h",
+          level: "Intermediário",
+          tags: ["portfolio", "projetos", "freelas", "carreira"],
+          tip: "Portfólio é seu cartão de visitas. Capriche!",
+          learningOutcomes: [
+            "✓ Montar portfólio com 3 projetos reais",
+            "✓ Organizar projetos no GitHub",
+            "✓ Criar texto simples de apresentação",
+            "✓ Entender caminhos para freelas",
+          ],
+          summary30s:
+            "Portfólio é sua prova real. Mostre 3 projetos bem feitos e publicados. Isso abre portas para freelas e vagas.",
+          whyItMatters:
+            "Clientes e empresas confiam em provas. Portfólio é sua vitrine.",
+          mindMap: [
+            "3 projetos completos",
+            "GitHub organizado",
+            "site portfolio",
+            "link de contato",
+            "publicar online",
+          ],
+          microExercises: [
+            {
+              title: "2 minutos",
+              prompt: "Escreva um mini texto “Sobre mim” (3 linhas).",
+            },
+            {
+              title: "3 minutos",
+              prompt: "Liste 3 projetos que você quer criar.",
+            },
+          ],
+          realWorldContext: {
+            description:
+              "Empresas e clientes querem ver projetos reais. Portfólio é a prova.",
+            examples: [
+              "Um site de apresentação com links de projetos.",
+              "Um formulário de contato funcional.",
+              "Um projeto publicado no GitHub com README.",
+            ],
+          },
+          commonMistakes: [
+            {
+              title: "Mostrar muitos projetos inacabados",
+              wrong: "10 projetos pela metade.",
+              right: "3 projetos bem feitos e publicados.",
+              explanation:
+                "Qualidade vence quantidade. Termine antes de começar outro.",
+            },
+          ],
+          examples: [
+            {
+              title: "Exemplo — Seção de projetos",
+              description: "Uma lista simples de projetos.",
+              code: `<section id="projetos">
+  <h2>Projetos</h2>
+  <ul>
+    <li>To‑Do List — <a href="#">Ver</a></li>
+    <li>Landing Page — <a href="#">Ver</a></li>
+  </ul>
+</section>`,
+            },
+            {
+              title: "Exemplo — Botão de contato",
+              description: "Botão que abre o email.",
+              code: `<a class="btn" href="mailto:seu@email.com">Fale comigo</a>`,
+            },
+          ],
+          checklist: [
+            "Tenho 3 projetos completos",
+            "Cada projeto tem descrição e link",
+            "Meu portfólio tem seção de contato",
+            "Publiquei tudo no GitHub",
+          ],
+          quiz: [
+            {
+              q: "O que pesa mais no portfólio?",
+              options: [
+                "Quantidade de projetos",
+                "Qualidade e conclusão",
+                "Muitos designs diferentes",
+              ],
+              answerIndex: 1,
+            },
+            {
+              q: "Onde publicar projetos para mostrar?",
+              options: ["GitHub", "Bloco de notas", "Pen drive"],
+              answerIndex: 0,
+            },
+          ],
+          prerequisites: ["m0a6"],
+          nextRecommended: [],
+          content: `
+### 🧠 Explicação simples
+Portfólio é **prova real** de que você sabe fazer.  
+É isso que abre portas para freelas e trabalho remoto.
+
+### 🎥 Vídeo recomendado (em português)
+Projeto de portfólio simples:
+https://www.youtube.com/watch?v=TGSwi2h8OXs
+
+### ✅ Dicas para não desistir
+- Estude um pouco todo dia (20–40 min)  
+- Faça **menos teoria e mais código**  
+- Repita os exercícios 2 ou 3 vezes  
+- Mostre seus resultados para alguém  
+
+### 💼 Caminho para freelas (simples e direto)
+1) Crie 3 projetos bons no GitHub  
+2) Publique no Netlify/Vercel  
+3) Faça um portfólio com link dos projetos  
+4) Ofereça para pequenos negócios do seu bairro  
+
+### 🧩 Por que portfólio importa?
+Empresas e clientes **querem provas reais**.  
+Seu portfólio mostra o que você consegue entregar.
+
+### ✅ Regra simples para ser levado a sério
+**Projeto publicado vale mais que 10 ideias no papel.**
+`,
+          exercises: [
+            {
+              title: "Exercício — Seu portfólio em 1 página",
+              level: "Médio",
+              prompt:
+                "Crie uma página com seção: Sobre, Projetos e Contato.",
+              solution: `<section id="sobre">Sobre mim...</section>
+<section id="projetos">Meus projetos...</section>
+<section id="contato">Meu email...</section>`,
+            },
+          ],
+          project: {
+            goal: "Portfólio profissional com 3 projetos e contato.",
+            steps: [
+              "Liste 3 projetos com imagem e link.",
+              "Inclua um texto curto sobre você.",
+              "Adicione um botão de contato (email/WhatsApp).",
+            ],
+          },
+        },
+      ],
+    },
     {
       id: "m1",
       title: "Módulo 1 — Fundamentos (Iniciante absoluto)",
